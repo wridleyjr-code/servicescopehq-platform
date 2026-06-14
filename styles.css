@@ -1,0 +1,44 @@
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5); /* gray-400 */
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: rgba(75, 85, 99, 0.5); /* gray-600 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 114, 128, 0.8); /* gray-500 */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 114, 128, 0.8);
+}
+
+/* Animations */
+@keyframes spin { 
+    100% { transform: rotate(360deg); } 
+}
+.spin { 
+    animation: spin 1s linear infinite; 
+}
+
+/* Modal Enhancements */
+#niche-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#niche-modal.open #modal-content-panel {
+    transform: scale(1);
+}

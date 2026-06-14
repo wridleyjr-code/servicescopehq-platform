@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceScopeHQ Directory</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        dark: {
+                            bg: '#0f111a',
+                            surface: '#1e212b',
+                            border: 'rgba(255,255,255,0.1)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Hide scrollbar for category row */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .glass {
+            background: rgba(15, 17, 26, 0.7);
+        }
+
+        /* Modal Transition */
+        #niche-modal.open {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        #niche-modal.open #modal-content-panel {
+            transform: scale(1) !important;
+        }
+
+        /* Animations */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .spin { animation: spin 1s linear infinite; }
+    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-dark-bg dark:text-gray-100 transition-colors duration-200 antialiased min-h-screen">
+    
+    <!-- Top Navbar -->
+    <nav class="sticky top-0 z-40 glass border-b border-gray-200 dark:border-dark-border transition-colors duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Tagline -->
+                <div class="flex flex-col justify-center">
+                    <div class="flex items-center">
+                        <i data-lucide="activity" class="text-primary mr-2 w-6 h-6"></i>
+                        <span class="text-2xl font-bold tracking-tight">ServiceScope<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">HQ</span></span>
+                    </div>
+                    <span id="tagline-text" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 ml-8 hidden sm:block transition-all">The B2B Database for Local Services, Niche Estimates & Scopes</span>
+                </div>
+
+                <!-- Right Side: Search, Location & Theme Toggle -->
+                <div class="flex items-center gap-3">
+                    <!-- Zip Code Input -->
+                    <div class="relative hidden lg:block w-32">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="map-pin" class="h-4 w-4 text-gray-400"></i>
+                        </div>
+                        <input type="text" id="local-zip" maxlength="5" placeholder="Zip Code" 
+                            class="block w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full leading-5 bg-white/50 dark:bg-dark-surface/50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm">
+                    </div>
+
+                    <!-- Search -->
+                    <div class="relative hidden md:block w-64">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="h-4 w-4 text-gray-400"></i>
+                        </div>
+                        <input type="text" id="global-search" placeholder="Search niches..." 
+                            class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full leading-5 bg-white/50 dark:bg-dark-surface/50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm">
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-500 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5 hidden"></i>
+                        <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Search & Zip -->
+            <div class="md:hidden pb-4 flex gap-2">
+                <div class="relative w-1/3">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="map-pin" class="h-4 w-4 text-gray-400"></i>
+                    </div>
+                    <input type="text" id="local-zip-mobile" maxlength="5" placeholder="Zip" 
+                        class="block w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full leading-5 bg-white/50 dark:bg-dark-surface/50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm">
+                </div>
+                <div class="relative w-2/3">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="h-4 w-4 text-gray-400"></i>
+                    </div>
+                    <input type="text" id="global-search-mobile" placeholder="Search..." 
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-full leading-5 bg-white/50 dark:bg-dark-surface/50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Category Filters -->
+        <div class="mb-8 overflow-hidden">
+            <div class="flex gap-3 overflow-x-auto pb-4 hide-scrollbar" id="category-filters">
+                <!-- Category Tags injected by JS -->
+            </div>
+        </div>
+
+        <!-- Data Grid -->
+        <div id="data-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Cards injected by JS -->
+        </div>
+    </main>
+
+    <!-- Modal Backdrop and Content -->
+    <div id="niche-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-dark-surface rounded-2xl shadow-2xl w-full max-w-4xl border border-gray-200 dark:border-dark-border overflow-hidden transform scale-95 transition-transform duration-300" id="modal-content-panel">
+            
+            <div class="flex flex-col md:flex-row relative max-h-[90vh] overflow-y-auto md:overflow-hidden md:h-[600px]">
+                <!-- Close Btn -->
+                <button id="close-modal" class="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 z-10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Details Column -->
+                <div class="w-full md:w-3/5 p-8 md:overflow-y-auto border-b md:border-b-0 md:border-r border-gray-200 dark:border-dark-border">
+                    <div class="text-sm font-semibold text-secondary uppercase tracking-wider mb-2" id="modal-category"></div>
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white" id="modal-title"></h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-primary mt-1">
+                                <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-gray-500 dark:text-gray-400">Price Range & Level</h4>
+                                <p class="text-lg font-medium text-gray-900 dark:text-gray-100"><span id="modal-price"></span></p>
+                                <p class="text-sm text-gray-500 mt-1" id="modal-price-level"></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 bg-purple-50 dark:bg-purple-900/30 rounded-lg text-secondary mt-1">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-gray-500 dark:text-gray-400">Target Audience</h4>
+                                <p class="text-lg font-medium text-gray-900 dark:text-gray-100" id="modal-audience"></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 bg-green-50 dark:bg-green-900/30 rounded-lg text-emerald-500 mt-1">
+                                <i data-lucide="briefcase" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-gray-500 dark:text-gray-400">Best Revenue Model</h4>
+                                <p class="text-lg font-medium text-gray-900 dark:text-gray-100" id="modal-monetization"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-dark-border">
+                        <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                            <i data-lucide="search" class="w-4 h-4"></i> Local SEO Focus
+                        </h4>
+                        <p class="font-mono text-sm text-primary break-all" id="modal-seo"></p>
+                    </div>
+                </div>
+
+                <!-- Form Column (Netlify Form) -->
+                <div class="w-full md:w-2/5 bg-gray-50 dark:bg-gray-900 p-8 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Unlock Leads</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Get access to the <strong id="modal-resource" class="text-gray-700 dark:text-gray-200"></strong> and the complete lead generation blueprint for this niche.</p>
+                    
+                    <!-- Netlify Form Integration -->
+                    <form id="lead-form" name="servicescopehq-leads" data-netlify="true" class="space-y-4">
+                        <input type="hidden" name="form-name" value="servicescopehq-leads" />
+                        <input type="hidden" name="niche_interest" id="form-niche-interest" value="" />
+                        
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                            <input type="text" name="name" id="name" required placeholder="John Doe" class="w-full px-4 py-2 bg-white dark:bg-dark-surface border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Work Email</label>
+                            <input type="email" name="email" id="email" required placeholder="john@company.com" class="w-full px-4 py-2 bg-white dark:bg-dark-surface border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
+                        </div>
+                        <button type="submit" id="modal-cta" class="w-full py-3 mt-4 bg-gradient-to-r from-primary to-secondary hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-dark-surface text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                            Get Access / Unlock Leads
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
