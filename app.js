@@ -251,6 +251,6 @@ function calculateMRR() {
     const mrrOutput = document.getElementById('mrrOutput');
     const arrOutput = document.getElementById('arrOutput');
     
-    if(mrrOutput) mrrOutput.innerHTML = \`$\${mrr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}<span class="text-xs text-indigo-500 font-bold ml-1">/mo</span>\`;
-    if(arrOutput) arrOutput.textContent = \`$\${arr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}\`;
+    if(mrrOutput) mrrOutput.innerHTML = `$${mrr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}<span class="text-xs text-indigo-500 font-bold ml-1">/mo</span>`;
+    if(arrOutput) arrOutput.textContent = `$${arr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
 }
