@@ -1,257 +1,182 @@
-let localDatabase = [];
-let activeCategoryFilter = "";
+// Geographically mapped mock records data store
+const regionalSubcontractorData = [
+    { id: "rec_1", name: "Premium Tile Shower Finishers", cat: "Remodeling Operations", state: "GA", city: "Byron", zip: "31008", tier: "High Ticket" },
+    { id: "rec_2", name: "Peach State Accessibility Builders", cat: "Senior & Household Services", state: "GA", city: "Macon", zip: "31201", tier: "High Ticket" },
+    { id: "rec_3", name: "Miami Coastline Mold Mitigation", cat: "Environmental Tech", state: "FL", city: "Miami", zip: "33101", tier: "High Ticket" },
+    { id: "rec_4", name: "Orlando Short-Term Turnover Pros", cat: "Property Services", state: "FL", city: "Orlando", zip: "32801", tier: "Mid Ticket" },
+    { id: "rec_5", name: "Lone Star Commercial Arbitrations", cat: "Legal Tech Frameworks", state: "TX", city: "Austin", zip: "73301", tier: "Mid Ticket" }
+];
 
-// Geographic State
-const geoState = {
-    state: "",
-    city: "",
-    zip: "",
-    keyword: ""
-};
-
-const stateCityMap = {
-    "GA": ["Atlanta", "Byron", "Macon", "Savannah"],
-    "FL": ["Miami", "Orlando", "Tampa", "Jacksonville"],
-    "TX": ["Austin", "Dallas", "Houston", "San Antonio"]
+// Structural layout relating valid cities to their respective states
+const geographicMapping = {
+    "GA": ["Byron", "Macon"],
+    "FL": ["Miami", "Orlando"],
+    "TX": ["Austin"]
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetchDatabasePayload();
-    setupCoreListeners();
+    initializeGeographicListeners();
     setupMRRListeners();
-    setupGeoConsoleListeners();
+    renderFilteredDirectory(regionalSubcontractorData);
 });
 
-async function fetchDatabasePayload() {
-    try {
-        const response = await fetch('./data/niches.json');
-        if (!response.ok) throw new Error("Network payload fetch failed");
-        localDatabase = await response.json();
+function initializeGeographicListeners() {
+    const stateMenu = document.getElementById("stateFilter");
+    const cityMenu = document.getElementById("cityFilter");
+    const zipInput = document.getElementById("zipFilter");
+    const searchInput = document.getElementById("dirSearch");
+
+    // Cascading effect: Changing state alters visible cities
+    stateMenu.addEventListener("change", () => {
+        const selectedState = stateMenu.value;
+        cityMenu.innerHTML = '<option value="">All Cities</option>';
         
-        initializeUIFilters();
-        renderDirectoryExplorer();
-    } catch (error) {
-        console.error("Critical database routing exception:", error);
-        document.getElementById('directoryGrid').innerHTML = `
-            <div class="bg-red-50 border border-red-200 p-6 rounded-xl text-center text-red-800 text-sm font-semibold">
-                Critical Synchronization Halt: Unable to resolve local directory data layers.
-            </div>`;
-    }
-}
-
-function initializeUIFilters() {
-    const categories = [...new Set(localDatabase.map(item => item.category))];
-    const container = document.getElementById("categoryContainer");
-    container.innerHTML = "";
-    
-    categories.forEach(cat => {
-        const btn = document.createElement("button");
-        btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900";
-        btn.textContent = cat;
-        btn.onclick = () => setCategoryFilter(cat, btn);
-        container.appendChild(btn);
-    });
-    
-    document.getElementById("totalCount").textContent = localDatabase.length;
-}
-
-function setupCoreListeners() {
-    document.getElementById("priceFilter").addEventListener("change", renderDirectoryExplorer);
-    document.getElementById("filter-all").addEventListener("click", () => {
-        activeCategoryFilter = "";
-        resetFilterButtons();
-        document.getElementById("filter-all").className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-50 text-indigo-700";
-        renderDirectoryExplorer();
-    });
-}
-
-function setupGeoConsoleListeners() {
-    const dirSearch = document.getElementById("dirSearch");
-    const stateFilter = document.getElementById("stateFilter");
-    const cityFilter = document.getElementById("cityFilter");
-    const zipFilter = document.getElementById("zipFilter");
-
-    dirSearch.addEventListener("input", (e) => {
-        geoState.keyword = e.target.value.toLowerCase();
-        renderDirectoryExplorer();
-    });
-
-    stateFilter.addEventListener("change", (e) => {
-        geoState.state = e.target.value;
-        geoState.city = "";
-        
-        if (geoState.state && stateCityMap[geoState.state]) {
-            cityFilter.disabled = false;
-            cityFilter.innerHTML = '<option value="">All Cities</option>';
-            stateCityMap[geoState.state].forEach(city => {
-                cityFilter.innerHTML += `<option value="${city}">${city}</option>`;
+        if (selectedState && geographicMapping[selectedState]) {
+            cityMenu.disabled = false;
+            cityMenu.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200";
+            geographicMapping[selectedState].forEach(city => {
+                const opt = document.createElement("option");
+                opt.value = city;
+                opt.textContent = city;
+                containerSelectionPass(opt, cityMenu);
             });
-            cityFilter.classList.remove("opacity-50");
         } else {
-            cityFilter.disabled = true;
-            cityFilter.innerHTML = '<option value="">Select State First</option>';
-            cityFilter.classList.add("opacity-50");
+            cityMenu.disabled = true;
+            cityMenu.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
+            cityMenu.innerHTML = '<option value="">Select State First</option>';
         }
-        updateLocationBadge();
-        renderDirectoryExplorer();
+        executePlatformSearchFilter();
     });
 
-    cityFilter.addEventListener("change", (e) => {
-        geoState.city = e.target.value;
-        updateLocationBadge();
-        renderDirectoryExplorer();
-    });
-
-    zipFilter.addEventListener("input", (e) => {
-        geoState.zip = e.target.value;
-        updateLocationBadge();
-        renderDirectoryExplorer();
-    });
-}
-
-function updateLocationBadge() {
-    const badge = document.getElementById("currentLocationBadge");
-    if (geoState.zip) {
-        badge.textContent = `ZIP ${geoState.zip} Cost Index`;
-    } else if (geoState.city && geoState.state) {
-        badge.textContent = `${geoState.city}, ${geoState.state} Cost Index`;
-    } else if (geoState.state) {
-        badge.textContent = `${geoState.state} Statewide Cost Index`;
-    } else {
-        badge.textContent = "Live Estimates & Scopes";
-    }
-}
-
-function setCategoryFilter(category, clickedButton) {
-    activeCategoryFilter = category;
-    resetFilterButtons();
-    clickedButton.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-50 text-indigo-700";
-    renderDirectoryExplorer();
-}
-
-function resetFilterButtons() {
-    document.getElementById("filter-all").className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900";
-    const buttons = document.querySelectorAll("#categoryContainer button");
-    buttons.forEach(b => b.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900");
-}
-
-function renderDirectoryExplorer() {
-    const targetPriceLevel = document.getElementById("priceFilter").value;
-    const gridContainer = document.getElementById("directoryGrid");
+    // Run evaluations on standard filter updates
+    cityMenu.addEventListener("change", executePlatformSearchFilter);
+    searchInput.addEventListener("input", executePlatformSearchFilter);
     
-    gridContainer.innerHTML = "";
+    // Typing a ZIP resets dropdown flags to prevent search conflicts
+    zipInput.addEventListener("input", (e) => {
+        if (e.target.value.length > 0) {
+            stateMenu.value = "";
+            cityMenu.innerHTML = '<option value="">Select State First</option>';
+            cityMenu.disabled = true;
+        }
+        executePlatformSearchFilter();
+    });
+
+    // Support Price Filtering from index.html UI
+    const priceFilter = document.getElementById("priceFilter");
+    if(priceFilter) priceFilter.addEventListener("change", executePlatformSearchFilter);
+}
+
+function containerSelectionPass(childNode, parentNode) {
+    parentNode.appendChild(childNode);
+}
+
+function executePlatformSearchFilter() {
+    const query = document.getElementById("dirSearch").value.toLowerCase();
+    const stateVal = document.getElementById("stateFilter").value;
+    const cityVal = document.getElementById("cityFilter").value;
+    const zipVal = document.getElementById("zipFilter").value.trim();
     
-    const filteredRecords = localDatabase.filter(item => {
-        // Keyword Search applies to service_name, category, and related services
-        const matchesKeyword = geoState.keyword === "" || 
-                               item.service_name.toLowerCase().includes(geoState.keyword) || 
-                               item.category.toLowerCase().includes(geoState.keyword) ||
-                               item.related_services.some(s => s.toLowerCase().includes(geoState.keyword));
-                               
-        const matchesCategory = activeCategoryFilter === "" || item.category === activeCategoryFilter;
-        const matchesPrice = targetPriceLevel === "" || item.price_level === targetPriceLevel;
+    const priceFilterEl = document.getElementById("priceFilter");
+    const priceVal = priceFilterEl ? priceFilterEl.value : "";
+
+    const matches = regionalSubcontractorData.filter(item => {
+        const matchesKeyword = item.name.toLowerCase().includes(query) || item.cat.toLowerCase().includes(query);
+        const matchesPrice = priceVal === "" || item.tier === priceVal;
         
-        return matchesKeyword && matchesCategory && matchesPrice;
+        // If ZIP has an entry, check it exclusively. Otherwise check State and City cascades.
+        if (zipVal.length > 0) {
+            return matchesKeyword && matchesPrice && item.zip.startsWith(zipVal);
+        } else {
+            const matchesState = stateVal === "" || item.state === stateVal;
+            const matchesCity = cityVal === "" || item.city === cityVal;
+            return matchesKeyword && matchesPrice && matchesState && matchesCity;
+        }
     });
 
-    document.getElementById("displayedCount").textContent = filteredRecords.length;
+    // Update Counter Badges
+    const displayedCount = document.getElementById("displayedCount");
+    const totalCount = document.getElementById("totalCount");
+    if(displayedCount) displayedCount.textContent = matches.length;
+    if(totalCount) totalCount.textContent = regionalSubcontractorData.length;
 
-    if (filteredRecords.length === 0) {
-        gridContainer.innerHTML = `
-            <div class="bg-white border border-slate-200 rounded-xl p-8 text-center text-slate-400 text-sm font-medium">
-                No optimization profiles match your filter parameters.
-            </div>`;
+    renderFilteredDirectory(matches);
+}
+
+function renderFilteredDirectory(records) {
+    // Note: The HTML has id="directoryGrid", mapping it here instead of directoryOutput
+    const outputArea = document.getElementById("directoryGrid"); 
+    outputArea.innerHTML = "";
+
+    if (records.length === 0) {
+        outputArea.innerHTML = `<div class="text-center p-6 text-xs text-slate-500 font-semibold border border-dashed border-slate-800 rounded-xl">No subcontractors or active listings found operating in that location bracket.</div>`;
         return;
     }
 
-    filteredRecords.forEach(item => {
+    records.forEach(item => {
         const card = document.createElement("div");
-        card.className = "bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between";
-        
-        const badgeColor = item.price_level === "High Ticket" ? "bg-amber-100 text-amber-800" : 
-                           item.price_level === "Mid Ticket" ? "bg-blue-100 text-blue-800" : "bg-slate-100 text-slate-700";
-
-        // Generate location-aware SEO title if applicable
-        let displayTitle = item.service_name;
-        if (geoState.city && geoState.state) {
-            displayTitle = item.local_seo.title_template
-                .replace('[City]', geoState.city)
-                .replace('[State_Abbr]', geoState.state);
-        } else if (geoState.state) {
-            displayTitle = item.local_seo.title_template
-                .replace('[City]', 'Local')
-                .replace('[State_Abbr]', geoState.state);
-        }
-
+        card.className = "bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between hover:border-indigo-500 transition-all cursor-pointer";
         card.innerHTML = `
-            <div>
-                <div class="flex items-start justify-between mb-3">
-                    <div>
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">${item.category}</span>
-                        <h2 class="text-lg font-bold text-slate-900 tracking-tight mt-0.5">${displayTitle}</h2>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-md text-xs font-bold ${badgeColor}">${item.price_level}</span>
-                </div>
-                <p class="text-xs text-slate-400 font-semibold mb-2">SEO Blueprint: <span class="italic text-slate-600">"${displayTitle}"</span></p>
-                <div class="grid grid-cols-2 gap-y-2 border-t border-b border-slate-100 py-3 my-3 text-xs">
-                    <div><span class="text-slate-400 font-medium">Target User:</span> <span class="font-semibold text-slate-700">${item.customer_type}</span></div>
-                    <div><span class="text-slate-400 font-medium">Urgency Vector:</span> <span class="font-semibold text-slate-700">${item.urgency_level}</span></div>
-                    <div><span class="text-slate-400 font-medium">Pricing Model:</span> <span class="font-semibold text-slate-700">${item.labor_pricing_method}</span></div>
-                    <div><span class="text-slate-400 font-medium">Monetization:</span> <span class="font-semibold text-slate-700">${item.best_monetization}</span></div>
-                </div>
-                <div class="flex flex-wrap gap-1.5 py-1">
-                    ${item.related_services.map(s => `<span class="bg-slate-100 text-slate-600 text-[10px] px-2 py-0.5 rounded font-medium border border-slate-200">#${s}</span>`).join('')}
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase tracking-wider">${item.cat}</span>
+                <h3 class="text-sm font-bold text-slate-100">${item.name}</h3>
+                <div class="flex items-center space-x-2 text-xs text-slate-400 pt-0.5">
+                    <span class="text-slate-300 font-semibold">📍 Coverage area:</span>
+                    <span>${item.city}, ${item.state} (${item.zip})</span>
                 </div>
             </div>
-            <div class="mt-5 pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div class="text-xs text-slate-500 font-medium">
-                    Est Value: <span class="text-slate-900 font-bold">$${item.average_price_range.min} - $${item.average_price_range.max}</span>
-                </div>
-                <button onclick="openLeadModal('${item.id}', '${displayTitle.replace(/'/g, "\\'")}')" class="bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all tracking-wide uppercase">
-                    ${item.call_to_action}
-                </button>
-            </div>
+            <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">${item.tier}</span>
         `;
-        gridContainer.appendChild(card);
+        
+        // Added onclick handler to support the Lead generation modal system perfectly
+        card.addEventListener('click', () => openLeadModal(item));
+        
+        outputArea.appendChild(card);
     });
 }
 
-function openLeadModal(nicheId, formattedTitle) {
-    const record = localDatabase.find(r => r.id === nicheId);
-    if (!record) return;
-
-    // Set Geographic override if defined
-    let locString = "";
-    if (geoState.zip) locString = geoState.zip;
-    else if (geoState.city && geoState.state) locString = `${geoState.city}, ${geoState.state}`;
-    else if (geoState.state) locString = geoState.state;
+function openLeadModal(record) {
+    const leadModal = document.getElementById("leadModal");
+    if(!leadModal) return;
 
     document.getElementById("formNicheId").value = record.id;
-    document.getElementById("formNicheName").value = formattedTitle;
-    document.getElementById("modalNicheName").textContent = formattedTitle;
-    document.getElementById("modalCategory").textContent = record.category;
-    document.getElementById("modalResourceName").textContent = record.downloadable_resource.title;
-    document.getElementById("formLocationInput").value = locString;
+    document.getElementById("formNicheName").value = record.name;
+    document.getElementById("modalNicheName").textContent = record.name;
+    document.getElementById("modalCategory").textContent = record.cat;
+    document.getElementById("modalResourceName").textContent = "Subcontractor Direct Quote";
     
-    document.getElementById("leadModal").classList.remove("hidden");
+    // Auto-fill actual exact location
+    document.getElementById("formLocationInput").value = `${record.city}, ${record.state} ${record.zip}`;
+    
+    leadModal.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
 }
 
 function closeModal() {
-    document.getElementById("leadModal").classList.add("hidden");
-    document.body.classList.remove("overflow-hidden");
+    const leadModal = document.getElementById("leadModal");
+    if(leadModal) {
+        leadModal.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+    }
 }
 
+// ==========================================
+// MRR Modeling Engine Logic (Retained)
+// ==========================================
 function setupMRRListeners() {
     const inputs = ['mrrLeads', 'mrrCloseRate', 'mrrRetainer'];
     inputs.forEach(id => {
-        document.getElementById(id).addEventListener('input', calculateMRR);
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('input', calculateMRR);
     });
     calculateMRR();
 }
 
 function calculateMRR() {
-    const leads = parseFloat(document.getElementById('mrrLeads').value) || 0;
+    const leadsEl = document.getElementById('mrrLeads');
+    if(!leadsEl) return;
+    
+    const leads = parseFloat(leadsEl.value) || 0;
     const closeRate = parseFloat(document.getElementById('mrrCloseRate').value) || 0;
     const retainer = parseFloat(document.getElementById('mrrRetainer').value) || 0;
 

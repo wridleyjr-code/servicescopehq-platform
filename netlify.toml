@@ -1,0 +1,3 @@
+[build]
+  command = "echo 'Deploying static HTML site... No build step required.'"
+  publish = "."

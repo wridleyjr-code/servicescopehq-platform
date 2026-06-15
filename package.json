@@ -1,0 +1,11 @@
+{
+  "name": "servicescopehq",
+  "version": "1.0.0",
+  "description": "ServiceScopeHQ Platform",
+  "scripts": {
+    "build": "echo 'Static HTML site, no build needed!'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
