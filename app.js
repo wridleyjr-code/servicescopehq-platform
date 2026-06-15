@@ -1,4 +1,3 @@
-let localDatabase = [];
 let activeCategoryFilter = "";
 
 // Geographic State
@@ -9,46 +8,27 @@ const geoState = {
     keyword: ""
 };
 
-const stateCityMap = {
-    "GA": ["Atlanta", "Byron", "Macon", "Savannah"],
-    "FL": ["Miami", "Orlando", "Tampa", "Jacksonville"],
-    "TX": ["Austin", "Dallas", "Houston", "San Antonio"]
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-    fetchDatabasePayload();
+    // localDatabase is loaded globally via data.js
+    initializeUIFilters();
+    executePlatformSearchFilter();
     setupMRRListeners();
     initializeGeographicListeners();
 });
 
-async function fetchDatabasePayload() {
-    try {
-        const response = await fetch('./data/niches.json');
-        if (!response.ok) throw new Error("Network payload fetch failed");
-        localDatabase = await response.json();
-        
-        initializeUIFilters();
-        executePlatformSearchFilter();
-    } catch (error) {
-        console.error("Critical database routing exception:", error);
-        const grid = document.getElementById('directoryGrid');
-        if (grid) {
-            grid.innerHTML = `
-                <div class="bg-red-50 border border-red-200 p-6 rounded-xl text-center text-red-800 text-sm font-semibold">
-                    Critical Synchronization Halt: Unable to resolve local directory data layers.
-                </div>`;
-        }
-    }
-}
-
 function initializeUIFilters() {
+    if (typeof localDatabase === 'undefined' || localDatabase.length === 0) {
+        console.error("Critical database routing exception: localDatabase is missing.");
+        return;
+    }
+
     const categories = [...new Set(localDatabase.map(item => item.category))];
     const container = document.getElementById("categoryContainer");
     if(!container) return;
     
     container.innerHTML = "";
     
-    // Add "All Sectors" logic to existing button if present
+    // Add "All Sectors" logic
     const filterAllBtn = document.getElementById("filter-all");
     if(filterAllBtn) {
         filterAllBtn.addEventListener("click", () => {
@@ -84,40 +64,22 @@ function resetFilterButtons() {
 }
 
 function initializeGeographicListeners() {
-    const stateMenu = document.getElementById("stateFilter");
-    const cityMenu = document.getElementById("cityFilter");
+    const stateInput = document.getElementById("stateFilter");
+    const cityInput = document.getElementById("cityFilter");
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
-    // Cascading effect: Changing state alters visible cities
-    if(stateMenu) {
-        stateMenu.addEventListener("change", () => {
-            geoState.state = stateMenu.value;
-            geoState.city = "";
-            
-            if (geoState.state && stateCityMap[geoState.state]) {
-                cityMenu.disabled = false;
-                cityMenu.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200";
-                cityMenu.innerHTML = '<option value="">All Cities</option>';
-                stateCityMap[geoState.state].forEach(city => {
-                    const opt = document.createElement("option");
-                    opt.value = city;
-                    opt.textContent = city;
-                    cityMenu.appendChild(opt);
-                });
-            } else {
-                cityMenu.disabled = true;
-                cityMenu.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
-                cityMenu.innerHTML = '<option value="">Select State First</option>';
-            }
+    if(stateInput) {
+        stateInput.addEventListener("input", (e) => {
+            geoState.state = e.target.value.trim().toUpperCase();
             updateLocationBadge();
             executePlatformSearchFilter();
         });
     }
 
-    if(cityMenu) {
-        cityMenu.addEventListener("change", (e) => {
-            geoState.city = e.target.value;
+    if(cityInput) {
+        cityInput.addEventListener("input", (e) => {
+            geoState.city = e.target.value.trim();
             updateLocationBadge();
             executePlatformSearchFilter();
         });
@@ -133,16 +95,6 @@ function initializeGeographicListeners() {
     if(zipInput) {
         zipInput.addEventListener("input", (e) => {
             geoState.zip = e.target.value.trim();
-            if (geoState.zip.length > 0) {
-                if(stateMenu) stateMenu.value = "";
-                geoState.state = "";
-                geoState.city = "";
-                if(cityMenu) {
-                    cityMenu.innerHTML = '<option value="">Select State First</option>';
-                    cityMenu.disabled = true;
-                    cityMenu.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
-                }
-            }
             updateLocationBadge();
             executePlatformSearchFilter();
         });
@@ -181,7 +133,6 @@ function executePlatformSearchFilter() {
         const matchesCategory = activeCategoryFilter === "" || item.category === activeCategoryFilter;
         const matchesPrice = priceVal === "" || item.price_level === priceVal;
         
-        // Location acts ONLY as a contextual badge, it does NOT filter out records!
         return matchesKeyword && matchesCategory && matchesPrice;
     });
 

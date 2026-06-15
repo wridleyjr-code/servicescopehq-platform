@@ -102,23 +102,18 @@
                                class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
                     </div>
 
-                    <!-- State Selector -->
+                    <!-- State Free-Form Field -->
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">State Region</label>
-                        <select id="stateFilter" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300">
-                            <option value="">All States</option>
-                            <option value="GA">Georgia (GA)</option>
-                            <option value="FL">Florida (FL)</option>
-                            <option value="TX">Texas (TX)</option>
-                        </select>
+                        <input type="text" id="stateFilter" placeholder="e.g., GA or Texas" 
+                               class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
                     </div>
 
-                    <!-- City Selector (Populates dynamically based on state choice) -->
+                    <!-- City Free-Form Field -->
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">City Hub</label>
-                        <select id="cityFilter" disabled class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50">
-                            <option value="">Select State First</option>
-                        </select>
+                        <input type="text" id="cityFilter" placeholder="e.g., Atlanta" 
+                               class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
                     </div>
 
                     <!-- ZIP Code Direct Input -->
@@ -209,6 +204,7 @@
     </footer>
 
     <!-- Run Logic Orchestration Hook -->
+    <script src="data.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
