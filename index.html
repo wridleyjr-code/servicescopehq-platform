@@ -28,10 +28,12 @@
             
             <div class="flex items-center space-x-4">
                 <!-- Location Lock Badge -->
-                <div class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700">
+                <div class="hidden sm:flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span id="currentLocationBadge">Live Estimates & Scopes</span>
                 </div>
+                <!-- Tier 1 Monetization CTA -->
+                <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded shadow-sm transition-all whitespace-nowrap">List Your Business</a>
             </div>
         </div>
     </header>
@@ -143,6 +145,20 @@
             <div id="directoryGrid" class="grid grid-cols-1 gap-4">
                 <!-- Javascript Renders Entries Instantly In This Zone -->
             </div>
+
+            <!-- Tier 3 Monetization: Newsletter Capture Block -->
+            <div class="mt-8 bg-slate-900 rounded-xl p-8 border border-slate-800 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-indigo-900/20"></div>
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-black text-white tracking-tight mb-2">The Scope-of-Work Newsletter</h3>
+                    <p class="text-slate-400 text-sm mb-6">Get weekly market pricing, labor metrics, and contract compliance updates designed strictly for high-volume B2B builders and general contractors.</p>
+                    <form name="newsletter" method="POST" data-netlify="true" class="flex flex-col sm:flex-row gap-3 justify-center">
+                        <input type="hidden" name="form-name" value="newsletter" />
+                        <input type="email" name="email" placeholder="Enter your work email address..." required class="w-full sm:w-96 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm">
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm">Subscribe for Insights</button>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -191,7 +207,35 @@
                     <input type="text" id="formLocationInput" name="client_location" value="" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
 
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs">
+                <!-- Tier 2 Monetization: RFQ Enhancements -->
+                <div class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-200 pt-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Est. Project Budget</label>
+                        <select name="client_budget" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="TBD">To Be Determined</option>
+                            <option value="<5k">Under $5,000</option>
+                            <option value="5k-25k">$5,000 - $25,000</option>
+                            <option value="25k-100k">$25,000 - $100,000</option>
+                            <option value="100k+">$100,000+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Timeline</label>
+                        <select name="client_timeline" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ASAP">ASAP (Emergency)</option>
+                            <option value="1-4 weeks">1 to 4 Weeks</option>
+                            <option value="1-3 months">1 to 3 Months</option>
+                            <option value="Planning">Planning Phase</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Required Certifications (Optional)</label>
+                    <input type="text" name="client_certs" placeholder="e.g., OSHA 30, Bonded, MBE" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <button type="submit" id="formSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs">
                     Authorize Request & Download Template
                 </button>
             </form>

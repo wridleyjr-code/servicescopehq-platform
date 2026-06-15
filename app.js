@@ -136,6 +136,13 @@ function executePlatformSearchFilter() {
         return matchesKeyword && matchesCategory && matchesPrice;
     });
 
+    // Sort: Premium tiers pin to the top
+    matches.sort((a, b) => {
+        if (a.listing_tier === 'Premium' && b.listing_tier !== 'Premium') return -1;
+        if (a.listing_tier !== 'Premium' && b.listing_tier === 'Premium') return 1;
+        return 0;
+    });
+
     // Update Counter Badges
     const displayedCount = document.getElementById("displayedCount");
     const totalCount = document.getElementById("totalCount");
@@ -176,27 +183,53 @@ function renderFilteredDirectory(records) {
         const displayCity = geoState.city || "All Cities";
         const displayZip = geoState.zip || "N/A";
 
+        const isPremium = item.listing_tier === "Premium";
+        const cardClass = isPremium 
+            ? "bg-slate-950 border-2 border-indigo-500/80 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:border-indigo-400 transition-all cursor-pointer relative overflow-hidden gap-4" 
+            : "bg-slate-950 border border-slate-800 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between hover:border-slate-600 transition-all cursor-pointer gap-4";
+
+        const premiumBadge = isPremium 
+            ? `<div class="absolute -right-8 top-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[9px] font-black uppercase tracking-widest text-slate-900 py-1 px-8 rotate-45 shadow-sm">Premium</div>` 
+            : "";
+
+        const resourcePrice = item.downloadable_resource.price > 0 ? `$${item.downloadable_resource.price}` : "FREE";
+        const resourceButtonColor = item.downloadable_resource.price > 0 ? "bg-amber-500 text-slate-900 hover:bg-amber-400" : "bg-slate-800 text-slate-300 hover:bg-slate-700";
+
         const card = document.createElement("div");
-        card.className = "bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center justify-between hover:border-indigo-500 transition-all cursor-pointer";
+        card.className = cardClass;
         card.innerHTML = `
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase tracking-wider">${item.category}</span>
+            ${premiumBadge}
+            <div class="space-y-1 z-10 w-full md:w-auto">
+                <div class="flex items-center space-x-2">
+                    <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase tracking-wider">${item.category}</span>
+                    ${isPremium ? `<span class="text-[10px] font-bold text-amber-400 bg-amber-950/30 px-2 py-0.5 rounded border border-amber-900/50 uppercase tracking-wider">Verified Pro</span>` : ''}
+                </div>
                 <h3 class="text-sm font-bold text-slate-100">${displayTitle}</h3>
-                <div class="flex items-center space-x-2 text-xs text-slate-400 pt-0.5">
-                    <span class="text-slate-300 font-semibold">📍 Coverage area:</span>
-                    <span>${displayCity}, ${displayState} (${displayZip})</span>
+                <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3 text-xs text-slate-400 pt-0.5">
+                    <div class="flex items-center space-x-1">
+                        <span class="text-slate-300 font-semibold">📍 Coverage:</span>
+                        <span>${displayCity}, ${displayState} (${displayZip})</span>
+                    </div>
+                    <div class="hidden sm:block text-slate-700">•</div>
+                    <span class="font-semibold text-slate-300">${item.price_level}</span>
                 </div>
             </div>
-            <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">${item.price_level}</span>
+            
+            <div class="flex items-center space-x-3 z-10 w-full md:w-auto mt-2 md:mt-0 border-t border-slate-800 md:border-0 pt-3 md:pt-0">
+                <button onclick="openLeadModal('${item.id}', '${displayTitle}', '${item.category}', '${item.downloadable_resource.title}', ${item.downloadable_resource.price})" class="flex-grow md:flex-grow-0 whitespace-nowrap text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded shadow-sm transition-all ${resourceButtonColor}">
+                    ${item.downloadable_resource.price > 0 ? `Buy Asset (${resourcePrice})` : `Download Template (${resourcePrice})`}
+                </button>
+                <button onclick="openLeadModal('${item.id}', '${displayTitle}', '${item.category}', 'RFQ Routing', 0)" class="flex-grow md:flex-grow-0 whitespace-nowrap text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded shadow-sm transition-all bg-indigo-600 text-white hover:bg-indigo-500">
+                    Dispatch RFQ
+                </button>
+            </div>
         `;
-        
-        card.addEventListener('click', () => openLeadModal(item, displayTitle));
         
         outputArea.appendChild(card);
     });
 }
 
-function openLeadModal(record, displayTitle) {
+function openLeadModal(id, displayTitle, category, resourceTitle, price) {
     const leadModal = document.getElementById("leadModal");
     if(!leadModal) return;
 
@@ -205,11 +238,27 @@ function openLeadModal(record, displayTitle) {
     else if (geoState.city && geoState.state) locString = `${geoState.city}, ${geoState.state}`;
     else if (geoState.state) locString = geoState.state;
 
-    document.getElementById("formNicheId").value = record.id;
+    document.getElementById("formNicheId").value = id;
     document.getElementById("formNicheName").value = displayTitle;
     document.getElementById("modalNicheName").textContent = displayTitle;
-    document.getElementById("modalCategory").textContent = record.category;
-    document.getElementById("modalResourceName").textContent = record.downloadable_resource.title;
+    document.getElementById("modalCategory").textContent = category;
+    
+    // Toggle between Buy Asset and Lead Capture based on pricing / intent
+    const formSubmitBtn = document.getElementById("formSubmitBtn");
+    if (price > 0 && resourceTitle !== 'RFQ Routing') {
+        document.getElementById("modalResourceName").textContent = `${resourceTitle} - Buy for $${price}`;
+        formSubmitBtn.textContent = `Checkout via Stripe ($${price})`;
+        formSubmitBtn.className = "w-full bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
+    } else if (resourceTitle === 'RFQ Routing') {
+        document.getElementById("modalResourceName").textContent = `High-Intent Project RFQ`;
+        formSubmitBtn.textContent = "Securely Dispatch RFQ to Pro Network";
+        formSubmitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
+    } else {
+        document.getElementById("modalResourceName").textContent = `${resourceTitle} (FREE)`;
+        formSubmitBtn.textContent = "Authorize Request & Download Template";
+        formSubmitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
+    }
+
     document.getElementById("formLocationInput").value = locString;
     
     leadModal.classList.remove("hidden");
