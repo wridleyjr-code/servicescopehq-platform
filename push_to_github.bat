@@ -1,4 +1,6 @@
 @echo off
+<<<<<<< HEAD
+<<<<<<< HEAD
 echo ========================================================
 echo ServiceScopeHQ: GitHub Push Initialization
 echo ========================================================
@@ -31,4 +33,21 @@ echo ========================================================
 echo SUCCESS! Your code has been pushed to GitHub.
 echo You can now connect Netlify to this repository.
 echo ========================================================
+=======
+=======
+echo Synchronizing with GitHub remote...
+git pull origin main --rebase
+
+>>>>>>> 6c411e7 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
+echo Staging updated files...
+git add .
+
+echo Committing files...
+git commit -m "feat: integrated interactive MRR modeling simulator and directory search wireframes"
+
+echo Pushing to GitHub origin main repository...
+git push origin main
+
+echo Push complete!
+>>>>>>> 7866196 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
 pause
