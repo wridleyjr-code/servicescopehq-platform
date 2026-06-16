@@ -1,4 +1,5 @@
 let activeCategoryFilter = "";
+let activeDatabase = [];
 
 // Geographic State
 const geoState = {
@@ -9,7 +10,12 @@ const geoState = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // localDatabase is loaded globally via data.js
+    // Merge localDatabase and liveDatabaseOverride if present
+    activeDatabase = [...(typeof localDatabase !== 'undefined' ? localDatabase : [])];
+    if (typeof liveDatabaseOverride !== 'undefined' && Array.isArray(liveDatabaseOverride)) {
+        activeDatabase = [...activeDatabase, ...liveDatabaseOverride];
+    }
+    
     initializeUIFilters();
     executePlatformSearchFilter();
     setupMRRListeners();
@@ -17,12 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initializeUIFilters() {
-    if (typeof localDatabase === 'undefined' || localDatabase.length === 0) {
-        console.error("Critical database routing exception: localDatabase is missing.");
+    if (activeDatabase.length === 0) {
+        console.error("Critical database routing exception: activeDatabase is empty.");
         return;
     }
 
-    const categories = [...new Set(localDatabase.map(item => item.category))];
+    const categories = [...new Set(activeDatabase.map(item => item.category))];
     const container = document.getElementById("categoryContainer");
     if(!container) return;
     
@@ -123,7 +129,7 @@ function executePlatformSearchFilter() {
     const priceFilterEl = document.getElementById("priceFilter");
     const priceVal = priceFilterEl ? priceFilterEl.value : "";
 
-    const matches = localDatabase.filter(item => {
+    const matches = activeDatabase.filter(item => {
         // Keyword checks across core strings
         const matchesKeyword = geoState.keyword === "" || 
                                item.service_name.toLowerCase().includes(geoState.keyword) || 
@@ -133,7 +139,18 @@ function executePlatformSearchFilter() {
         const matchesCategory = activeCategoryFilter === "" || item.category === activeCategoryFilter;
         const matchesPrice = priceVal === "" || item.price_level === priceVal;
         
-        return matchesKeyword && matchesCategory && matchesPrice;
+        // Match location (for scraped listings)
+        let matchesLocation = true;
+        if (geoState.state || geoState.city) {
+            // Static items from localDatabase don't have explicit city/state property, so they match all
+            const itemState = item.state ? item.state.toUpperCase() : "";
+            const itemCity = item.city ? item.city.toLowerCase() : "";
+            
+            if (geoState.state && itemState && itemState !== geoState.state) matchesLocation = false;
+            if (geoState.city && itemCity && !itemCity.includes(geoState.city.toLowerCase())) matchesLocation = false;
+        }
+
+        return matchesKeyword && matchesCategory && matchesPrice && matchesLocation;
     });
 
     // Sort: Premium tiers pin to the top
@@ -147,7 +164,7 @@ function executePlatformSearchFilter() {
     const displayedCount = document.getElementById("displayedCount");
     const totalCount = document.getElementById("totalCount");
     if(displayedCount) displayedCount.textContent = matches.length;
-    if(totalCount) totalCount.textContent = localDatabase.length;
+    if(totalCount) totalCount.textContent = activeDatabase.length;
 
     renderFilteredDirectory(matches);
 }
