@@ -26,12 +26,17 @@
                 </div>
             </div>
             
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
                 <!-- Location Lock Badge -->
                 <div class="hidden sm:flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span id="currentLocationBadge">Live Estimates & Scopes</span>
                 </div>
+                <!-- How to Use Guide Button -->
+                <button onclick="openGuideModal()" id="howToUseBtn" class="flex items-center space-x-1.5 bg-slate-100 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-slate-600 hover:text-indigo-700 text-xs font-bold px-3 py-2 rounded transition-all whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"/></svg>
+                    <span>How to Use</span>
+                </button>
                 <!-- Tier 1 Monetization CTA -->
                 <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded shadow-sm transition-all whitespace-nowrap">List Your Business</a>
             </div>
@@ -241,6 +246,277 @@
             </form>
         </div>
     </div>
+
+    <!-- ============================================================ -->
+    <!-- Consumer Guide Modal                                        -->
+    <!-- ============================================================ -->
+    <div id="guideModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleGuideBackdropClick(event)">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
+
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 px-6 py-5 flex items-center justify-between flex-shrink-0">
+                <div>
+                    <h2 class="text-lg font-extrabold text-white tracking-tight">How to Use ServiceScopeHQ</h2>
+                    <p class="text-xs text-indigo-300 mt-0.5">Your complete guide to finding services, templates &amp; contractors</p>
+                </div>
+                <button onclick="closeGuideModal()" class="text-slate-400 hover:text-white transition-all text-2xl font-bold leading-none">&times;</button>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex border-b border-slate-200 bg-slate-50 flex-shrink-0 overflow-x-auto">
+                <button onclick="switchGuideTab('overview')"    id="gtab-overview"    class="guide-tab guide-tab-active">🗺️ Overview</button>
+                <button onclick="switchGuideTab('search')"      id="gtab-search"      class="guide-tab">🔍 Search &amp; Filter</button>
+                <button onclick="switchGuideTab('cards')"       id="gtab-cards"       class="guide-tab">📋 Service Cards</button>
+                <button onclick="switchGuideTab('resources')"   id="gtab-resources"   class="guide-tab">📥 Templates &amp; RFQs</button>
+                <button onclick="switchGuideTab('faq')"         id="gtab-faq"         class="guide-tab">❓ FAQ</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="overflow-y-auto flex-grow p-6 space-y-5 text-sm text-slate-700 custom-scrollbar">
+
+                <!-- OVERVIEW TAB -->
+                <div id="gpanel-overview" class="guide-panel space-y-5">
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-indigo-800">
+                        <p class="font-bold text-base mb-1">Welcome to ServiceScopeHQ 👋</p>
+                        <p class="text-xs leading-relaxed">The B2B database for local service estimates, scope-of-work templates, and contractor connections across the US.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                            <div class="text-xl">🔍</div>
+                            <p class="font-bold text-slate-800">Find Local Providers</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">Search contractors, legal pros, tech specialists and more by keyword, city, state, or ZIP code.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                            <div class="text-xl">📄</div>
+                            <p class="font-bold text-slate-800">Download Templates</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">Get free &amp; paid scope-of-work docs, checklists, and contract shells — ready to use instantly.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                            <div class="text-xl">📬</div>
+                            <p class="font-bold text-slate-800">Submit an RFQ</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">Request quotes from vetted professionals. Describe your project — they come to you.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                            <div class="text-xl">💰</div>
+                            <p class="font-bold text-slate-800">Model Your Revenue</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">Use the MRR calculator in the sidebar to forecast monthly &amp; annual revenue for your service business.</p>
+                        </div>
+                    </div>
+                    <div class="text-center pt-2">
+                        <button onclick="switchGuideTab('search')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-6 py-2.5 rounded-lg transition-all">Start with Search &amp; Filter →</button>
+                    </div>
+                </div>
+
+                <!-- SEARCH & FILTER TAB -->
+                <div id="gpanel-search" class="guide-panel hidden space-y-4">
+                    <h3 class="font-extrabold text-slate-900 text-base">Finding the Right Service</h3>
+
+                    <div class="space-y-3">
+                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+                            <div>
+                                <p class="font-bold text-slate-800">Scope Keyword</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Type any trade or topic — <code class="bg-slate-200 px-1 rounded">tile</code>, <code class="bg-slate-200 px-1 rounded">mold</code>, <code class="bg-slate-200 px-1 rounded">LLC</code>, <code class="bg-slate-200 px-1 rounded">airbnb</code>. Results filter instantly.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+                            <div>
+                                <p class="font-bold text-slate-800">State Region</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Type a 2-letter state code — <code class="bg-slate-200 px-1 rounded">GA</code>, <code class="bg-slate-200 px-1 rounded">FL</code>, <code class="bg-slate-200 px-1 rounded">TX</code>, <code class="bg-slate-200 px-1 rounded">NC</code> — to narrow to your state.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+                            <div>
+                                <p class="font-bold text-slate-800">City Hub</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Type your city — <code class="bg-slate-200 px-1 rounded">Atlanta</code>, <code class="bg-slate-200 px-1 rounded">Miami</code>, <code class="bg-slate-200 px-1 rounded">Houston</code> — to show only local live listings.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+                            <div>
+                                <p class="font-bold text-slate-800">ZIP Code Override</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Enter a 5-digit ZIP — <code class="bg-slate-200 px-1 rounded">31008</code>, <code class="bg-slate-200 px-1 rounded">30309</code> — for hyper-local results. Updates the header badge.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 pt-4">
+                        <p class="font-bold text-slate-800 mb-2">Sidebar Filters</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2"><span class="font-semibold">Market Verticals</span><br><span class="text-slate-500">Filter by industry sector</span></div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2"><span class="font-semibold">Price Level</span><br><span class="text-slate-500">High / Mid / Low Ticket</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICE CARDS TAB -->
+                <div id="gpanel-cards" class="guide-panel hidden space-y-4">
+                    <h3 class="font-extrabold text-slate-900 text-base">Reading a Service Card</h3>
+                    <div class="bg-slate-900 border-2 border-indigo-500/60 rounded-xl p-4 text-white relative overflow-hidden shadow-lg">
+                        <div class="absolute -right-8 top-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[9px] font-black uppercase tracking-widest text-slate-900 py-1 px-8 rotate-45">Premium</div>
+                        <div class="space-y-1 z-10">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase">Remodeling</span>
+                                <span class="text-[10px] font-bold text-amber-400 bg-amber-950/30 px-2 py-0.5 rounded border border-amber-900/50 uppercase">Verified Pro</span>
+                            </div>
+                            <p class="text-sm font-bold">Tile Shower Installation in Atlanta, GA</p>
+                            <p class="text-xs text-slate-400">📍 Coverage: Atlanta, GA (30309) &nbsp;•&nbsp; High Ticket</p>
+                        </div>
+                        <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+                            <span class="text-[10px] font-bold bg-amber-500 text-slate-900 px-3 py-1.5 rounded">Buy Asset ($49)</span>
+                            <span class="text-[10px] font-bold bg-indigo-600 text-white px-3 py-1.5 rounded">Dispatch RFQ</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-600 w-28 flex-shrink-0">Gold border</span><span class="text-slate-500">Premium listing — top-ranked, verified provider</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-600 w-28 flex-shrink-0">Verified Pro badge</span><span class="text-slate-500">Premium tier — manually elevated listing</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-700 w-28 flex-shrink-0">Category tag</span><span class="text-slate-500">Industry sector — matches sidebar filter</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-700 w-28 flex-shrink-0">📍 Coverage</span><span class="text-slate-500">City / State / ZIP the listing serves</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-28 flex-shrink-0">Amber button</span><span class="text-slate-500">Paid asset available — click to purchase via Stripe</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-600 w-28 flex-shrink-0">Grey button</span><span class="text-slate-500">Free template — fill form to download</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-700 w-28 flex-shrink-0">Blue button</span><span class="text-slate-500">Dispatch RFQ — submit your project for quotes</span></div>
+                    </div>
+                </div>
+
+                <!-- TEMPLATES & RFQS TAB -->
+                <div id="gpanel-resources" class="guide-panel hidden space-y-5">
+                    <h3 class="font-extrabold text-slate-900 text-base">Templates &amp; RFQs</h3>
+
+                    <div class="space-y-3">
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="bg-slate-100 px-4 py-2.5 font-bold text-slate-700 text-xs uppercase tracking-wider">📥 Downloading a Free Template</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                                <p>1. Click the grey <strong>"Download Template (FREE)"</strong> button on any card.</p>
+                                <p>2. Fill in your name, phone, email, and location.</p>
+                                <p>3. Optionally add your budget range, timeline, and any certifications needed.</p>
+                                <p>4. Click <strong>"Authorize Request &amp; Download Template"</strong>.</p>
+                                <p class="text-indigo-600 font-semibold pt-1">✓ You'll receive the template and be connected to local pros in that category.</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-amber-200 rounded-xl overflow-hidden">
+                            <div class="bg-amber-50 px-4 py-2.5 font-bold text-amber-700 text-xs uppercase tracking-wider">💳 Buying a Paid Asset</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                                <p>1. Click the amber <strong>"Buy Asset ($XX)"</strong> button.</p>
+                                <p>2. Review the asset name and price in the popup.</p>
+                                <p>3. Click <strong>"Checkout via Stripe"</strong> to complete payment securely.</p>
+                                <p class="text-slate-500 pt-1">Paid assets include detailed Excel templates, contract shells, compliance guides, and audit packets.</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-indigo-200 rounded-xl overflow-hidden">
+                            <div class="bg-indigo-50 px-4 py-2.5 font-bold text-indigo-700 text-xs uppercase tracking-wider">📬 Submitting an RFQ</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                                <p>1. Click the blue <strong>"Dispatch RFQ"</strong> button on any service card.</p>
+                                <p>2. Fill in your contact info, location, budget range, and timeline.</p>
+                                <p>3. Add any certification requirements (e.g. OSHA 30, Bonded, MBE).</p>
+                                <p>4. Click <strong>"Securely Dispatch RFQ to Pro Network"</strong>.</p>
+                                <p class="text-indigo-600 font-semibold pt-1">✓ Verified professionals in your area follow up via phone or email.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ TAB -->
+                <div id="gpanel-faq" class="guide-panel hidden space-y-3">
+                    <h3 class="font-extrabold text-slate-900 text-base">Frequently Asked Questions</h3>
+                    <div class="space-y-2">
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                Are the business listings real companies?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Live listings (tagged with a city/state) are real businesses sourced from OpenStreetMap. Static niche entries are curated service categories with templated scope info.</p>
+                        </details>
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                How do I find contractors in my specific city?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Type your city in the "City Hub" field and your 2-letter state code in "State Region". Only listings matching your area will appear in the directory.</p>
+                        </details>
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                What's the difference between free and paid resources?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Free resources are general-use templates and checklists. Paid assets ($19–$199) are professionally formatted scope templates, contract shells, and compliance matrices designed to save hours of work.</p>
+                        </details>
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                What happens after I submit an RFQ?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Your project details are routed to the ServiceScopeHQ pro network. Verified contractors in your area and service category will follow up via phone or email.</p>
+                        </details>
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                Is my information secure?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">All form submissions are processed through Netlify's secure infrastructure. Payment checkout is handled by Stripe (PCI-DSS compliant). Your data is never sold to third parties.</p>
+                        </details>
+                        <details class="border border-slate-200 rounded-xl group">
+                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                                Why does the header say "Live Estimates &amp; Scopes"?
+                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </summary>
+                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">That's the default — no location filter is active, so you're seeing all listings nationally. Enter a city or state and the badge updates to show your active area.</p>
+                        </details>
+                    </div>
+                </div>
+
+            </div><!-- end scroll area -->
+
+            <!-- Modal Footer -->
+            <div class="border-t border-slate-200 px-6 py-3 flex justify-between items-center bg-slate-50 flex-shrink-0">
+                <p class="text-[10px] text-slate-400">ServiceScopeHQ &copy; 2026 — The B2B Services Database</p>
+                <button onclick="closeGuideModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">Close Guide</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .guide-tab {
+            padding: 0.625rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+        .guide-tab:hover { color: #4f46e5; background: #eef2ff; }
+        .guide-tab-active { color: #4f46e5 !important; border-bottom-color: #4f46e5 !important; background: white !important; }
+    </style>
+
+    <script>
+        function openGuideModal() {
+            document.getElementById('guideModal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+        function closeGuideModal() {
+            document.getElementById('guideModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+        function handleGuideBackdropClick(e) {
+            if (e.target === document.getElementById('guideModal')) closeGuideModal();
+        }
+        function switchGuideTab(tab) {
+            const tabs   = ['overview','search','cards','resources','faq'];
+            tabs.forEach(t => {
+                document.getElementById('gpanel-' + t).classList.add('hidden');
+                document.getElementById('gtab-' + t).classList.remove('guide-tab-active');
+            });
+            document.getElementById('gpanel-' + tab).classList.remove('hidden');
+            document.getElementById('gtab-' + tab).classList.add('guide-tab-active');
+        }
+    </script>
 
     <!-- Page Footer -->
     <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400 font-medium">
