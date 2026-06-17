@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Custom Scrollbar for Webkit */
 ::-webkit-scrollbar {
     width: 8px;
@@ -42,7 +41,8 @@
 
 #niche-modal.open #modal-content-panel {
     transform: scale(1);
-=======
+}
+
 /* Core Styling Shell for ServiceScopeHQ Directory */
 @theme {
   --color-brand-indigo: #4f46e5;
@@ -51,5 +51,4 @@
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
->>>>>>> 7866196 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
 }
