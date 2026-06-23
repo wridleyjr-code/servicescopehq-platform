@@ -202,10 +202,17 @@ function renderFilteredDirectory(records) {
         const displayCity = geoState.city || "All Cities";
         const displayZip = geoState.zip || "N/A";
 
+        const isTileNiche = item.id === "niche_03";
         const isPremium = item.listing_tier === "Premium";
-        const cardClass = isPremium 
-            ? "bg-slate-950 border-2 border-indigo-500/80 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:border-indigo-400 transition-all cursor-pointer relative overflow-hidden gap-4" 
-            : "bg-slate-950 border border-slate-800 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between hover:border-slate-600 transition-all cursor-pointer gap-4";
+        
+        let cardClass = "";
+        if (isTileNiche) {
+            cardClass = "bg-slate-950 border border-slate-800 p-5 rounded-xl flex flex-col hover:border-slate-600 transition-all cursor-pointer gap-4 w-full";
+        } else if (isPremium) {
+            cardClass = "bg-slate-950 border-2 border-indigo-500/80 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:border-indigo-400 transition-all cursor-pointer relative overflow-hidden gap-4";
+        } else {
+            cardClass = "bg-slate-950 border border-slate-800 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between hover:border-slate-600 transition-all cursor-pointer gap-4";
+        }
 
         const premiumBadge = isPremium 
             ? `<div class="absolute -right-8 top-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[9px] font-black uppercase tracking-widest text-slate-900 py-1 px-8 rotate-45 shadow-sm">Premium</div>` 
@@ -214,11 +221,78 @@ function renderFilteredDirectory(records) {
         const resourcePrice = item.downloadable_resource.price > 0 ? `$${item.downloadable_resource.price}` : "FREE";
         const resourceButtonColor = item.downloadable_resource.price > 0 ? "bg-amber-500 text-slate-900 hover:bg-amber-400" : "bg-slate-800 text-slate-300 hover:bg-slate-700";
 
+        let takeoffHtml = "";
+        if (isTileNiche) {
+            takeoffHtml = `
+            <!-- Takeoff Estimator UI markup card -->
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-4 max-w-xl text-slate-200 mt-2 w-full" onclick="event.stopPropagation()">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Tile Shower Material Takeoff & Slope Engine</h4>
+                    <p class="text-[10px] text-slate-400 mt-0.5">TCNA-compliant material scaling and pre-slope calculator for custom tile bays.</p>
+                </div>
+                
+                <div class="space-y-3 text-[11px]">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Pan Width (ft)</label>
+                            <input type="number" id="panWidth" value="3" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Pan Length (ft)</label>
+                            <input type="number" id="panLength" value="5" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Wall Height (ft)</label>
+                            <input type="number" id="wallHeight" value="8" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Waste Allowance Layer</label>
+                        <select id="wasteFactor" onchange="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="1.10" selected>10% Standard (Straight Grid Layout)</option>
+                            <option value="1.15">15% Modified (Diagonal / Large Format Cuts)</option>
+                            <option value="1.20">20% High Waste (Herringbone / Chevron Patterns)</option>
+                        </select>
+                    </div>
+
+                    <!-- Takeoff Quantities Summary Display Grid -->
+                    <div class="bg-slate-950/60 p-3 rounded border border-slate-800/80 space-y-2 mt-2">
+                        <h5 class="font-bold text-slate-400 uppercase text-[9px] tracking-wider mb-1">Required Material Takeoff Quantities</h5>
+                        
+                        <div class="grid grid-cols-2 gap-2 text-[10px]">
+                            <div class="bg-slate-950/80 p-2 rounded border border-slate-800/40">
+                                <p class="text-slate-400 text-[8px] uppercase">Backer Board Sheets (3'x5')</p>
+                                <p id="takeoffBoards" class="text-xs font-black text-slate-200 mt-0.5">0 Sheets</p>
+                            </div>
+                            <div class="bg-slate-950/80 p-2 rounded border border-slate-800/40">
+                                <p class="text-slate-400 text-[8px] uppercase">Waterproofing Membrane</p>
+                                <p id="takeoffMembrane" class="text-xs font-black text-slate-200 mt-0.5">0 Sq Ft</p>
+                            </div>
+                            <div class="bg-slate-950/80 p-2 rounded border border-slate-800/40">
+                                <p class="text-slate-400 text-[8px] uppercase">Thinset Mortar (50lb Bags)</p>
+                                <p id="takeoffThinset" class="text-xs font-black text-slate-200 mt-0.5">0 Bags</p>
+                            </div>
+                            <div class="bg-slate-950/80 p-2 rounded border border-slate-800/40">
+                                <p class="text-slate-400 text-[8px] uppercase">Est. Center Slope Drop</p>
+                                <p id="takeoffSlope" class="text-xs font-black text-amber-400 mt-0.5">0.00 inches</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-amber-950/20 border border-amber-900/40 p-2.5 rounded mt-2 text-[10px] text-amber-300 leading-normal">
+                            ⚠️ <strong>TCNA Standard Compliance Rule:</strong> Shower pan slope calculations assume a minimum required drop of <strong>1/4-inch per linear foot</strong> traveling from the furthest perimeter framing wall edge straight to the center weep hole drain tracking throat.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
         const card = document.createElement("div");
         card.className = cardClass;
         card.innerHTML = `
             ${premiumBadge}
-            <div class="space-y-1 z-10 w-full md:w-auto">
+            <div class="space-y-1 z-10 w-full ${isTileNiche ? '' : 'md:w-auto'} flex-grow">
                 <div class="flex items-center space-x-2">
                     <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase tracking-wider">${item.category}</span>
                     ${isPremium ? `<span class="text-[10px] font-bold text-amber-400 bg-amber-950/30 px-2 py-0.5 rounded border border-amber-900/50 uppercase tracking-wider">Verified Pro</span>` : ''}
@@ -232,9 +306,10 @@ function renderFilteredDirectory(records) {
                     <div class="hidden sm:block text-slate-700">•</div>
                     <span class="font-semibold text-slate-300">${item.price_level}</span>
                 </div>
+                ${takeoffHtml}
             </div>
             
-            <div class="flex items-center space-x-3 z-10 w-full md:w-auto mt-2 md:mt-0 border-t border-slate-800 md:border-0 pt-3 md:pt-0">
+            <div class="flex items-center space-x-3 z-10 w-full md:w-auto mt-2 md:mt-0 ${isTileNiche ? 'border-t border-slate-800 pt-3' : 'md:border-0 md:pt-0'}">
                 <button onclick="openLeadModal('${item.id}', '${displayTitle}', '${item.category}', '${item.downloadable_resource.title}', ${item.downloadable_resource.price})" class="flex-grow md:flex-grow-0 whitespace-nowrap text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded shadow-sm transition-all ${resourceButtonColor}">
                     ${item.downloadable_resource.price > 0 ? `Buy Asset (${resourcePrice})` : `Download Template (${resourcePrice})`}
                 </button>
@@ -246,6 +321,10 @@ function renderFilteredDirectory(records) {
         
         outputArea.appendChild(card);
     });
+
+    if (document.getElementById('panWidth')) {
+        runTileCalculator();
+    }
 }
 
 function openLeadModal(id, displayTitle, category, resourceTitle, price) {
@@ -455,3 +534,47 @@ async function captureSubscriberEmail(event) {
         alert("Success! Your resource is unlocked.");
     }
 }
+
+function runTileCalculator() {
+    // 1. Capture user inputs
+    const width = parseFloat(document.getElementById('panWidth').value) || 0;
+    const length = parseFloat(document.getElementById('panLength').value) || 0;
+    const height = parseFloat(document.getElementById('wallHeight').value) || 0;
+    const wasteMultiplier = parseFloat(document.getElementById('wasteFactor').value) || 1.10;
+
+    // 2. Structural Area Computations
+    const floorPanArea = width * length;
+    
+    // Calculates total square footage for 3 framing perimeter wet-walls
+    // Assumes 1 back long wall (length x height) + 2 side walls (width x height x 2)
+    const activeWallArea = (length * height) + (width * height * 2);
+    const grossTotalArea = (floorPanArea + activeWallArea) * wasteMultiplier;
+
+    // 3. Material Factor Quantities Scaling Formulas
+    // 3ft x 5ft backer sheets equal 15 square feet per structural leaf unit
+    const backerBoardSheetsNeeded = Math.ceil((activeWallArea * wasteMultiplier) / 15);
+    
+    // Waterproofing requires covering both floor pan and wet walls fully
+    const waterproofingMembraneSqFt = Math.ceil(grossTotalArea);
+    
+    // Standard medium-bed tile trowels coverage maps to roughly 50 sq ft per 50lb dry bag mix
+    const thinsetBagsNeeded = Math.ceil(grossTotalArea / 50);
+
+    // 4. TCNA Pitch Slope Formulations
+    // Finds longest path to drain (halfway across the longest span dimension out from center)
+    const longestRunToDrain = Math.max(width, length) / 2;
+    const verticalSlopeInchesDrop = longestRunToDrain * 0.25; // 1/4 inch per foot drop index
+
+    // 5. Update HTML viewport display variables
+    document.getElementById('takeoffBoards').textContent = backerBoardSheetsNeeded + " Sheets";
+    document.getElementById('takeoffMembrane').textContent = waterproofingMembraneSqFt + " Sq Ft";
+    document.getElementById('takeoffThinset').textContent = thinsetBagsNeeded + " Bags";
+    document.getElementById('takeoffSlope').textContent = verticalSlopeInchesDrop.toFixed(2) + " inches";
+}
+
+// Attach a trigger to auto-fire initial values upon frontend interface boot
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById('panWidth')) {
+        runTileCalculator();
+    }
+});
