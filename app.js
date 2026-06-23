@@ -203,10 +203,11 @@ function renderFilteredDirectory(records) {
         const displayZip = geoState.zip || "N/A";
 
         const isTileNiche = item.id === "niche_03";
+        const isAdaNiche = item.id === "niche_02";
         const isPremium = item.listing_tier === "Premium";
         
         let cardClass = "";
-        if (isTileNiche) {
+        if (isTileNiche || isAdaNiche) {
             cardClass = "bg-slate-950 border border-slate-800 p-5 rounded-xl flex flex-col hover:border-slate-600 transition-all cursor-pointer gap-4 w-full";
         } else if (isPremium) {
             cardClass = "bg-slate-950 border-2 border-indigo-500/80 p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:border-indigo-400 transition-all cursor-pointer relative overflow-hidden gap-4";
@@ -288,11 +289,64 @@ function renderFilteredDirectory(records) {
             `;
         }
 
+        let adaHtml = "";
+        if (isAdaNiche) {
+            adaHtml = `
+            <!-- Niche 02: ADA Grab Bar & Roll-In Clearance Verifier -->
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-4 max-w-xl text-slate-200 mt-2 w-full" onclick="event.stopPropagation()">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-teal-400">ADA Grab Bar & Roll-In Clearance Verifier</h4>
+                    <p class="text-[10px] text-slate-400 mt-0.5">Instant code clearance checking tool for residential aging-in-place remodeling operations.</p>
+                </div>
+                
+                <div class="space-y-3 text-[11px]">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Clear Width (Inches)</label>
+                            <input type="number" id="adaWidth" value="72" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Clear Length (Inches)</label>
+                            <input type="number" id="adaLength" value="84" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-1 bg-slate-950/40 p-2.5 rounded border border-slate-800/60">
+                        <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
+                            <input type="checkbox" id="adaObstructions" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
+                            <span>Fixed Obstructions Encroaching on Floor (Vanities, Cabinets)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
+                            <input type="checkbox" id="adaDoorSwing" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
+                            <span>Bathroom Door Swings Inward into the Room Footprint</span>
+                        </label>
+                    </div>
+
+                    <div class="bg-slate-950/60 p-3 rounded border border-slate-800/80 space-y-2 mt-2">
+                        <div class="flex justify-between items-center">
+                            <h5 class="font-bold text-slate-400 uppercase text-[9px] tracking-wider">ADA Clearance Status</h5>
+                            <span id="adaBadge" class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded border">Checking...</span>
+                        </div>
+                        
+                        <p id="adaMessage" class="text-[10px] text-slate-300 leading-relaxed bg-slate-950/80 p-2.5 rounded border border-slate-800/40"></p>
+
+                        <div class="border-t border-slate-800 pt-2 space-y-1 text-[9px] text-slate-400">
+                            <p class="font-bold uppercase text-[8px] text-teal-500 tracking-wider mb-1">Standard Grab Bar Code Guidelines:</p>
+                            <p>✓ <strong>Sidewall Bars:</strong> Min 42 inches long, mounted max 12 inches out from the back wall face.</p>
+                            <p>✓ <strong>Rearwall Bars:</strong> Min 36 inches long, extending min 12 inches from center line on one side.</p>
+                            <p>✓ <strong>Height Rule:</strong> All safety bars must lock in securely between <strong>33 and 36 inches</strong> above finished flooring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
         const card = document.createElement("div");
         card.className = cardClass;
         card.innerHTML = `
             ${premiumBadge}
-            <div class="space-y-1 z-10 w-full ${isTileNiche ? '' : 'md:w-auto'} flex-grow">
+            <div class="space-y-1 z-10 w-full ${isTileNiche || isAdaNiche ? '' : 'md:w-auto'} flex-grow">
                 <div class="flex items-center space-x-2">
                     <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-900/40 uppercase tracking-wider">${item.category}</span>
                     ${isPremium ? `<span class="text-[10px] font-bold text-amber-400 bg-amber-950/30 px-2 py-0.5 rounded border border-amber-900/50 uppercase tracking-wider">Verified Pro</span>` : ''}
@@ -307,9 +361,10 @@ function renderFilteredDirectory(records) {
                     <span class="font-semibold text-slate-300">${item.price_level}</span>
                 </div>
                 ${takeoffHtml}
+                ${adaHtml}
             </div>
             
-            <div class="flex items-center space-x-3 z-10 w-full md:w-auto mt-2 md:mt-0 ${isTileNiche ? 'border-t border-slate-800 pt-3' : 'md:border-0 md:pt-0'}">
+            <div class="flex items-center space-x-3 z-10 w-full md:w-auto mt-2 md:mt-0 ${isTileNiche || isAdaNiche ? 'border-t border-slate-800 pt-3' : 'md:border-0 md:pt-0'}">
                 <button onclick="openLeadModal('${item.id}', '${displayTitle}', '${item.category}', '${item.downloadable_resource.title}', ${item.downloadable_resource.price})" class="flex-grow md:flex-grow-0 whitespace-nowrap text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded shadow-sm transition-all ${resourceButtonColor}">
                     ${item.downloadable_resource.price > 0 ? `Buy Asset (${resourcePrice})` : `Download Template (${resourcePrice})`}
                 </button>
@@ -324,6 +379,9 @@ function renderFilteredDirectory(records) {
 
     if (document.getElementById('panWidth')) {
         runTileCalculator();
+    }
+    if (document.getElementById('adaWidth')) {
+        runAdaVerifier();
     }
 }
 
@@ -576,5 +634,60 @@ function runTileCalculator() {
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById('panWidth')) {
         runTileCalculator();
+    }
+});
+
+function runAdaVerifier() {
+    // 1. Retrieve user workspace inputs
+    const width = parseFloat(document.getElementById('adaWidth').value) || 0;
+    const length = parseFloat(document.getElementById('adaLength').value) || 0;
+    const hasObstructions = document.getElementById('adaObstructions').checked;
+    const hasInwardDoor = document.getElementById('adaDoorSwing').checked;
+
+    const badge = document.getElementById('adaBadge');
+    const message = document.getElementById('adaMessage');
+
+    // 2. Define ADA Regulatory Evaluation Guardrails (Section 304.3.1)
+    // ADA requires a continuous 60-inch unobstructed circular turning area boundary
+    const minRequiredTurningDiameter = 60;
+    
+    let isCompliant = true;
+    let failureReasons = [];
+
+    // Evaluate fundamental spatial dimensions
+    if (width < minRequiredTurningDiameter || length < minRequiredTurningDiameter) {
+        isCompliant = false;
+        failureReasons.push(`Room dimensions drop below the raw 60" requirement in at least one axis direction.`);
+    }
+
+    // Evaluate structural floor obstructions
+    if (hasObstructions) {
+        isCompliant = false;
+        failureReasons.push(`Fixed floor layout obstructions block the required continuous rotation radius.`);
+    }
+
+    // Evaluate door swing conflicts
+    if (hasInwardDoor) {
+        isCompliant = false;
+        failureReasons.push(`The door swings inward, which violates the rule banning doors from encroaching into the turning space clear zone.`);
+    }
+
+    // 3. Render Status Indicators on UI Viewport Nodes
+    if (isCompliant) {
+        badge.textContent = "ADA Compliant Pass";
+        badge.className = "text-[10px] font-black uppercase px-2.5 py-0.5 rounded border border-emerald-900/60 bg-emerald-950/40 text-emerald-400";
+        message.innerHTML = `🎉 **Clearance Approved!** The current footprint configuration maps out an unobstructed 60-inch turning circle, allowing a standard wheelchair layout assembly to execute a safe 180-degree turn sequence cleanly.`;
+    } else {
+        badge.textContent = "Compliance Violation Fail";
+        badge.className = "text-[10px] font-black uppercase px-2.5 py-0.5 rounded border border-rose-900/60 bg-rose-950/40 text-rose-400";
+        message.innerHTML = `⚠️ **Design Changes Needed:**<br><ul class="list-disc pl-4 mt-1 space-y-1 text-rose-300">` + 
+            failureReasons.map(reason => `<li>${reason}</li>`).join('') + `</ul>`;
+    }
+}
+
+// Map automatic execution trigger routine on standard frame page loads
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById('adaWidth')) {
+        runAdaVerifier();
     }
 });
