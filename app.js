@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupMRRListeners();
     setupCalculatorListeners();
     initializeGeographicListeners();
+    setupNewsletterFormListener();
 });
 
 function initializeUIFilters() {
@@ -257,7 +258,7 @@ function openLeadModal(id, displayTitle, category, resourceTitle, price) {
     else if (geoState.state) locString = geoState.state;
 
     document.getElementById("formNicheId").value = id;
-    document.getElementById("formNicheName").value = displayTitle;
+    document.getElementById("subscriberNicheInput").value = displayTitle;
     document.getElementById("modalNicheName").textContent = displayTitle;
     document.getElementById("modalCategory").textContent = category;
     
@@ -383,3 +384,74 @@ document.addEventListener("DOMContentLoaded", () => {
         runEscalationCalculator();
     }
 });
+
+function setupNewsletterFormListener() {
+    const form = document.querySelector('form[name="newsletter"]');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const emailInput = form.querySelector('input[name="email"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (!emailInput || !submitBtn) return;
+        
+        const email = emailInput.value;
+        const originalBtnText = submitBtn.textContent;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Subscribing...";
+        
+        try {
+            const response = await fetch('/.netlify/functions/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, niche: 'Newsletter' })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                emailInput.value = "";
+                submitBtn.textContent = "Subscribed!";
+                submitBtn.className = "bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm";
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.className = "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm";
+                }, 3000);
+            } else {
+                throw new Error(data.error || 'Subscription failed');
+            }
+        } catch (error) {
+            console.error('Subscription Error:', error);
+            submitBtn.textContent = "Error! Try again.";
+            submitBtn.className = "bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm";
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                submitBtn.className = "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm";
+            }, 3000);
+        }
+    });
+}
+
+async function captureSubscriberEmail(event) {
+    event.preventDefault(); // Stop page refresh
+    
+    const emailValue = document.getElementById('subscriberEmailInput').value;
+    const nicheValue = document.getElementById('subscriberNicheInput').value;
+
+    const response = await fetch('/.netlify/functions/saveEmail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailValue, niche: nicheValue })
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        alert("Success! Your resource is unlocked.");
+    }
+}

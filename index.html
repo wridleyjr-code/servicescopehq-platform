@@ -260,10 +260,10 @@
             </div>
             
             <!-- Native Netlify Lead Intake Engine Wrapper -->
-            <form name="servicescopehq-leads" method="POST" data-netlify="true" class="p-6 space-y-4">
+            <form name="servicescopehq-leads" method="POST" data-netlify="true" onsubmit="captureSubscriberEmail(event)" class="p-6 space-y-4">
                 <input type="hidden" name="form-name" value="servicescopehq-leads" />
                 <input type="hidden" id="formNicheId" name="target_niche_id" value="" />
-                <input type="hidden" id="formNicheName" name="target_niche_name" value="" />
+                <input type="hidden" id="subscriberNicheInput" name="target_niche_name" value="" />
                 
                 <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-3.5 text-xs text-indigo-800 space-y-1">
                     <p class="font-bold flex items-center">
@@ -285,7 +285,7 @@
 
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
-                    <input type="email" name="client_email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="email" id="subscriberEmailInput" name="client_email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <div>
