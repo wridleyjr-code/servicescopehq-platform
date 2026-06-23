@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeUIFilters();
     executePlatformSearchFilter();
     setupMRRListeners();
+    setupCalculatorListeners();
     initializeGeographicListeners();
 });
 
@@ -319,4 +320,38 @@ function calculateMRR() {
     
     if(mrrOutput) mrrOutput.innerHTML = `$${mrr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}<span class="text-xs text-indigo-500 font-bold ml-1">/mo</span>`;
     if(arrOutput) arrOutput.textContent = `$${arr.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+}
+
+// ==========================================
+// B2B Billable Hourly Rate Calculator Logic
+// ==========================================
+function setupCalculatorListeners() {
+    const inputs = ['calcWage', 'calcBurden', 'calcMargin'];
+    inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('input', calculateRequiredHourlyRate);
+    });
+    calculateRequiredHourlyRate();
+}
+
+function calculateRequiredHourlyRate() {
+    const wageEl = document.getElementById("calcWage");
+    const burdenEl = document.getElementById("calcBurden");
+    const marginEl = document.getElementById("calcMargin");
+    const resultEl = document.getElementById("hourlyRateResult");
+    
+    if (!wageEl || !burdenEl || !marginEl || !resultEl) return;
+    
+    const wage = parseFloat(wageEl.value) || 0;
+    const burden = parseFloat(burdenEl.value) || 0;
+    const margin = parseFloat(marginEl.value) || 0;
+    
+    const loadedWage = wage * (1 + (burden / 100));
+    
+    let requiredRate = 0;
+    if (margin < 100) {
+        requiredRate = loadedWage / (1 - (margin / 100));
+    }
+    
+    resultEl.textContent = `$${requiredRate.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} / hr`;
 }

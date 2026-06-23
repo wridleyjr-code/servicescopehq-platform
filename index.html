@@ -92,6 +92,36 @@
                     <div id="arrOutput" class="text-sm font-bold text-indigo-200">$36,000</div>
                 </div>
             </div>
+
+            <!-- B2B Billable Hourly Rate Calculator -->
+            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-4 text-white">
+                <div>
+                    <h3 class="text-xs font-extrabold uppercase tracking-widest text-indigo-400">Hourly Rate Calculator</h3>
+                    <p class="text-[10px] text-slate-400 mt-0.5">Determine your exact target billing rate to protect your profit margins.</p>
+                </div>
+                
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Base Tech Wage ($/hr)</label>
+                        <input type="number" id="calcWage" value="32" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Labor Burden % (Overhead/Tax)</label>
+                        <input type="number" id="calcBurden" value="35" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Desired Net Margin %</label>
+                        <input type="number" id="calcMargin" value="20" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    
+                    <button onclick="calculateRequiredHourlyRate()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition-all text-xs uppercase tracking-wider">Compute Minimum Rate</button>
+                    
+                    <div class="bg-indigo-950 p-3 rounded-lg border border-indigo-800 flex justify-between items-center mt-2">
+                        <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Required Quote Rate:</span>
+                        <span id="hourlyRateResult" class="font-black text-emerald-400 text-sm">$0.00 / hr</span>
+                    </div>
+                </div>
+            </div>
         </aside>
 
         <!-- Main Data Grid Explorer Area -->
