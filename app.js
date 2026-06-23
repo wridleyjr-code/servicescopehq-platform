@@ -203,7 +203,7 @@ function renderFilteredDirectory(records) {
         const displayZip = geoState.zip || "N/A";
 
         const isTileNiche = item.id === "niche_03";
-        const isAdaNiche = item.id === "niche_02";
+        const isAdaNiche = item.id === "niche_01" || item.id === "niche_02";
         const isPremium = item.listing_tier === "Premium";
         
         let cardClass = "";
@@ -292,7 +292,7 @@ function renderFilteredDirectory(records) {
         let adaHtml = "";
         if (isAdaNiche) {
             adaHtml = `
-            <!-- Niche 02: ADA Grab Bar & Roll-In Clearance Verifier -->
+            <!-- Niche 01 & 02: ADA Grab Bar & Roll-In Clearance Verifier -->
             <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-4 max-w-xl text-slate-200 mt-2 w-full" onclick="event.stopPropagation()">
                 <div>
                     <h4 class="text-xs font-bold uppercase tracking-wider text-teal-400">ADA Grab Bar & Roll-In Clearance Verifier</h4>
@@ -303,21 +303,21 @@ function renderFilteredDirectory(records) {
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Clear Width (Inches)</label>
-                            <input type="number" id="adaWidth" value="72" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
+                            <input type="number" id="adaWidth-${item.id}" value="72" oninput="runAdaVerifier('${item.id}')" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
                         </div>
                         <div>
                             <label class="block text-slate-300 mb-1 font-semibold text-[9px] uppercase">Clear Length (Inches)</label>
-                            <input type="number" id="adaLength" value="84" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
+                            <input type="number" id="adaLength-${item.id}" value="84" oninput="runAdaVerifier('${item.id}')" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-teal-500">
                         </div>
                     </div>
 
                     <div class="space-y-2 pt-1 bg-slate-950/40 p-2.5 rounded border border-slate-800/60">
                         <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
-                            <input type="checkbox" id="adaObstructions" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
+                            <input type="checkbox" id="adaObstructions-${item.id}" onchange="runAdaVerifier('${item.id}')" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
                             <span>Fixed Obstructions Encroaching on Floor (Vanities, Cabinets)</span>
                         </label>
                         <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
-                            <input type="checkbox" id="adaDoorSwing" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
+                            <input type="checkbox" id="adaDoorSwing-${item.id}" onchange="runAdaVerifier('${item.id}')" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0 focus:ring-offset-0">
                             <span>Bathroom Door Swings Inward into the Room Footprint</span>
                         </label>
                     </div>
@@ -325,10 +325,10 @@ function renderFilteredDirectory(records) {
                     <div class="bg-slate-950/60 p-3 rounded border border-slate-800/80 space-y-2 mt-2">
                         <div class="flex justify-between items-center">
                             <h5 class="font-bold text-slate-400 uppercase text-[9px] tracking-wider">ADA Clearance Status</h5>
-                            <span id="adaBadge" class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded border">Checking...</span>
+                            <span id="adaBadge-${item.id}" class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded border">Checking...</span>
                         </div>
                         
-                        <p id="adaMessage" class="text-[10px] text-slate-300 leading-relaxed bg-slate-950/80 p-2.5 rounded border border-slate-800/40"></p>
+                        <p id="adaMessage-${item.id}" class="text-[10px] text-slate-300 leading-relaxed bg-slate-950/80 p-2.5 rounded border border-slate-800/40"></p>
 
                         <div class="border-t border-slate-800 pt-2 space-y-1 text-[9px] text-slate-400">
                             <p class="font-bold uppercase text-[8px] text-teal-500 tracking-wider mb-1">Standard Grab Bar Code Guidelines:</p>
@@ -380,9 +380,11 @@ function renderFilteredDirectory(records) {
     if (document.getElementById('panWidth')) {
         runTileCalculator();
     }
-    if (document.getElementById('adaWidth')) {
-        runAdaVerifier();
-    }
+    ['niche_01', 'niche_02'].forEach(id => {
+        if (document.getElementById(`adaWidth-${id}`)) {
+            runAdaVerifier(id);
+        }
+    });
 }
 
 function openLeadModal(id, displayTitle, category, resourceTitle, price) {
@@ -637,15 +639,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function runAdaVerifier() {
-    // 1. Retrieve user workspace inputs
-    const width = parseFloat(document.getElementById('adaWidth').value) || 0;
-    const length = parseFloat(document.getElementById('adaLength').value) || 0;
-    const hasObstructions = document.getElementById('adaObstructions').checked;
-    const hasInwardDoor = document.getElementById('adaDoorSwing').checked;
+function runAdaVerifier(nicheId) {
+    const suffix = nicheId ? `-${nicheId}` : '';
+    const widthEl = document.getElementById(`adaWidth${suffix}`);
+    const lengthEl = document.getElementById(`adaLength${suffix}`);
+    const obstructionsEl = document.getElementById(`adaObstructions${suffix}`);
+    const doorSwingEl = document.getElementById(`adaDoorSwing${suffix}`);
 
-    const badge = document.getElementById('adaBadge');
-    const message = document.getElementById('adaMessage');
+    if (!widthEl || !lengthEl) return;
+
+    // 1. Retrieve user workspace inputs
+    const width = parseFloat(widthEl.value) || 0;
+    const length = parseFloat(lengthEl.value) || 0;
+    const hasObstructions = obstructionsEl ? obstructionsEl.checked : false;
+    const hasInwardDoor = doorSwingEl ? doorSwingEl.checked : false;
+
+    const badge = document.getElementById(`adaBadge${suffix}`);
+    const message = document.getElementById(`adaMessage${suffix}`);
+
+    if (!badge || !message) return;
 
     // 2. Define ADA Regulatory Evaluation Guardrails (Section 304.3.1)
     // ADA requires a continuous 60-inch unobstructed circular turning area boundary
@@ -687,7 +699,9 @@ function runAdaVerifier() {
 
 // Map automatic execution trigger routine on standard frame page loads
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById('adaWidth')) {
-        runAdaVerifier();
-    }
+    ['niche_01', 'niche_02'].forEach(id => {
+        if (document.getElementById(`adaWidth-${id}`)) {
+            runAdaVerifier(id);
+        }
+    });
 });
