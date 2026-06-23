@@ -332,26 +332,54 @@ function setupCalculatorListeners() {
         if(el) el.addEventListener('input', calculateRequiredHourlyRate);
     });
     calculateRequiredHourlyRate();
+    runEscalationCalculator();
 }
 
 function calculateRequiredHourlyRate() {
-    const wageEl = document.getElementById("calcWage");
-    const burdenEl = document.getElementById("calcBurden");
-    const marginEl = document.getElementById("calcMargin");
-    const resultEl = document.getElementById("hourlyRateResult");
+    const wage = parseFloat(document.getElementById('calcWage').value) || 0;
+    const burdenPct = parseFloat(document.getElementById('calcBurden').value) || 0;
+    const marginPct = parseFloat(document.getElementById('calcMargin').value) || 0;
+
+    // Calculate fully burdened labor cost base
+    const burdenedCost = wage * (1 + (burdenPct / 100));
     
-    if (!wageEl || !burdenEl || !marginEl || !resultEl) return;
-    
-    const wage = parseFloat(wageEl.value) || 0;
-    const burden = parseFloat(burdenEl.value) || 0;
-    const margin = parseFloat(marginEl.value) || 0;
-    
-    const loadedWage = wage * (1 + (burden / 100));
-    
-    let requiredRate = 0;
-    if (margin < 100) {
-        requiredRate = loadedWage / (1 - (margin / 100));
-    }
-    
-    resultEl.textContent = `$${requiredRate.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} / hr`;
+    // Apply margin formula target: Cost / (1 - Margin)
+    const minimumBillableRate = burdenedCost / (1 - (marginPct / 100));
+
+    document.getElementById('hourlyRateResult').textContent = 
+        "$" + minimumBillableRate.toFixed(2) + " / hr";
 }
+
+function runEscalationCalculator() {
+    // 1. Capture and convert input values securely
+    const baseCost = parseFloat(document.getElementById('baseCostInput').value) || 0;
+    const durationMonths = parseInt(document.getElementById('durationInput').value) || 1;
+    const volatilityRate = parseFloat(document.getElementById('volatilitySelect').value) || 0;
+
+    // 2. Mathematical Calculation Formulations
+    // Standard baseline indexing assumes a fixed 0.5% project cost deterioration index per month out
+    const monthlyEscalationFactor = 0.005;
+    const timeEscalationFee = baseCost * (monthlyEscalationFactor * durationMonths);
+    
+    // Volatility buffer compounding index markup logic
+    const volatilityBufferFee = baseCost * volatilityRate;
+    
+    // Consolidate pricing layers
+    const totalContingencyCushion = timeEscalationFee + volatilityBufferFee;
+    const finalAdjustedBidValue = baseCost + totalContingencyCushion;
+    const totalCushionPercentage = baseCost > 0 ? (totalContingencyCushion / baseCost) * 100 : 0;
+
+    // 3. Inject calculated strings back to client layout rendering points
+    document.getElementById('outEscalation').textContent = "$" + timeEscalationFee.toFixed(2);
+    document.getElementById('outVolatility').textContent = "$" + volatilityBufferFee.toFixed(2);
+    document.getElementById('outTotalCushion').textContent = "$" + totalContingencyCushion.toFixed(2);
+    document.getElementById('outPercentage').textContent = totalCushionPercentage.toFixed(0) + "%";
+    document.getElementById('outFinalBid').textContent = "$" + finalAdjustedBidValue.toFixed(2);
+}
+
+// Ensure the engine runs its initial setup profile load when the site page opens
+document.addEventListener("DOMContentLoaded", () => {
+    if(document.getElementById('baseCostInput')) {
+        runEscalationCalculator();
+    }
+});
