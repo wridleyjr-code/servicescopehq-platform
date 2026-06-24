@@ -38,7 +38,7 @@
                     <span class="hidden sm:inline">How to Use</span>
                 </button>
                 <!-- Tier 1 Monetization CTA -->
-                <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded shadow-sm transition-all whitespace-nowrap">List Your Business</a>
+                <button onclick="openBusinessListingModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded shadow-sm transition-all whitespace-nowrap">List Your Business</button>
             </div>
         </div>
     </header>
@@ -294,7 +294,7 @@
                 </div>
 
                 <!-- Tier 2 Monetization: RFQ Enhancements -->
-                <div class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-200 pt-4">
+                <div id="rfqEnhancementsSection" class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-200 pt-4">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Est. Project Budget</label>
                         <select name="client_budget" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -316,7 +316,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div id="certsSection">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Required Certifications (Optional)</label>
                     <input type="text" name="client_certs" placeholder="e.g., OSHA 30, Bonded, MBE" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>

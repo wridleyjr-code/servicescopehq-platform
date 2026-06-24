@@ -391,6 +391,17 @@ function openLeadModal(id, displayTitle, category, resourceTitle, price) {
     const leadModal = document.getElementById("leadModal");
     if(!leadModal) return;
 
+    // Restore RFQ-only sections and default text in case they were hidden by the listing modal
+    const rfqEnhancements = document.getElementById("rfqEnhancementsSection");
+    if (rfqEnhancements) rfqEnhancements.classList.remove("hidden");
+    const certsSection = document.getElementById("certsSection");
+    if (certsSection) certsSection.classList.remove("hidden");
+    
+    const infoBoxDesc = document.querySelector("#leadModal .bg-indigo-50 p.opacity-90");
+    if (infoBoxDesc) {
+        infoBoxDesc.textContent = "Fill out your routing parameters below to fetch your resource file and direct quotes from verification checked contractors.";
+    }
+
     let locString = "";
     if (geoState.zip) locString = geoState.zip;
     else if (geoState.city && geoState.state) locString = `${geoState.city}, ${geoState.state}`;
@@ -418,7 +429,46 @@ function openLeadModal(id, displayTitle, category, resourceTitle, price) {
     }
 
     document.getElementById("formLocationInput").value = locString;
+    document.getElementById("formLocationInput").placeholder = "";
     
+    leadModal.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+}
+
+function openBusinessListingModal() {
+    const leadModal = document.getElementById("leadModal");
+    if(!leadModal) return;
+
+    // Set modal headers specifically for claiming/listing a business
+    document.getElementById("formNicheId").value = "niche_business_listing";
+    document.getElementById("subscriberNicheInput").value = "Business Listing";
+    document.getElementById("modalNicheName").textContent = "Claim / Add Your Business";
+    document.getElementById("modalCategory").textContent = "Service Provider Network";
+    document.getElementById("modalResourceName").textContent = "Directory Partner Placement";
+    
+    // Set customized onboarding message
+    const infoBoxDesc = document.querySelector("#leadModal .bg-indigo-50 p.opacity-90");
+    if (infoBoxDesc) {
+        infoBoxDesc.textContent = "Submit your business details below to secure a local directory listing, claim your profile, and receive regional RFQ routing requests.";
+    }
+
+    // Set specialized submit button
+    const formSubmitBtn = document.getElementById("formSubmitBtn");
+    if (formSubmitBtn) {
+        formSubmitBtn.textContent = "Request Partner Directory Listing";
+        formSubmitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
+    }
+
+    // Hide project-specific inputs (Budget, Timeline, Certifications)
+    const rfqEnhancements = document.getElementById("rfqEnhancementsSection");
+    if (rfqEnhancements) rfqEnhancements.classList.add("hidden");
+    const certsSection = document.getElementById("certsSection");
+    if (certsSection) certsSection.classList.add("hidden");
+
+    // Reset location value with a placeholder
+    document.getElementById("formLocationInput").value = "";
+    document.getElementById("formLocationInput").placeholder = "e.g. Atlanta, GA or 30301";
+
     leadModal.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
 }
