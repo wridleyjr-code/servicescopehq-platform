@@ -11,7 +11,8 @@ exports.handler = async (event, context) => {
 
     try {
         // 2. Extract payload elements out of frontend form streams
-        const { email, niche } = JSON.parse(event.body);
+        const payload = JSON.parse(event.body);
+        const { email } = payload;
         
         if (!email) {
             return {
@@ -21,13 +22,8 @@ exports.handler = async (event, context) => {
         }
 
         // 3. Retrieve our Google Sheet Webhook target location safely out of system memory
-        const googleWebhookTarget = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-        if (!googleWebhookTarget) {
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: 'System variable mismatch. Hook address is unconfigured.' })
-            };
-        }
+        // Fallback to the active sheet URL to ensure out-of-the-box functionality
+        const googleWebhookTarget = process.env.GOOGLE_SHEET_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxV_GPgeTqhWw_yIzX4WvY1S8w95FjIQL3u3iwcpwNm5aI5sQmEx7FCqw2S0uQVKo0a5w/exec";
 
         console.log(`📤 Syncing captured subscriber [${email}] directly to Google Sheet...`);
 
@@ -37,10 +33,7 @@ exports.handler = async (event, context) => {
         // To prevent this, we handle the redirect manually.
         let response;
         try {
-            response = await axios.post(googleWebhookTarget, {
-                email: email,
-                niche: niche
-            }, {
+            response = await axios.post(googleWebhookTarget, payload, {
                 maxRedirects: 0,
                 validateStatus: (status) => status >= 200 && status < 400
             });
@@ -48,10 +41,7 @@ exports.handler = async (event, context) => {
             if (error.response && [301, 302, 307, 308].includes(error.response.status)) {
                 const redirectUrl = error.response.headers.location;
                 console.log(`↪️ Redirecting to Google Content server (catch): ${redirectUrl}`);
-                response = await axios.post(redirectUrl, {
-                    email: email,
-                    niche: niche
-                });
+                response = await axios.post(redirectUrl, payload);
             } else {
                 throw error;
             }
@@ -61,10 +51,7 @@ exports.handler = async (event, context) => {
         if (response.status >= 300 && response.status < 400 && response.headers.location) {
             const redirectUrl = response.headers.location;
             console.log(`↪️ Redirecting to Google Content server (resolve): ${redirectUrl}`);
-            response = await axios.post(redirectUrl, {
-                email: email,
-                niche: niche
-            });
+            response = await axios.post(redirectUrl, payload);
         }
 
         // 5. Evaluate response signals returned by Google's background execution scripts

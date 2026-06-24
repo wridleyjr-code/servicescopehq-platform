@@ -580,18 +580,67 @@ function setupNewsletterFormListener() {
 async function captureSubscriberEmail(event) {
     event.preventDefault(); // Stop page refresh
     
-    const emailValue = document.getElementById('subscriberEmailInput').value;
-    const nicheValue = document.getElementById('subscriberNicheInput').value;
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Capture all fields from the RFQ form
+    const payload = {
+        email: formData.get('client_email') || document.getElementById('subscriberEmailInput').value,
+        niche: formData.get('target_niche_name') || document.getElementById('subscriberNicheInput').value,
+        name: formData.get('client_name') || "",
+        phone: formData.get('client_phone') || "",
+        location: formData.get('client_location') || document.getElementById('formLocationInput').value,
+        budget: formData.get('client_budget') || "",
+        timeline: formData.get('client_timeline') || "",
+        certs: formData.get('client_certs') || ""
+    };
 
-    const response = await fetch('/.netlify/functions/saveEmail', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailValue, niche: nicheValue })
-    });
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : "Submit Request";
+    let originalBtnClass = submitBtn ? submitBtn.className : "";
 
-    const result = await response.json();
-    if (result.success) {
-        alert("Success! Your resource is unlocked.");
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Processing...";
+    }
+
+    try {
+        const response = await fetch('/.netlify/functions/saveEmail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            if (submitBtn) {
+                submitBtn.textContent = "Request Sent!";
+                submitBtn.className = "w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg shadow-md text-xs uppercase tracking-wider transition-all";
+            }
+            alert("Success! Your resource has been unlocked and your RFQ routed to our network.");
+            setTimeout(() => {
+                closeModal();
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.className = originalBtnClass;
+                }
+            }, 2000);
+        } else {
+            throw new Error(result.error || 'Submission failed');
+        }
+    } catch (error) {
+        console.error('Lead Submission Error:', error);
+        if (submitBtn) {
+            submitBtn.textContent = "Error! Try again.";
+            submitBtn.className = "w-full bg-rose-600 text-white font-bold py-3 px-4 rounded-lg shadow-md text-xs uppercase tracking-wider transition-all";
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                submitBtn.className = originalBtnClass;
+            }, 3000);
+        }
     }
 }
 
