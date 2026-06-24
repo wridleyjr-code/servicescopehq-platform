@@ -1,40 +1,59 @@
 const axios = require('axios');
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+    // 1. Enforce strict POST request security checks
     if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, body: 'Method Not Allowed' };
+        return {
+            statusCode: 405,
+            body: JSON.stringify({ error: 'Method Not Allowed.' })
+        };
     }
 
     try {
+        // 2. Extract payload elements out of frontend form streams
         const { email, niche } = JSON.parse(event.body);
         
         if (!email) {
-            return { statusCode: 400, body: JSON.stringify({ error: 'Email is required' }) };
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: 'Email parameter is required.' })
+            };
         }
 
-        // Send data directly to Airtable's REST API
-        // You'll grab these variable tokens from your free Airtable Developer account
-        await axios.post(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Subscribers`, {
-            fields: {
-                "EmailAddress": email,
-                "TargetNiche": niche || "General",
-                "DateJoined": new Date().toISOString().split('T')[0]
-            }
-        }, {
-            headers: {
-                'Authorization': `Bearer ${process.env.AIRTABLE_PAT_TOKEN}`,
-                'Content-Type': 'application/json'
-            }
+        // 3. Retrieve our Google Sheet Webhook target location safely out of system memory
+        const googleWebhookTarget = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+        if (!googleWebhookTarget) {
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'System variable mismatch. Hook address is unconfigured.' })
+            };
+        }
+
+        console.log(`📤 Syncing captured subscriber [${email}] directly to Google Sheet...`);
+
+        // 4. Stream data payload directly across the web straight to Google's macro engine
+        const response = await axios.post(googleWebhookTarget, {
+            email: email,
+            niche: niche
         });
 
-        return {
-            statusCode: 200,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success: true, message: 'Contact successfully archived!' })
-        };
+        // 5. Evaluate response signals returned by Google's background execution scripts
+        if (response.data && response.data.result === 'success') {
+            return {
+                statusCode: 200,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ success: true, message: 'Data perfectly synchronized to Google Sheet!' })
+            };
+        } else {
+            throw new Error(response.data.error || 'Google Script execution pipeline error.');
+        }
 
-    } catch (error) {
-        console.error('❌ Database Sync Failure:', error.response?.data || error.message);
-        return { statusCode: 500, body: JSON.stringify({ error: 'Failed to write to data store' }) };
+    } catch (pipelineException) {
+        console.error('❌ Direct Spreadsheet Integration Sync Fault:', pipelineException.message);
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ error: 'Failed to write record to Google sheet tracking grids.', details: pipelineException.message })
+        };
     }
 };
