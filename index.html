@@ -238,7 +238,7 @@
                 <div class="relative z-10 max-w-2xl mx-auto">
                     <h3 class="text-2xl font-black text-white tracking-tight mb-2">The Scope-of-Work Newsletter</h3>
                     <p class="text-slate-400 text-sm mb-6">Get weekly market pricing, labor metrics, and contract compliance updates designed strictly for high-volume B2B builders and general contractors.</p>
-                    <form name="newsletter" method="POST" data-netlify="true" class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <form name="newsletter" method="POST" class="flex flex-col sm:flex-row gap-3 justify-center">
                         <input type="hidden" name="form-name" value="newsletter" />
                         <input type="email" name="email" placeholder="Enter your work email address..." required class="w-full sm:w-96 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm">
                         <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm">Subscribe for Insights</button>
@@ -260,7 +260,7 @@
             </div>
             
             <!-- Native Netlify Lead Intake Engine Wrapper -->
-            <form name="servicescopehq-leads" method="POST" data-netlify="true" onsubmit="captureSubscriberEmail(event)" class="p-6 space-y-4">
+            <form name="servicescopehq-leads" method="POST" onsubmit="captureSubscriberEmail(event)" class="p-6 space-y-4">
                 <input type="hidden" name="form-name" value="servicescopehq-leads" />
                 <input type="hidden" id="formNicheId" name="target_niche_id" value="" />
                 <input type="hidden" id="subscriberNicheInput" name="target_niche_name" value="" />
