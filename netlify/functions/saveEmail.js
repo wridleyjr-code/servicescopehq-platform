@@ -32,10 +32,40 @@ exports.handler = async (event, context) => {
         console.log(`📤 Syncing captured subscriber [${email}] directly to Google Sheet...`);
 
         // 4. Stream data payload directly across the web straight to Google's macro engine
-        const response = await axios.post(googleWebhookTarget, {
-            email: email,
-            niche: niche
-        });
+        // Note: Google Script redirects POST requests with a 302/307 status.
+        // Axios in Node.js by default converts 302 redirects from POST to GET and drops the body.
+        // To prevent this, we handle the redirect manually.
+        let response;
+        try {
+            response = await axios.post(googleWebhookTarget, {
+                email: email,
+                niche: niche
+            }, {
+                maxRedirects: 0,
+                validateStatus: (status) => status >= 200 && status < 400
+            });
+        } catch (error) {
+            if (error.response && [301, 302, 307, 308].includes(error.response.status)) {
+                const redirectUrl = error.response.headers.location;
+                console.log(`↪️ Redirecting to Google Content server (catch): ${redirectUrl}`);
+                response = await axios.post(redirectUrl, {
+                    email: email,
+                    niche: niche
+                });
+            } else {
+                throw error;
+            }
+        }
+
+        // If it resolved with a 3xx redirect status code, follow it manually
+        if (response.status >= 300 && response.status < 400 && response.headers.location) {
+            const redirectUrl = response.headers.location;
+            console.log(`↪️ Redirecting to Google Content server (resolve): ${redirectUrl}`);
+            response = await axios.post(redirectUrl, {
+                email: email,
+                niche: niche
+            });
+        }
 
         // 5. Evaluate response signals returned by Google's background execution scripts
         if (response.data && response.data.result === 'success') {
