@@ -633,13 +633,37 @@ async function captureSubscriberEmail(event) {
     const form = event.target;
     const formData = new FormData(form);
     
-    // Capture all fields from the RFQ form
+    // Capture all fields from the RFQ form and parse location details
+    const locationVal = formData.get('client_location') || document.getElementById('formLocationInput').value || "";
+    
+    let parsedCity = "";
+    let parsedZip = "";
+    if (/^\d{5}$/.test(locationVal.trim())) {
+        parsedZip = locationVal.trim();
+    } else if (locationVal.includes(',')) {
+        const parts = locationVal.split(',');
+        parsedCity = parts[0].trim();
+        parsedZip = parts[1] ? parts[1].trim() : "";
+    } else {
+        parsedCity = locationVal.trim();
+    }
+
     const payload = {
         email: formData.get('client_email') || document.getElementById('subscriberEmailInput').value,
         niche: formData.get('target_niche_name') || document.getElementById('subscriberNicheInput').value,
         name: formData.get('client_name') || "",
         phone: formData.get('client_phone') || "",
-        location: formData.get('client_location') || document.getElementById('formLocationInput').value,
+        
+        // Multi-mapped location fields for maximum webhook compatibility:
+        location: locationVal,
+        client_location: locationVal,
+        zip: parsedZip || locationVal,
+        city: parsedCity || locationVal,
+        ZIP: parsedZip || locationVal,
+        City: parsedCity || locationVal,
+        zipcode: parsedZip || locationVal,
+        ZipCode: parsedZip || locationVal,
+        
         budget: formData.get('client_budget') || "",
         timeline: formData.get('client_timeline') || "",
         certs: formData.get('client_certs') || ""
