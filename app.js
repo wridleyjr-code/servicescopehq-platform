@@ -542,7 +542,7 @@ function setupNewsletterFormListener() {
         submitBtn.textContent = "Subscribing...";
         
         try {
-            const response = await fetch('/.netlify/functions/subscribe', {
+            const response = await fetch('/.netlify/functions/saveEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
