@@ -77,16 +77,57 @@ function initializeGeographicListeners() {
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
+    // Dynamic city populating function
+    function populateCitiesForState(stateCode) {
+        if (!cityInput) return;
+        
+        // Clear previous options
+        cityInput.innerHTML = '<option value="">All Cities</option>';
+        
+        if (!stateCode) {
+            cityInput.disabled = true;
+            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
+            cityInput.innerHTML = '<option value="">Select State First</option>';
+            geoState.city = "";
+            return;
+        }
+
+        // Extract unique cities for this state from activeDatabase
+        const cities = [...new Set(
+            activeDatabase
+                .filter(item => item.state && item.state.toUpperCase() === stateCode.toUpperCase() && item.city)
+                .map(item => item.city)
+        )].sort();
+
+        if (cities.length > 0) {
+            cities.forEach(city => {
+                const opt = document.createElement("option");
+                opt.value = city;
+                opt.textContent = city;
+                cityInput.appendChild(opt);
+            });
+            cityInput.disabled = false;
+            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300";
+        } else {
+            cityInput.disabled = true;
+            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
+            cityInput.innerHTML = '<option value="">No Cities Found</option>';
+        }
+    }
+
     if(stateInput) {
-        stateInput.addEventListener("input", (e) => {
-            geoState.state = e.target.value.trim().toUpperCase();
+        stateInput.addEventListener("change", (e) => {
+            const selectedState = e.target.value.trim().toUpperCase();
+            geoState.state = selectedState;
+            populateCitiesForState(selectedState);
+            geoState.city = ""; // Reset city selection
             updateLocationBadge();
             executePlatformSearchFilter();
         });
     }
 
     if(cityInput) {
-        cityInput.addEventListener("input", (e) => {
+        cityInput.addEventListener("change", (e) => {
             geoState.city = e.target.value.trim();
             updateLocationBadge();
             executePlatformSearchFilter();
@@ -110,6 +151,11 @@ function initializeGeographicListeners() {
 
     const priceFilter = document.getElementById("priceFilter");
     if(priceFilter) priceFilter.addEventListener("change", executePlatformSearchFilter);
+    
+    // Initial run to ensure correct disabled state for city selector
+    if (stateInput) {
+        populateCitiesForState(stateInput.value);
+    }
 }
 
 function updateLocationBadge() {
