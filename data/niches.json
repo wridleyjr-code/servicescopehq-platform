@@ -1,1268 +1,1185 @@
-[
-  {
-    "id": "niche_01",
-<<<<<<< HEAD
-    "rank": 1,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Commercial Roofing",
-    "category": "B2B",
-    "customer_type": "Business Owner / Property Manager",
-    "urgency_level": "Emergency / Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 25000, "max": 150000, "currency": "USD" },
-    "labor_pricing_method": "Per square / Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Roof coating", "Flat roof repair", "Commercial gutters"],
-    "local_seo": {
-      "title_template": "Commercial Roofing Contractors in [City], [State_Abbr]",
-      "example_title": "Commercial Roofing Contractors in Houston, TX",
-      "primary_keywords": ["commercial roof repair", "tpo roofing cost"]
-    },
-    "downloadable_resource": {
-      "title": "Commercial Roof Maintenance Plan Template",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Request a Commercial Bid"
-  },
-  {
-    "id": "niche_02",
-    "rank": 2,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Managed IT Services",
-    "category": "Tech",
-    "customer_type": "Small to Medium Business",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket MRR",
-    "average_price_range": { "min": 1500, "max": 10000, "currency": "USD" },
-    "labor_pricing_method": "Per user / Per month",
-    "best_monetization": "Lead generation / Commission",
-    "related_services": ["Cybersecurity", "Cloud Migration", "Helpdesk Support"],
-    "local_seo": {
-      "title_template": "Managed IT Services in [City], [State_Abbr]",
-      "example_title": "Managed IT Services in Austin, TX",
-      "primary_keywords": ["IT support for business", "managed service provider"]
-    },
-    "downloadable_resource": {
-      "title": "Cybersecurity Audit Checklist",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Get a Free IT Audit"
-  },
-  {
-    "id": "niche_03_01",
-    "rank": 3,
-    "complexity": "Medium",
-    "field_example": true,
-    "service_name": "Tile Shower Installation",
-    "category": "Real Estate",
-=======
-    "service_name": "Aging-in-Place Home Modification",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Seniors / Caregivers / OTs",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 2500, "max": 15000, "currency": "USD" },
-    "labor_pricing_method": "Per project estimate",
-    "best_monetization": "Leads, checklists, contractor directory",
-    "related_services": ["Wheelchair ramps", "Grab bar install", "Door widening"],
-    "local_seo": {
-      "title_template": "Aging-in-Place Home Modifications in [City], [State_Abbr]",
-      "example_title": "Aging-in-Place Home Modifications in Byron, GA",
-      "primary_keywords": ["senior home modifications", "handicap accessible home installer"]
-    },
-    "downloadable_resource": { "title": "Comprehensive Home Accessibility Audit Checklist", "type": "PDF Guide" },
-    "call_to_action": "Download Checklist & Get Quotes"
-  },
-  {
-    "id": "niche_02",
-    "service_name": "Handicap Bathroom Costs",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Mobility-impaired / Families",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 6000, "max": 22000, "currency": "USD" },
-    "labor_pricing_method": "Per project contract",
-    "best_monetization": "High-ticket RCPX/remodeling leads",
-    "related_services": ["Walk-in tubs", "Roll-in showers", "Anti-slip flooring"],
-    "local_seo": {
-      "title_template": "Handicap Bathroom Remodel Cost in [City], [State_Abbr]",
-      "example_title": "Handicap Bathroom Remodel Cost in Byron, GA",
-      "primary_keywords": ["accessible bathroom cost", "walk in tub installers"]
-    },
-    "downloadable_resource": { "title": "ADA Bathroom Layout Planning Worksheet", "type": "PDF Guide" },
-    "call_to_action": "Request High-Ticket Quotes"
-  },
-  {
-    "id": "niche_03",
-    "service_name": "Tile Shower Installation",
-    "category": "Remodeling",
->>>>>>> 7866196 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
-    "customer_type": "Homeowner / Landlord",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 3500, "max": 9500, "currency": "USD" },
-    "labor_pricing_method": "Per project / per sq ft / per hour",
-    "best_monetization": "Lead generation",
-    "related_services": ["Shower pan", "Tile floor", "Waterproofing"],
-    "local_seo": {
-      "title_template": "Tile Shower Installation Cost in [City], [State_Abbr]",
-      "example_title": "Tile Shower Installation Cost in Byron, GA",
-      "primary_keywords": ["tile shower cost", "custom shower installer"]
-    },
-<<<<<<< HEAD
-    "downloadable_resource": {
-      "title": "Shower scope-of-work template",
-      "type": "PDF / Excel Template"
-    },
-=======
-    "downloadable_resource": { "title": "Shower scope-of-work template", "type": "PDF / Excel Template" },
->>>>>>> 7866196 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
-    "call_to_action": "Request a quote"
-  },
-  {
-    "id": "niche_04",
-<<<<<<< HEAD
-    "rank": 4,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Foundation Repair",
-    "category": "Real Estate",
-    "customer_type": "Homeowner / Real Estate Investor",
-    "urgency_level": "Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 4500, "max": 15000, "currency": "USD" },
-    "labor_pricing_method": "Per pier / Per project",
-    "best_monetization": "Lead generation / Commission",
-    "related_services": ["Basement waterproofing", "Crawl space encapsulation", "Mudjacking"],
-    "local_seo": {
-      "title_template": "Foundation Repair Services in [City], [State_Abbr]",
-      "example_title": "Foundation Repair Services in Dallas, TX",
-      "primary_keywords": ["foundation repair cost", "slab leak repair"]
-    },
-    "downloadable_resource": {
-      "title": "Signs of Foundation Failure Checklist",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Book an Evaluation"
-  },
-  {
-    "id": "niche_05",
-    "rank": 5,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Solar Panel Installation",
-    "category": "Tech",
-    "customer_type": "Homeowner / Commercial",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 15000, "max": 40000, "currency": "USD" },
-    "labor_pricing_method": "Per watt / Per project",
-    "best_monetization": "Lead generation / Revenue share",
-    "related_services": ["Battery backup", "Roof repair", "Energy audit"],
-    "local_seo": {
-      "title_template": "Solar Panel Installation Cost in [City], [State_Abbr]",
-      "example_title": "Solar Panel Installation Cost in Phoenix, AZ",
-      "primary_keywords": ["solar panel installation", "solar cost per watt"]
-    },
-    "downloadable_resource": {
-      "title": "Solar ROI Calculator",
-      "type": "Excel Template"
-    },
-    "call_to_action": "See If You Qualify"
-  },
-  {
-    "id": "niche_06",
-    "rank": 6,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Commercial HVAC Retrofitting",
-    "category": "B2B",
-    "customer_type": "Facility Managers",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 20000, "max": 100000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Ductwork overhaul", "Energy efficiency tuning", "Chiller maintenance"],
-    "local_seo": {
-      "title_template": "Commercial HVAC Retrofit in [City], [State_Abbr]",
-      "example_title": "Commercial HVAC Retrofit in Chicago, IL",
-      "primary_keywords": ["commercial HVAC installation", "building HVAC upgrade"]
-    },
-    "downloadable_resource": {
-      "title": "HVAC Energy Savings Calculator",
-      "type": "Excel Template"
-    },
-    "call_to_action": "Request a Free Estimate"
-  },
-  {
-    "id": "niche_07",
-    "rank": 7,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Water Damage Restoration",
-    "category": "Real Estate",
-    "customer_type": "Homeowner / Commercial",
-    "urgency_level": "Extreme Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 3000, "max": 10000, "currency": "USD" },
-    "labor_pricing_method": "Per sq ft / Per hour",
-    "best_monetization": "Pay-per-call / Lead generation",
-    "related_services": ["Mold remediation", "Carpet cleaning", "Drywall repair"],
-    "local_seo": {
-      "title_template": "24/7 Water Damage Restoration in [City], [State_Abbr]",
-      "example_title": "24/7 Water Damage Restoration in Miami, FL",
-      "primary_keywords": ["water damage restoration", "flooded basement cleanup"]
-    },
-    "downloadable_resource": {
-      "title": "What to Do When Your House Floods",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Call for Immediate Help"
-  },
-  {
-    "id": "niche_08",
-    "rank": 8,
-    "complexity": "Low",
-    "field_example": false,
-    "service_name": "Commercial Landscaping",
-    "category": "B2B",
-    "customer_type": "Property Manager / HOA",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket MRR",
-    "average_price_range": { "min": 1000, "max": 5000, "currency": "USD" },
-    "labor_pricing_method": "Per month / Per property",
-    "best_monetization": "Lead generation",
-    "related_services": ["Irrigation repair", "Tree removal", "Snow removal"],
-    "local_seo": {
-      "title_template": "Commercial Landscaping in [City], [State_Abbr]",
-      "example_title": "Commercial Landscaping in Seattle, WA",
-      "primary_keywords": ["HOA landscaping", "commercial lawn care"]
-    },
-    "downloadable_resource": {
-      "title": "Yearly Grounds Maintenance Checklist",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Get a Free Quote"
-  },
-  {
-    "id": "niche_09",
-    "rank": 9,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "SaaS Implementation Consulting",
-    "category": "Tech",
-    "customer_type": "B2B Enterprises",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 10000, "max": 50000, "currency": "USD" },
-    "labor_pricing_method": "Per project / Retainer",
-    "best_monetization": "Lead generation",
-    "related_services": ["CRM setup", "ERP migration", "Data integration"],
-    "local_seo": {
-      "title_template": "SaaS Implementation Consultants in [City], [State_Abbr]",
-      "example_title": "SaaS Implementation Consultants in Denver, CO",
-      "primary_keywords": ["Salesforce implementation partner", "ERP consulting"]
-    },
-    "downloadable_resource": {
-      "title": "SaaS Migration Roadmap",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Book a Discovery Call"
-  },
-  {
-    "id": "niche_10",
-    "rank": 10,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Plumbing Re-piping",
-    "category": "Real Estate",
-    "customer_type": "Homeowner / Landlord",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 4000, "max": 15000, "currency": "USD" },
-    "labor_pricing_method": "Per fixture / Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Water heater replacement", "Leak detection", "Drywall patching"],
-    "local_seo": {
-      "title_template": "Whole House Repiping Cost in [City], [State_Abbr]",
-      "example_title": "Whole House Repiping Cost in Orlando, FL",
-      "primary_keywords": ["house repiping", "polybutylene pipe replacement"]
-    },
-    "downloadable_resource": {
-      "title": "Signs You Need PEX Repiping",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Schedule an Inspection"
-  },
-  {
-    "id": "niche_11",
-    "rank": 11,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Asbestos Removal",
-    "category": "Real Estate",
-    "customer_type": "Homeowner / Commercial",
-    "urgency_level": "Planned / Urgent",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 2000, "max": 10000, "currency": "USD" },
-    "labor_pricing_method": "Per sq ft / Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Asbestos testing", "Insulation replacement", "Demolition"],
-    "local_seo": {
-      "title_template": "Certified Asbestos Abatement in [City], [State_Abbr]",
-      "example_title": "Certified Asbestos Abatement in Boston, MA",
-      "primary_keywords": ["asbestos removal cost", "asbestos testing companies"]
-    },
-    "downloadable_resource": {
-      "title": "Asbestos Safety Protocols",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Get a Safe Estimate"
-  },
-  {
-    "id": "niche_12",
-    "rank": 12,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Custom Software Development",
-    "category": "Tech",
-    "customer_type": "Startups / Enterprises",
-    "urgency_level": "Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 25000, "max": 200000, "currency": "USD" },
-    "labor_pricing_method": "Per sprint / Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["App development", "UX/UI design", "API integration"],
-    "local_seo": {
-      "title_template": "Custom Software Developers in [City], [State_Abbr]",
-      "example_title": "Custom Software Developers in Raleigh, NC",
-      "primary_keywords": ["software development company", "hire app developers"]
-    },
-    "downloadable_resource": {
-      "title": "Software Requirements Document Template",
-      "type": "Word Template"
-    },
-    "call_to_action": "Request a Technical Consultation"
-  },
-  {
-    "id": "niche_13",
-    "rank": 13,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Commercial Epoxy Flooring",
-    "category": "B2B",
-    "customer_type": "Warehouse Managers",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 10000, "max": 40000, "currency": "USD" },
-    "labor_pricing_method": "Per sq ft",
-    "best_monetization": "Lead generation",
-    "related_services": ["Concrete polishing", "Floor striping", "Warehouse organization"],
-    "local_seo": {
-      "title_template": "Commercial Epoxy Flooring Contractors in [City]",
-      "example_title": "Commercial Epoxy Flooring Contractors in Charlotte, NC",
-      "primary_keywords": ["warehouse floor coating", "industrial epoxy flooring"]
-    },
-    "downloadable_resource": {
-      "title": "Industrial Flooring Durability Guide",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Get a Concrete Quote"
-  },
-  {
-    "id": "niche_14",
-    "rank": 14,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "In-Ground Pool Installation",
-    "category": "Real Estate",
-    "customer_type": "Homeowner",
-    "urgency_level": "Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 40000, "max": 100000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Pool deck installation", "Landscaping", "Pool fencing"],
-    "local_seo": {
-      "title_template": "In-Ground Pool Builders in [City], [State_Abbr]",
-      "example_title": "In-Ground Pool Builders in Las Vegas, NV",
-      "primary_keywords": ["pool installation cost", "custom pool builders"]
-    },
-    "downloadable_resource": {
-      "title": "Fiberglass vs Gunite Pool Comparison",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Schedule Pool Design"
-  },
-  {
-    "id": "niche_15",
-    "rank": 15,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Janitorial Services",
-    "category": "B2B",
-    "customer_type": "Office Managers",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket MRR",
-    "average_price_range": { "min": 500, "max": 4000, "currency": "USD" },
-    "labor_pricing_method": "Per sq ft / Per month",
-    "best_monetization": "Lead generation / Subscription",
-    "related_services": ["Window cleaning", "Carpet cleaning", "Post-construction cleaning"],
-    "local_seo": {
-      "title_template": "Office Cleaning Services in [City], [State_Abbr]",
-      "example_title": "Office Cleaning Services in Tampa, FL",
-      "primary_keywords": ["commercial cleaning company", "janitorial services near me"]
-    },
-    "downloadable_resource": {
-      "title": "Office Cleaning Checklist",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Get a Cleaning Quote"
-  },
-  {
-    "id": "niche_16",
-    "rank": 16,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Data Analytics Consulting",
-    "category": "Tech",
-    "customer_type": "Mid-Market Businesses",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 10000, "max": 30000, "currency": "USD" },
-    "labor_pricing_method": "Retainer / Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Business Intelligence", "Data Warehouse Setup", "Machine Learning Models"],
-    "local_seo": {
-      "title_template": "Data Analytics Consultants in [City], [State_Abbr]",
-      "example_title": "Data Analytics Consultants in Columbus, OH",
-      "primary_keywords": ["business intelligence consulting", "data analytics firm"]
-    },
-    "downloadable_resource": {
-      "title": "Data Maturity Assessment",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Request an Assessment"
-  },
-  {
-    "id": "niche_17",
-    "rank": 17,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Electrical Panel Upgrade",
-    "category": "Real Estate",
-    "customer_type": "Homeowner / Commercial",
-    "urgency_level": "Planned / Urgent",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 1500, "max": 4000, "currency": "USD" },
-    "labor_pricing_method": "Per project / Per hour",
-    "best_monetization": "Lead generation",
-    "related_services": ["House rewiring", "EV charger installation", "Generator installation"],
-    "local_seo": {
-      "title_template": "Electrical Panel Upgrade Cost in [City], [State_Abbr]",
-      "example_title": "Electrical Panel Upgrade Cost in San Jose, CA",
-      "primary_keywords": ["200 amp panel upgrade", "electrician near me"]
-    },
-    "downloadable_resource": {
-      "title": "Is My Electrical Panel Safe?",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Book an Electrician"
-  },
-  {
-    "id": "niche_18",
-    "rank": 18,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Property Management",
-    "category": "Real Estate",
-    "customer_type": "Real Estate Investors",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket MRR",
-    "average_price_range": { "min": 1000, "max": 5000, "currency": "USD" },
-    "labor_pricing_method": "Percentage of rent",
-    "best_monetization": "Lead generation",
-    "related_services": ["Tenant screening", "Maintenance coordination", "Rent collection"],
-    "local_seo": {
-      "title_template": "Property Management Companies in [City], [State_Abbr]",
-      "example_title": "Property Management Companies in Portland, OR",
-      "primary_keywords": ["property managers near me", "residential property management"]
-    },
-    "downloadable_resource": {
-      "title": "Landlord Guide to Tenant Screening",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Discuss Your Properties"
-  },
-  {
-    "id": "niche_19",
-    "rank": 19,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Aging-in-Place Mod",
-    "category": "Home Improvement",
-    "customer_type": "Seniors / Homeowners",
-    "urgency_level": "Planned / Urgent",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 3000, "max": 15000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Ramp installation", "Door widening", "Stairlifts"],
-    "local_seo": {
-      "title_template": "Aging in Place Contractors in [City], [State_Abbr]",
-      "example_title": "Aging in Place Contractors in Houston, TX",
-      "primary_keywords": ["aging in place home modifications", "senior home safety"]
-    },
-    "downloadable_resource": {
-      "title": "Home Safety Assessment Checklist",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Request a Safety Audit"
-  },
-  {
-    "id": "niche_20",
-    "rank": 20,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Handicap Bathroom Costs",
-    "category": "Home Improvement",
-    "customer_type": "Homeowners / Caregivers",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 5000, "max": 20000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Walk-in tubs", "Roll-in showers", "Grab bar installation"],
-    "local_seo": {
-      "title_template": "Handicap Bathroom Remodel Cost in [City], [State_Abbr]",
-      "example_title": "Handicap Bathroom Remodel Cost in Minneapolis, MN",
-      "primary_keywords": ["handicap bathroom contractors", "ADA compliant bathroom remodel"]
-    },
-    "downloadable_resource": {
-      "title": "Accessible Bathroom Layout Ideas",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Get a Remodel Quote"
-  },
-  {
-    "id": "niche_21",
-    "rank": 21,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Medical Spa Buildout",
-    "category": "B2B",
-    "customer_type": "Healthcare Providers",
-    "urgency_level": "Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 50000, "max": 250000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Medical plumbing", "Exam room framing", "HVAC specialized"],
-    "local_seo": {
-      "title_template": "Medical Spa Buildout Contractors in [City], [State_Abbr]",
-      "example_title": "Medical Spa Buildout Contractors in Dallas, TX",
-      "primary_keywords": ["medical spa construction", "healthcare facility contractors"]
-    },
-    "downloadable_resource": {
-      "title": "Medical Facility Buildout Checklist",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Request a Construction Bid"
-  },
-  {
-    "id": "niche_22",
-    "rank": 22,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Commercial Paving",
-    "category": "B2B",
-    "customer_type": "Property Managers",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 10000, "max": 100000, "currency": "USD" },
-    "labor_pricing_method": "Per sq ft",
-    "best_monetization": "Lead generation",
-    "related_services": ["Sealcoating", "Line striping", "Pothole repair"],
-    "local_seo": {
-      "title_template": "Commercial Paving Contractors in [City], [State_Abbr]",
-      "example_title": "Commercial Paving Contractors in Atlanta, GA",
-      "primary_keywords": ["parking lot paving", "commercial asphalt repair"]
-    },
-    "downloadable_resource": {
-      "title": "Asphalt Maintenance Schedule",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Get a Paving Estimate"
-  },
-  {
-    "id": "niche_23",
-    "rank": 23,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Custom Home Building",
-    "category": "Real Estate",
-    "customer_type": "Homeowners",
-    "urgency_level": "Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 300000, "max": 1500000, "currency": "USD" },
-    "labor_pricing_method": "Cost plus / Fixed price",
-    "best_monetization": "Lead generation",
-    "related_services": ["Architectural design", "Lot clearing", "Interior design"],
-    "local_seo": {
-      "title_template": "Custom Home Builders in [City], [State_Abbr]",
-      "example_title": "Custom Home Builders in Austin, TX",
-      "primary_keywords": ["custom home contractors", "luxury home builders"]
-    },
-    "downloadable_resource": {
-      "title": "Custom Home Planning Guide",
-      "type": "PDF Book"
-    },
-    "call_to_action": "Schedule a Design Consultation"
-  },
-  {
-    "id": "niche_24",
-    "rank": 24,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Elevator Maintenance",
-    "category": "B2B",
-    "customer_type": "Building Owners",
-    "urgency_level": "Emergency / Planned",
-    "price_level": "High Ticket MRR",
-    "average_price_range": { "min": 2000, "max": 15000, "currency": "USD" },
-    "labor_pricing_method": "Annual contract",
-    "best_monetization": "Lead generation",
-    "related_services": ["Elevator modernization", "Safety inspections", "Hydraulic repair"],
-    "local_seo": {
-      "title_template": "Elevator Maintenance Companies in [City], [State_Abbr]",
-      "example_title": "Elevator Maintenance Companies in New York, NY",
-      "primary_keywords": ["commercial elevator repair", "elevator service contract"]
-    },
-    "downloadable_resource": {
-      "title": "Elevator Safety Audit Form",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Request a Service Plan"
-  },
-  {
-    "id": "niche_25",
-    "rank": 25,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "ERP Software Licensing",
-    "category": "Tech",
-    "customer_type": "Mid-Market / Enterprise",
-    "urgency_level": "Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 50000, "max": 500000, "currency": "USD" },
-    "labor_pricing_method": "Per user / Annual",
-    "best_monetization": "Commission / Rev Share",
-    "related_services": ["Implementation", "Training", "Custom modules"],
-    "local_seo": {
-      "title_template": "ERP Software Solutions in [City], [State_Abbr]",
-      "example_title": "ERP Software Solutions in Chicago, IL",
-      "primary_keywords": ["enterprise resource planning software", "ERP vendors"]
-    },
-    "downloadable_resource": {
-      "title": "ERP Vendor Comparison Chart",
-      "type": "Excel Template"
-    },
-    "call_to_action": "Request a Demo"
-  },
-  {
-    "id": "niche_26",
-    "rank": 26,
-    "complexity": "Low",
-    "field_example": false,
-    "service_name": "Fleet Maintenance",
-    "category": "B2B",
-    "customer_type": "Logistics / Delivery Companies",
-    "urgency_level": "Planned / Urgent",
-    "price_level": "High Ticket MRR",
-    "average_price_range": { "min": 5000, "max": 20000, "currency": "USD" },
-    "labor_pricing_method": "Per vehicle / Retainer",
-    "best_monetization": "Lead generation",
-    "related_services": ["Mobile mechanic", "Tire replacement", "Diagnostics"],
-    "local_seo": {
-      "title_template": "Commercial Fleet Maintenance in [City], [State_Abbr]",
-      "example_title": "Commercial Fleet Maintenance in Denver, CO",
-      "primary_keywords": ["fleet repair services", "mobile truck mechanic"]
-    },
-    "downloadable_resource": {
-      "title": "Fleet Preventative Maintenance Log",
-      "type": "Excel Template"
-    },
-    "call_to_action": "Get a Fleet Service Quote"
-  },
-  {
-    "id": "niche_27",
-    "rank": 27,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Structural Engineering",
-    "category": "B2B",
-    "customer_type": "Developers / Architects",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 5000, "max": 40000, "currency": "USD" },
-    "labor_pricing_method": "Per project / Hourly",
-    "best_monetization": "Lead generation",
-    "related_services": ["Foundation design", "Seismic retrofitting", "Building inspections"],
-    "local_seo": {
-      "title_template": "Structural Engineering Firms in [City], [State_Abbr]",
-      "example_title": "Structural Engineering Firms in San Francisco, CA",
-      "primary_keywords": ["structural engineer consulting", "commercial building engineer"]
-    },
-    "downloadable_resource": {
-      "title": "Commercial Structural Assessment Guide",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Consult an Engineer"
-  },
-  {
-    "id": "niche_28",
-    "rank": 28,
-    "complexity": "Medium",
-    "field_example": false,
-    "service_name": "Luxury Kitchen Remodeling",
-    "category": "Real Estate",
-    "customer_type": "Homeowners",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 40000, "max": 120000, "currency": "USD" },
-    "labor_pricing_method": "Cost plus / Fixed price",
-    "best_monetization": "Lead generation",
-    "related_services": ["Custom cabinetry", "Countertop fabrication", "Appliance installation"],
-    "local_seo": {
-      "title_template": "Luxury Kitchen Remodeling Cost in [City], [State_Abbr]",
-      "example_title": "Luxury Kitchen Remodeling Cost in Miami, FL",
-      "primary_keywords": ["high end kitchen remodel", "custom kitchen contractors"]
-    },
-    "downloadable_resource": {
-      "title": "Kitchen Design Material Cheatsheet",
-      "type": "PDF Guide"
-    },
-    "call_to_action": "Schedule a Design Call"
-  },
-  {
-    "id": "niche_29",
-    "rank": 29,
-    "complexity": "High",
-    "field_example": false,
-    "service_name": "Environmental Remediation",
-    "category": "B2B",
-    "customer_type": "Industrial / Commercial Property Owners",
-    "urgency_level": "Emergency / Planned",
-    "price_level": "Ultra High Ticket",
-    "average_price_range": { "min": 50000, "max": 500000, "currency": "USD" },
-    "labor_pricing_method": "Per project",
-    "best_monetization": "Lead generation",
-    "related_services": ["Soil testing", "Groundwater cleanup", "Hazardous waste removal"],
-    "local_seo": {
-      "title_template": "Environmental Remediation Companies in [City], [State_Abbr]",
-      "example_title": "Environmental Remediation Companies in Seattle, WA",
-      "primary_keywords": ["contaminated soil removal", "industrial site cleanup"]
-    },
-    "downloadable_resource": {
-      "title": "Phase 1 ESA Checklist",
-      "type": "PDF Checklist"
-    },
-    "call_to_action": "Request a Site Evaluation"
-=======
-    "service_name": "Local Remodeling Labor Costs",
-    "category": "Remodeling",
-    "customer_type": "Homeowners / DIYers",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 45, "max": 120, "currency": "USD" },
-    "labor_pricing_method": "Per hour basis",
-    "best_monetization": "SEO, lead gen, templates",
-    "related_services": ["Drywall installation", "Framing labor", "Finish carpentry"],
-    "local_seo": {
-      "title_template": "Average Remodeling Labor Rates in [City], [State_Abbr]",
-      "example_title": "Average Remodeling Labor Rates in Byron, GA",
-      "primary_keywords": ["carpenter hourly rate", "handyman local labor cost"]
-    },
-    "downloadable_resource": { "title": "Labor Hours Estimation Sheet", "type": "Excel Spreadsheet" },
-    "call_to_action": "Browse Cost Index"
-  },
-  {
-    "id": "niche_05",
-    "service_name": "Rental Turnover Repairs",
-    "category": "Property & Convenience Services",
-    "customer_type": "Landlords / Property Managers",
-    "urgency_level": "Tight Deadline",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 500, "max": 4000, "currency": "USD" },
-    "labor_pricing_method": "Flat punch-list fee",
-    "best_monetization": "Landlord leads, checklists, subscriptions",
-    "related_services": ["Patch & paint", "Lock rekeying", "Deep cleaning"],
-    "local_seo": {
-      "title_template": "Fast Rental Turnover Repair Services in [City], [State_Abbr]",
-      "example_title": "Fast Rental Turnover Repair Services in Byron, GA",
-      "primary_keywords": ["apartment turnover repair", "property maintenance punchlist"]
-    },
-    "downloadable_resource": { "title": "100-Point Move-Out Restoration Checklist", "type": "PDF Form" },
-    "call_to_action": "Find Turnover Help"
-  },
-  {
-    "id": "niche_06",
-    "service_name": "Insurance Claim Repair Scope",
-    "category": "FinTech / Restoration",
-    "customer_type": "Public Adjusters / Contractors",
-    "urgency_level": "Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 5000, "max": 85000, "currency": "USD" },
-    "labor_pricing_method": "Xactimate formatting / Unit pricing",
-    "best_monetization": "Mitigation/rebuild leads",
-    "related_services": ["Water mitigation", "Fire restoration", "Roof supplements"],
-    "local_seo": {
-      "title_template": "Insurance Property Claim Scope Auditing in [City], [State_Abbr]",
-      "example_title": "Insurance Property Claim Scope Auditing in Byron, GA",
-      "primary_keywords": ["Xactimate estimate line items", "supplemental repair scope"]
-    },
-    "downloadable_resource": { "title": "Standard Supplement Scoping Guide", "type": "PDF Guide" },
-    "call_to_action": "Submit Scope for Audit"
-  },
-  {
-    "id": "niche_07",
-    "service_name": "Mold Remediation Pricing",
-    "category": "Environmental / Emergency",
-    "customer_type": "Homeowners / Realtors",
-    "urgency_level": "Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 1500, "max": 9000, "currency": "USD" },
-    "labor_pricing_method": "Per square foot or structural containment build",
-    "best_monetization": "Mold testing and emergency leads",
-    "related_services": ["Spore air testing", "Crawlspace encapsulation", "Dehumidification"],
-    "local_seo": {
-      "title_template": "Certified Mold Remediation Costs in [City], [State_Abbr]",
-      "example_title": "Certified Mold Remediation Costs in Byron, GA",
-      "primary_keywords": ["black mold removal cost", "emergency mold abatement near me"]
-    },
-    "downloadable_resource": { "title": "Post-Mitigation Air Clearance Protocol", "type": "PDF Document" },
-    "call_to_action": "Connect with Certified Pros"
-  },
-  {
-    "id": "niche_08",
-    "service_name": "Small Contractor Templates",
-    "category": "Professional Services",
-    "customer_type": "Solo-preneurs / Tradesmen",
-    "urgency_level": "Planned",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 29, "max": 149, "currency": "USD" },
-    "labor_pricing_method": "Digital license down-payment",
-    "best_monetization": "Digital products storefront",
-    "related_services": ["Change orders", "Subcontractor agreements", "Lien waivers"],
-    "local_seo": {
-      "title_template": "Downloadable Construction Contract Templates for [City] Builders",
-      "example_title": "Downloadable Construction Contract Templates for Byron Builders",
-      "primary_keywords": ["independent contractor agreement template", "remodeling estimate printable"]
-    },
-    "downloadable_resource": { "title": "Master Service Agreement Shell (Lite)", "type": "Word Document" },
-    "call_to_action": "Download Agreement Pack"
-  },
-  {
-    "id": "niche_09",
-    "service_name": "QuickBooks Service Tag Structure",
-    "category": "SaaS / Accounting",
-    "customer_type": "Contractor Bookkeepers",
-    "urgency_level": "Planned",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 49, "max": 199, "currency": "USD" },
-    "labor_pricing_method": "Digital guide access fee",
-    "best_monetization": "Digital products / membership options",
-    "related_services": ["Job costing setup", "Chart of accounts config", "Progress invoicing setup"],
-    "local_seo": {
-      "title_template": "Optimized QuickBooks Class Tag Setup for Tradesmen",
-      "example_title": "Optimized QuickBooks Class Tag Setup for Tradesmen",
-      "primary_keywords": ["quickbooks job costing structure", "construction chart of accounts template"]
-    },
-    "downloadable_resource": { "title": "Trades Chart-of-Accounts Import Matrix", "type": "CSV Config File" },
-    "call_to_action": "Get Clean Books Setup"
-  },
-  {
-    "id": "niche_10",
-    "service_name": "Permit Requirements by City",
-    "category": "GovTech / Compliance",
-    "customer_type": "Developers / Architects / DIYers",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 75, "max": 450, "currency": "USD" },
-    "labor_pricing_method": "Filing audit retainer",
-    "best_monetization": "Paid compliance mapping / Local runner leads",
-    "related_services": ["Zoning variances", "Plan checks", "Occupancy applications"],
-    "local_seo": {
-      "title_template": "Building Permit Requirements & Steps in [City], [State_Abbr]",
-      "example_title": "Building Permit Requirements & Steps in Byron, GA",
-      "primary_keywords": ["do i need a permit for a deck", "city residential building code lookup"]
-    },
-    "downloadable_resource": { "title": "Permit Application Package Guide", "type": "PDF Guide" },
-    "call_to_action": "Verify Permit Rules"
-  },
-  {
-    "id": "niche_11",
-    "service_name": "Code Violation Repairs",
-    "category": "Legal / Real Estate",
-    "customer_type": "Distressed Owners / Investors",
-    "urgency_level": "Tight Deadline",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 1200, "max": 18000, "currency": "USD" },
-    "labor_pricing_method": "Per project remediation schedule",
-    "best_monetization": "Landlord / Investor local emergency leads",
-    "related_services": ["Structural bracing", "Unpermitted work removal", "Electrical updates"],
-    "local_seo": {
-      "title_template": "Fix Code Violations Fast in [City], [State_Abbr]",
-      "example_title": "Fix Code Violations Fast in Byron, GA",
-      "primary_keywords": ["city code compliance extension", "stop work order resolution contractor"]
-    },
-    "downloadable_resource": { "title": "Municipal Inspector Pre-Audit Matrix", "type": "PDF Document" },
-    "call_to_action": "Clear My Violation Notice"
-  },
-  {
-    "id": "niche_12",
-    "service_name": "AI Setup for Local Biz",
-    "category": "B2B Tech / Agency",
-    "customer_type": "Main Street Businesses",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 1500, "max": 5000, "currency": "USD" },
-    "labor_pricing_method": "Setup infrastructure fee + ongoing monthly retainer",
-    "best_monetization": "Retainers / Workflow integration setups",
-    "related_services": ["CRM custom integrations", "LLM database tuning", "Legacy system scraping"],
-    "local_seo": {
-      "title_template": "Custom Business Workflow Automation in [City], [State_Abbr]",
-      "example_title": "Custom Business Workflow Automation in Byron, GA",
-      "primary_keywords": ["local small business workflow optimization", "automate customer onboarding"]
-    },
-    "downloadable_resource": { "title": "AI Opportunity Matrix for Brick & Mortar Teams", "type": "PDF Layout" },
-    "call_to_action": "Book Operational Audit"
-  },
-  {
-    "id": "niche_13",
-    "service_name": "AI Receptionist Database",
-    "category": "B2B Tech / SaaS",
-    "customer_type": "Medical / Law / Home Trades",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 199, "max": 599, "currency": "USD" },
-    "labor_pricing_method": "Monthly recurring usage tier",
-    "best_monetization": "Monthly software subscription retainers (MRR)",
-    "related_services": ["Twilio phone configuration", "Voice prompt system mapping", "VAPI testing"],
-    "local_seo": {
-      "title_template": "Automated Phone Receptionist Setups for [City] Tradesmen",
-      "example_title": "Automated Phone Receptionist Setups for Byron Tradesmen",
-      "primary_keywords": ["missed call auto text back system", "virtual ai booking agent for plubmers"]
-    },
-    "downloadable_resource": { "title": "High-Conversion Voice Response Script Framework", "type": "Word Template" },
-    "call_to_action": "Deploy Phone Agent Now"
-  },
-  {
-    "id": "niche_14",
-    "service_name": "SMB Cybersecurity Checklist",
-    "category": "Cybersecurity / IT",
-    "customer_type": "Small Business Owners",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 1200, "max": 7500, "currency": "USD" },
-    "labor_pricing_method": "Network architecture audit base rate",
-    "best_monetization": "Consulting engagement fees & affiliate software kickbacks",
-    "related_services": ["Endpoint configuration tracking", "Secure VPN systems", "Phishing simulations"],
-    "local_seo": {
-      "title_template": "Small Business Data Compliance Audits in [City], [State_Abbr]",
-      "example_title": "Small Business Data Compliance Audits in Byron, GA",
-      "primary_keywords": ["FTC safeguards compliance check", "local business cyber security protection"]
-    },
-    "downloadable_resource": { "title": "Internal Employee Password & Access Protocol Deck", "type": "Powerpoint Shell" },
-    "call_to_action": "Run Security Risk Check"
-  },
-  {
-    "id": "niche_15",
-    "service_name": "Subcontractor Onboarding Pack",
-    "category": "HR / Operations",
-    "customer_type": "General Contractors",
-    "urgency_level": "Planned",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 39, "max": 129, "currency": "USD" },
-    "labor_pricing_method": "One-time digital product bundle download",
-    "best_monetization": "Digital document package storefront systems",
-    "related_services": ["W9 processing checklists", "COI verification procedures", "Safety logs"],
-    "local_seo": {
-      "title_template": "Standard Subcontractor Packet Requirements for [City] Builders",
-      "example_title": "Standard Subcontractor Packet Requirements for Byron Builders",
-      "primary_keywords": ["subcontractor onboarding manual template", "construction safety verification form"]
-    },
-    "downloadable_resource": { "title": "Subcontractor Jobsite Rules Sign-Off Form", "type": "PDF Form" },
-    "call_to_action": "Get Onboarding Assets"
-  },
-  {
-    "id": "niche_16",
-    "service_name": "Section 8 Repair Checklist",
-    "category": "Government Housing",
-    "customer_type": "Real Estate Investors",
-    "urgency_level": "Planned",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 19, "max": 79, "currency": "USD" },
-    "labor_pricing_method": "Digital standard sheet download fee",
-    "best_monetization": "Digital guides, landlord spreadsheets, real estate links",
-    "related_services": ["HUD habitability audits", "Lead paint clearances", "HQS checklist checks"],
-    "local_seo": {
-      "title_template": "How to Pass Section 8 Inspections in [City], [State_Abbr]",
-      "example_title": "How to Pass Section 8 Inspections in Byron, GA",
-      "primary_keywords": ["Section 8 inspection failure list", "HUD rental compliance adjustments"]
-    },
-    "downloadable_resource": { "title": "Pre-Inspection 50-Point Compliance Tracking Sheet", "type": "Excel File" },
-    "call_to_action": "Download Section 8 Form"
-  },
-  {
-    "id": "niche_17",
-    "service_name": "Estate Cleanout Services",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Executors / Probate Attorneys",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 1800, "max": 7500, "currency": "USD" },
-    "labor_pricing_method": "Volume and physical tracking weight assessments",
-    "best_monetization": "High-ticket asset liquidator referral leads",
-    "related_services": ["Appraisal sourcing", "Donation routing logs", "Deep clean scrubs"],
-    "local_seo": {
-      "title_template": "Compassionate Estate Liquidation Clears in [City], [State_Abbr]",
-      "example_title": "Compassionate Estate Liquidation Clears in Byron, GA",
-      "primary_keywords": ["probate asset junk clear out", "estate content disposal specialists"]
-    },
-    "downloadable_resource": { "title": "Executor Property Liquidation Item Tracker Log", "type": "Excel Sheet" },
-    "call_to_action": "Request Discrete Site Audit"
-  },
-  {
-    "id": "niche_18",
-    "service_name": "Short-Term Rental Maintenance",
-    "category": "Property & Convenience Services",
-    "customer_type": "Short-Term Rental Hosts",
-    "urgency_level": "Tight Deadline",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 150, "max": 600, "currency": "USD" },
-    "labor_pricing_method": "Per turnaround deployment or monthly retainer basis",
-    "best_monetization": "Contracted recurring vendor appointment lead capture",
-    "related_services": ["Hot tub chemical logs", "Emergency locksmith overrides", "Linens processing"],
-    "local_seo": {
-      "title_template": "Same-Day Airbnb Emergency Maintenance in [City], [State_Abbr]",
-      "example_title": "Same-Day Airbnb Emergency Maintenance in Byron, GA",
-      "primary_keywords": ["short term rental fast handymen", "airbnb emergency repair tech"]
-    },
-    "downloadable_resource": { "title": "Turnover Maintenance Check Logs for Cleaners", "type": "PDF Printout" },
-    "call_to_action": "Hire On-Call Support"
-  },
-  {
-    "id": "niche_19",
-    "service_name": "Well Water / Septic Service",
-    "category": "Infrastructure / Rural",
-    "customer_type": "Rural Homeowners",
-    "urgency_level": "Emergency",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 450, "max": 6500, "currency": "USD" },
-    "labor_pricing_method": "Per component fix or pumping tank capacity limits",
-    "best_monetization": "Hyper-local master trade engineer call assignments",
-    "related_services": ["Submersible pump diagnostics", "Drainfield rejuvenation jetting", "Filter swap"],
-    "local_seo": {
-      "title_template": "Emergency Septic Pumping & Well Repair in [City], [State_Abbr]",
-      "example_title": "Emergency Septic Pumping & Well Repair in Byron, GA",
-      "primary_keywords": ["septic backup emergency service", "well water pump testing near me"]
-    },
-    "downloadable_resource": { "title": "Rural Utility Annual Maintenance Planner Blueprint", "type": "PDF Guide" },
-    "call_to_action": "Dispatch Field Engineer"
-  },
-  {
-    "id": "niche_20",
-    "service_name": "Gov Contract Readiness",
-    "category": "B2G (Government)",
-    "customer_type": "Small Business Federal Bidders",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 2500, "max": 12000, "currency": "USD" },
-    "labor_pricing_method": "Corporate procurement consulting retainer tracking",
-    "best_monetization": "High-end corporate procurement proposal pipeline leads",
-    "related_services": ["SAM.gov filing configuration", "UEI registration sweeps", "Capability briefs"],
-    "local_seo": {
-      "title_template": "Federal RFP Response & Bidding Consultants in [City], [State_Abbr]",
-      "example_title": "Federal RFP Response & Bidding Consultants in Byron, GA",
-      "primary_keywords": ["small business government certification", "SAM lookup assistance team"]
-    },
-    "downloadable_resource": { "title": "One-Page Corporate Capability Statement Grid Framework", "type": "Word Template" },
-    "call_to_action": "Run Procurement Check"
-  },
-  {
-    "id": "niche_21",
-    "service_name": "Trade School / Apprenticeships",
-    "category": "EdTech / Careers",
-    "customer_type": "Students / HR Recruiters",
-    "urgency_level": "Planned",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 0, "max": 1500, "currency": "USD" },
-    "labor_pricing_method": "Directory listing placement validation fee structure",
-    "best_monetization": "Direct corporate recruitment lead generation and course links",
-    "related_services": ["HVAC field basic schools", "Welding line certifications", "CDL licensing checks"],
-    "local_seo": {
-      "title_template": "Top Paid Trade Apprenticeship Programs in [City], [State_Abbr]",
-      "example_title": "Top Paid Trade Apprenticeship Programs in Byron, GA",
-      "primary_keywords": ["electrical apprenticeship listings", "local vocational tech directories"]
-    },
-    "downloadable_resource": { "title": "Trades Resume Template & Core Interview Framework Guide", "type": "PDF Layout" },
-    "call_to_action": "Browse Training Portals"
-  },
-  {
-    "id": "niche_22",
-    "service_name": "Small Biz Legal & Incorporation",
-    "category": "Legal",
-    "customer_type": "Founders / Solo-preneurs",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 150, "max": 600, "currency": "USD" },
-    "labor_pricing_method": "Per registration / flat filing fee",
-    "best_monetization": "Affiliate software commissions",
-    "related_services": ["LLC Formation", "EIN Registration", "Operating Agreements"],
-    "local_seo": {
-      "title_template": "How to Start an LLC in [City], [State_Abbr] Checklist",
-      "example_title": "How to Start an LLC in Byron, GA Checklist",
-      "primary_keywords": ["local LLC filing steps", "business license cost"]
-    },
-    "downloadable_resource": { "title": "State-by-state compliance tracking sheet", "type": "Interactive Excel" },
-    "call_to_action": "Launch your business"
-  },
-  {
-    "id": "niche_23",
-    "service_name": "Apostille & Notary Admin Hub",
-    "category": "Document & Admin Help",
-    "customer_type": "Expats / International Biz",
-    "urgency_level": "Emergency / Tight Deadline",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 45, "max": 180, "currency": "USD" },
-    "labor_pricing_method": "Per document signature / stamp",
-    "best_monetization": "Premium checklists and local notary directory ads",
-    "related_services": ["Power of Attorney legalization", "Translation certification"],
-    "local_seo": {
-      "title_template": "Fast Apostille Services in [City], [State_Abbr]",
-      "example_title": "Fast Apostille Services in Byron, GA",
-      "primary_keywords": ["emergency notary near me", "document legalization cost"]
-    },
-    "downloadable_resource": { "title": "International document preparation checklist", "type": "PDF Guide" },
-    "call_to_action": "Find an emergency notary"
-  },
-  {
-    "id": "niche_24",
-    "service_name": "Contract Review & Scope Audit",
-    "category": "Legal",
-    "customer_type": "Subcontractors / Agencies",
-    "urgency_level": "Tight Deadline",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 300, "max": 1200, "currency": "USD" },
-    "labor_pricing_method": "Per-page evaluation flat tier",
-    "best_monetization": "Paid micro-audits, commercial legal firm leads",
-    "related_services": ["Indemnity review", "Retainage verification", "Scope conflict maps"],
-    "local_seo": {
-      "title_template": "Commercial Subcontract Agreement Audits in [City], [State_Abbr]",
-      "example_title": "Commercial Subcontract Agreement Audits in Byron, GA",
-      "primary_keywords": ["construction contract lawyer review", "verify scope of work legal traps"]
-    },
-    "downloadable_resource": { "title": "5 Red-Flag Contract Clauses Checklist", "type": "PDF Sheet" },
-    "call_to_action": "Submit Contract for Review"
-  },
-  {
-    "id": "niche_25",
-    "service_name": "Junk Removal Pricing",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Homeowners / Estate Executors",
-    "urgency_level": "Planned / Emergency",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 150, "max": 850, "currency": "USD" },
-    "labor_pricing_method": "Per truckload volume / flat item fee",
-    "best_monetization": "Local lead generation",
-    "related_services": ["Estate cleanout", "Hoarder sorting", "Garage clearing"],
-    "local_seo": {
-      "title_template": "Affordable Junk Removal Costs in [City], [State_Abbr]",
-      "example_title": "Affordable Junk Removal Costs in Byron, GA",
-      "primary_keywords": ["haul away junk price", "trash removal near me"]
-    },
-    "downloadable_resource": { "title": "Decluttering checklist & property sorting layout", "type": "PDF Template" },
-    "call_to_action": "Request a haul quote"
-  },
-  {
-    "id": "niche_26",
-    "service_name": "Appliance Removal & Recycle",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Property Managers / Landlords",
-    "urgency_level": "Tight Deadline",
-    "price_level": "Low Ticket",
-    "average_price_range": { "min": 75, "max": 250, "currency": "USD" },
-    "labor_pricing_method": "Per unit extraction base price",
-    "best_monetization": "High-urgency local logistics routing calls",
-    "related_services": ["Refrigerator disposal", "Freon recovery logs", "Dryer hauling"],
-    "local_seo": {
-      "title_template": "Refrigerator & Washer Bulk Pickups in [City], [State_Abbr]",
-      "example_title": "Refrigerator & Washer Bulk Pickups in Byron, GA",
-      "primary_keywords": ["old appliance disposal crew", "free appliance recycling pickup lookup"]
-    },
-    "downloadable_resource": { "title": "Appliance Disconnection & Drainage Safety Sheet", "type": "PDF Guide" },
-    "call_to_action": "Clear Old Unit Now"
-  },
-  {
-    "id": "niche_27",
-    "service_name": "Dumpster Rental Cost Index",
-    "category": "Property & Convenience Services",
-    "customer_type": "Remodeling Contractors / Flippers",
-    "urgency_level": "Planned",
-    "price_level": "High Ticket",
-    "average_price_range": { "min": 320, "max": 1100, "currency": "USD" },
-    "labor_pricing_method": "Per roll-off size / weekly drop fee",
-    "best_monetization": "High-ticket RCPX leads",
-    "related_services": ["Construction waste disposal", "Roofing tear-off bins"],
-    "local_seo": {
-      "title_template": "Best Roll-Off Dumpster Rental Prices in [City], [State_Abbr]",
-      "example_title": "Best Roll-Off Dumpster Rental Prices in Byron, GA",
-      "primary_keywords": ["15 yard dumpster rental", "roll off container cost"]
-    },
-    "downloadable_resource": { "title": "Dumpster sizing calculator & weight allowance sheet", "type": "Interactive Excel" },
-    "call_to_action": "Check local availability"
-  },
-  {
-    "id": "niche_28",
-    "service_name": "Moving Labor / On-Demand Loading",
-    "category": "Senior, Family & Household Services",
-    "customer_type": "Shifting Tenants / Families",
-    "urgency_level": "Tight Deadline",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 200, "max": 1400, "currency": "USD" },
-    "labor_pricing_method": "Per mover / hourly scheduling layout",
-    "best_monetization": "Booking fees, localized carrier directory advertising spaces",
-    "related_services": ["U-Haul truck packing", "Furniture pad wrapping", "Heavy piano lifts"],
-    "local_seo": {
-      "title_template": "Hire Local Moving Labor Crews in [City], [State_Abbr]",
-      "example_title": "Hire Local Moving Labor Crews in Byron, GA",
-      "primary_keywords": ["load moving truck help online", "local hands for furniture lifting"]
-    },
-    "downloadable_resource": { "title": "Truck Packing Optimization Space Calculation Matrix", "type": "PDF Layout" },
-    "call_to_action": "Reserve Loading Hands"
-  },
-  {
-    "id": "niche_29",
-    "service_name": "Short-Term Rental Listing Optimization",
-    "category": "Property & Convenience Services",
-    "customer_type": "Airbnb / VRBO Hosts / Investors",
-    "urgency_level": "Planned",
-    "price_level": "Mid Ticket",
-    "average_price_range": { "min": 250, "max": 1200, "currency": "USD" },
-    "labor_pricing_method": "Per optimization build / copy rewrite",
-    "best_monetization": "Digital products & service retainers",
-    "related_services": ["Listing copywriting", "SEO photo sorting", "Pricing algorithm setup"],
-    "local_seo": {
-      "title_template": "How to Increase Airbnb Bookings in [City], [State_Abbr]",
-      "example_title": "How to Increase Airbnb Bookings in Byron, GA",
-      "primary_keywords": ["short term rental seo", "optimize airbnb listing"]
-    },
-    "downloadable_resource": { "title": "High-conversion listing description framework", "type": "Word Template" },
-    "call_to_action": "Audit my listing"
->>>>>>> 7866196 (feat: integrated interactive MRR modeling simulator and directory search wireframes)
-  }
+﻿[
+    {
+        "id":  "niche_01",
+        "service_name":  "Aging-in-Place Home Modification",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Seniors / Caregivers / OTs",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  2500,
+                                    "max":  15000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project estimate",
+        "best_monetization":  "Leads, checklists, contractor directory",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Wheelchair ramps",
+                                 "Grab bar install",
+                                 "Door widening"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Aging-in-Place Home Modifications in [City], [State_Abbr]",
+                          "example_title":  "Aging-in-Place Home Modifications in Byron, GA",
+                          "primary_keywords":  [
+                                                   "senior home modifications",
+                                                   "handicap accessible home installer"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Comprehensive Home Accessibility Audit Checklist",
+                                      "type":  "PDF Guide",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Download Checklist \u0026 Get Quotes"
+    },
+    {
+        "id":  "niche_02",
+        "service_name":  "Handicap Bathroom Costs",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Mobility-impaired / Families",
+        "urgency_level":  "Planned / Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  6000,
+                                    "max":  22000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project contract",
+        "best_monetization":  "High-ticket RCPX/remodeling leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Walk-in tubs",
+                                 "Roll-in showers",
+                                 "Anti-slip flooring"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Handicap Bathroom Remodel Cost in [City], [State_Abbr]",
+                          "example_title":  "Handicap Bathroom Remodel Cost in Byron, GA",
+                          "primary_keywords":  [
+                                                   "accessible bathroom cost",
+                                                   "walk in tub installers"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "ADA Bathroom Layout Planning Worksheet",
+                                      "type":  "PDF Guide",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Request High-Ticket Quotes"
+    },
+    {
+        "id":  "niche_03",
+        "service_name":  "Tile Shower Installation",
+        "category":  "Remodeling",
+        "customer_type":  "Homeowner / Landlord",
+        "urgency_level":  "Planned / Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  3500,
+                                    "max":  9500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project / per sq ft / per hour",
+        "best_monetization":  "Lead generation",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Shower pan",
+                                 "Tile floor",
+                                 "Waterproofing"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Tile Shower Installation Cost in [City], [State_Abbr]",
+                          "example_title":  "Tile Shower Installation Cost in Byron, GA",
+                          "primary_keywords":  [
+                                                   "tile shower cost",
+                                                   "custom shower installer"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Shower scope-of-work template",
+                                      "type":  "PDF / Excel Template",
+                                      "price":  49
+                                  },
+        "call_to_action":  "Request a quote"
+    },
+    {
+        "id":  "niche_04",
+        "service_name":  "Local Remodeling Labor Costs",
+        "category":  "Remodeling",
+        "customer_type":  "Homeowners / DIYers",
+        "urgency_level":  "Planned",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  45,
+                                    "max":  120,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per hour basis",
+        "best_monetization":  "SEO, lead gen, templates",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Drywall installation",
+                                 "Framing labor",
+                                 "Finish carpentry"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Average Remodeling Labor Rates in [City], [State_Abbr]",
+                          "example_title":  "Average Remodeling Labor Rates in Byron, GA",
+                          "primary_keywords":  [
+                                                   "carpenter hourly rate",
+                                                   "handyman local labor cost"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Labor Hours Estimation Sheet",
+                                      "type":  "Excel Spreadsheet",
+                                      "price":  29
+                                  },
+        "call_to_action":  "Browse Cost Index"
+    },
+    {
+        "id":  "niche_05",
+        "service_name":  "Rental Turnover Repairs",
+        "category":  "Property \u0026 Convenience Services",
+        "customer_type":  "Landlords / Property Managers",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  500,
+                                    "max":  4000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Flat punch-list fee",
+        "best_monetization":  "Landlord leads, checklists, subscriptions",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Patch \u0026 paint",
+                                 "Lock rekeying",
+                                 "Deep cleaning"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Fast Rental Turnover Repair Services in [City], [State_Abbr]",
+                          "example_title":  "Fast Rental Turnover Repair Services in Byron, GA",
+                          "primary_keywords":  [
+                                                   "apartment turnover repair",
+                                                   "property maintenance punchlist"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "100-Point Move-Out Restoration Checklist",
+                                      "type":  "PDF Form",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Find Turnover Help"
+    },
+    {
+        "id":  "niche_06",
+        "service_name":  "Insurance Claim Repair Scope",
+        "category":  "FinTech / Restoration",
+        "customer_type":  "Public Adjusters / Contractors",
+        "urgency_level":  "Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  5000,
+                                    "max":  85000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Xactimate formatting / Unit pricing",
+        "best_monetization":  "Mitigation/rebuild leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Water mitigation",
+                                 "Fire restoration",
+                                 "Roof supplements"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Insurance Property Claim Scope Auditing in [City], [State_Abbr]",
+                          "example_title":  "Insurance Property Claim Scope Auditing in Byron, GA",
+                          "primary_keywords":  [
+                                                   "Xactimate estimate line items",
+                                                   "supplemental repair scope"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Standard Supplement Scoping Guide",
+                                      "type":  "PDF Guide",
+                                      "price":  99
+                                  },
+        "call_to_action":  "Submit Scope for Audit"
+    },
+    {
+        "id":  "niche_07",
+        "service_name":  "Mold Remediation Pricing",
+        "category":  "Environmental / Emergency",
+        "customer_type":  "Homeowners / Realtors",
+        "urgency_level":  "Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  1500,
+                                    "max":  9000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per square foot or structural containment build",
+        "best_monetization":  "Mold testing and emergency leads",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Spore air testing",
+                                 "Crawlspace encapsulation",
+                                 "Dehumidification"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Certified Mold Remediation Costs in [City], [State_Abbr]",
+                          "example_title":  "Certified Mold Remediation Costs in Byron, GA",
+                          "primary_keywords":  [
+                                                   "black mold removal cost",
+                                                   "emergency mold abatement near me"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Post-Mitigation Air Clearance Protocol",
+                                      "type":  "PDF Document",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Connect with Certified Pros"
+    },
+    {
+        "id":  "niche_08",
+        "service_name":  "Small Contractor Templates",
+        "category":  "Professional Services",
+        "customer_type":  "Solo-preneurs / Tradesmen",
+        "urgency_level":  "Planned",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  29,
+                                    "max":  149,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Digital license down-payment",
+        "best_monetization":  "Digital products storefront",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Change orders",
+                                 "Subcontractor agreements",
+                                 "Lien waivers"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Downloadable Construction Contract Templates for [City] Builders",
+                          "example_title":  "Downloadable Construction Contract Templates for Byron Builders",
+                          "primary_keywords":  [
+                                                   "independent contractor agreement template",
+                                                   "remodeling estimate printable"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Master Service Agreement Shell (Lite)",
+                                      "type":  "Word Document",
+                                      "price":  49
+                                  },
+        "call_to_action":  "Download Agreement Pack"
+    },
+    {
+        "id":  "niche_09",
+        "service_name":  "QuickBooks Service Tag Structure",
+        "category":  "SaaS / Accounting",
+        "customer_type":  "Contractor Bookkeepers",
+        "urgency_level":  "Planned",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  49,
+                                    "max":  199,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Digital guide access fee",
+        "best_monetization":  "Digital products / membership options",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Job costing setup",
+                                 "Chart of accounts config",
+                                 "Progress invoicing setup"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Optimized QuickBooks Class Tag Setup for Tradesmen",
+                          "example_title":  "Optimized QuickBooks Class Tag Setup for Tradesmen",
+                          "primary_keywords":  [
+                                                   "quickbooks job costing structure",
+                                                   "construction chart of accounts template"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Trades Chart-of-Accounts Import Matrix",
+                                      "type":  "CSV Config File",
+                                      "price":  39
+                                  },
+        "call_to_action":  "Get Clean Books Setup"
+    },
+    {
+        "id":  "niche_10",
+        "service_name":  "Permit Requirements by City",
+        "category":  "GovTech / Compliance",
+        "customer_type":  "Developers / Architects / DIYers",
+        "urgency_level":  "Planned",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  75,
+                                    "max":  450,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Filing audit retainer",
+        "best_monetization":  "Paid compliance mapping / Local runner leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Zoning variances",
+                                 "Plan checks",
+                                 "Occupancy applications"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Building Permit Requirements \u0026 Steps in [City], [State_Abbr]",
+                          "example_title":  "Building Permit Requirements \u0026 Steps in Byron, GA",
+                          "primary_keywords":  [
+                                                   "do i need a permit for a deck",
+                                                   "city residential building code lookup"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Permit Application Package Guide",
+                                      "type":  "PDF Guide",
+                                      "price":  79
+                                  },
+        "call_to_action":  "Verify Permit Rules"
+    },
+    {
+        "id":  "niche_11",
+        "service_name":  "Code Violation Repairs",
+        "category":  "Legal / Real Estate",
+        "customer_type":  "Distressed Owners / Investors",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  1200,
+                                    "max":  18000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project remediation schedule",
+        "best_monetization":  "Landlord / Investor local emergency leads",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Structural bracing",
+                                 "Unpermitted work removal",
+                                 "Electrical updates"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Fix Code Violations Fast in [City], [State_Abbr]",
+                          "example_title":  "Fix Code Violations Fast in Byron, GA",
+                          "primary_keywords":  [
+                                                   "city code compliance extension",
+                                                   "stop work order resolution contractor"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Municipal Inspector Pre-Audit Matrix",
+                                      "type":  "PDF Document",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Clear My Violation Notice"
+    },
+    {
+        "id":  "niche_12",
+        "service_name":  "AI Setup for Local Biz",
+        "category":  "B2B Tech / Agency",
+        "customer_type":  "Main Street Businesses",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  1500,
+                                    "max":  5000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Setup infrastructure fee + ongoing monthly retainer",
+        "best_monetization":  "Retainers / Workflow integration setups",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "CRM custom integrations",
+                                 "LLM database tuning",
+                                 "Legacy system scraping"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Custom Business Workflow Automation in [City], [State_Abbr]",
+                          "example_title":  "Custom Business Workflow Automation in Byron, GA",
+                          "primary_keywords":  [
+                                                   "local small business workflow optimization",
+                                                   "automate customer onboarding"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "AI Opportunity Matrix for Brick \u0026 Mortar Teams",
+                                      "type":  "PDF Layout",
+                                      "price":  149
+                                  },
+        "call_to_action":  "Book Operational Audit"
+    },
+    {
+        "id":  "niche_13",
+        "service_name":  "AI Receptionist Database",
+        "category":  "B2B Tech / SaaS",
+        "customer_type":  "Medical / Law / Home Trades",
+        "urgency_level":  "Planned",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  199,
+                                    "max":  599,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Monthly recurring usage tier",
+        "best_monetization":  "Monthly software subscription retainers (MRR)",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Twilio phone configuration",
+                                 "Voice prompt system mapping",
+                                 "VAPI testing"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Automated Phone Receptionist Setups for [City] Tradesmen",
+                          "example_title":  "Automated Phone Receptionist Setups for Byron Tradesmen",
+                          "primary_keywords":  [
+                                                   "missed call auto text back system",
+                                                   "virtual ai booking agent for plumbers"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "High-Conversion Voice Response Script Framework",
+                                      "type":  "Word Template",
+                                      "price":  29
+                                  },
+        "call_to_action":  "Deploy Phone Agent Now"
+    },
+    {
+        "id":  "niche_14",
+        "service_name":  "SMB Cybersecurity Checklist",
+        "category":  "Cybersecurity / IT",
+        "customer_type":  "Small Business Owners",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  1200,
+                                    "max":  7500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Network architecture audit base rate",
+        "best_monetization":  "Consulting engagement fees \u0026 affiliate software kickbacks",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Endpoint configuration tracking",
+                                 "Secure VPN systems",
+                                 "Phishing simulations"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Small Business Data Compliance Audits in [City], [State_Abbr]",
+                          "example_title":  "Small Business Data Compliance Audits in Byron, GA",
+                          "primary_keywords":  [
+                                                   "FTC safeguards compliance check",
+                                                   "local business cyber security protection"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Internal Employee Password \u0026 Access Protocol Deck",
+                                      "type":  "Powerpoint Shell",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Run Security Risk Check"
+    },
+    {
+        "id":  "niche_15",
+        "service_name":  "Subcontractor Onboarding Pack",
+        "category":  "HR / Operations",
+        "customer_type":  "General Contractors",
+        "urgency_level":  "Planned",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  39,
+                                    "max":  129,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "One-time digital product bundle download",
+        "best_monetization":  "Digital document package storefront systems",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "W9 processing checklists",
+                                 "COI verification procedures",
+                                 "Safety logs"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Standard Subcontractor Packet Requirements for [City] Builders",
+                          "example_title":  "Standard Subcontractor Packet Requirements for Byron Builders",
+                          "primary_keywords":  [
+                                                   "subcontractor onboarding manual template",
+                                                   "construction safety verification form"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Subcontractor Jobsite Rules Sign-Off Form",
+                                      "type":  "PDF Form",
+                                      "price":  59
+                                  },
+        "call_to_action":  "Get Onboarding Assets"
+    },
+    {
+        "id":  "niche_16",
+        "service_name":  "Section 8 Repair Checklist",
+        "category":  "Government Housing",
+        "customer_type":  "Real Estate Investors",
+        "urgency_level":  "Planned",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  19,
+                                    "max":  79,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Digital standard sheet download fee",
+        "best_monetization":  "Digital guides, landlord spreadsheets, real estate links",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "HUD habitability audits",
+                                 "Lead paint clearances",
+                                 "HQS checklist checks"
+                             ],
+        "local_seo":  {
+                          "title_template":  "How to Pass Section 8 Inspections in [City], [State_Abbr]",
+                          "example_title":  "How to Pass Section 8 Inspections in Byron, GA",
+                          "primary_keywords":  [
+                                                   "Section 8 inspection failure list",
+                                                   "HUD rental compliance adjustments"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Pre-Inspection 50-Point Compliance Tracking Sheet",
+                                      "type":  "Excel File",
+                                      "price":  19
+                                  },
+        "call_to_action":  "Download Section 8 Form"
+    },
+    {
+        "id":  "niche_17",
+        "service_name":  "Estate Cleanout Services",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Executors / Probate Attorneys",
+        "urgency_level":  "Planned / Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  1800,
+                                    "max":  7500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Volume and physical tracking weight assessments",
+        "best_monetization":  "High-ticket asset liquidator referral leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Appraisal sourcing",
+                                 "Donation routing logs",
+                                 "Deep clean scrubs"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Compassionate Estate Liquidation Clears in [City], [State_Abbr]",
+                          "example_title":  "Compassionate Estate Liquidation Clears in Byron, GA",
+                          "primary_keywords":  [
+                                                   "probate asset junk clear out",
+                                                   "estate content disposal specialists"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Executor Property Liquidation Item Tracker Log",
+                                      "type":  "Excel Sheet",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Request Discrete Site Audit"
+    },
+    {
+        "id":  "niche_18",
+        "service_name":  "Short-Term Rental Maintenance",
+        "category":  "Property \u0026 Convenience Services",
+        "customer_type":  "Short-Term Rental Hosts",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  150,
+                                    "max":  600,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per turnaround deployment or monthly retainer basis",
+        "best_monetization":  "Contracted recurring vendor appointment lead capture",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Hot tub chemical logs",
+                                 "Emergency locksmith overrides",
+                                 "Linens processing"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Same-Day Airbnb Emergency Maintenance in [City], [State_Abbr]",
+                          "example_title":  "Same-Day Airbnb Emergency Maintenance in Byron, GA",
+                          "primary_keywords":  [
+                                                   "short term rental fast handymen",
+                                                   "airbnb emergency repair tech"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Turnover Maintenance Check Logs for Cleaners",
+                                      "type":  "PDF Printout",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Hire On-Call Support"
+    },
+    {
+        "id":  "niche_19",
+        "service_name":  "Well Water / Septic Service",
+        "category":  "Infrastructure / Rural",
+        "customer_type":  "Rural Homeowners",
+        "urgency_level":  "Emergency",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  450,
+                                    "max":  6500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per component fix or pumping tank capacity limits",
+        "best_monetization":  "Hyper-local master trade engineer call assignments",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Submersible pump diagnostics",
+                                 "Drainfield rejuvenation jetting",
+                                 "Filter swap"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Emergency Septic Pumping \u0026 Well Repair in [City], [State_Abbr]",
+                          "example_title":  "Emergency Septic Pumping \u0026 Well Repair in Byron, GA",
+                          "primary_keywords":  [
+                                                   "septic backup emergency service",
+                                                   "well water pump testing near me"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Rural Utility Annual Maintenance Planner Blueprint",
+                                      "type":  "PDF Guide",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Dispatch Field Engineer"
+    },
+    {
+        "id":  "niche_20",
+        "service_name":  "Gov Contract Readiness",
+        "category":  "B2G (Government)",
+        "customer_type":  "Small Business Federal Bidders",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  2500,
+                                    "max":  12000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Corporate procurement consulting retainer tracking",
+        "best_monetization":  "High-end corporate procurement proposal pipeline leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "SAM.gov filing configuration",
+                                 "UEI registration sweeps",
+                                 "Capability briefs"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Federal RFP Response \u0026 Bidding Consultants in [City], [State_Abbr]",
+                          "example_title":  "Federal RFP Response \u0026 Bidding Consultants in Byron, GA",
+                          "primary_keywords":  [
+                                                   "small business government certification",
+                                                   "SAM lookup assistance team"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "One-Page Corporate Capability Statement Grid Framework",
+                                      "type":  "Word Template",
+                                      "price":  199
+                                  },
+        "call_to_action":  "Run Procurement Check"
+    },
+    {
+        "id":  "niche_21",
+        "service_name":  "Trade School / Apprenticeships",
+        "category":  "EdTech / Careers",
+        "customer_type":  "Students / HR Recruiters",
+        "urgency_level":  "Planned",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  0,
+                                    "max":  1500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Directory listing placement validation fee structure",
+        "best_monetization":  "Direct corporate recruitment lead generation and course links",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "HVAC field basic schools",
+                                 "Welding line certifications",
+                                 "CDL licensing checks"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Top Paid Trade Apprenticeship Programs in [City], [State_Abbr]",
+                          "example_title":  "Top Paid Trade Apprenticeship Programs in Byron, GA",
+                          "primary_keywords":  [
+                                                   "electrical apprenticeship listings",
+                                                   "local vocational tech directories"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Trades Resume Template \u0026 Core Interview Framework Guide",
+                                      "type":  "PDF Layout",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Browse Training Portals"
+    },
+    {
+        "id":  "niche_22",
+        "service_name":  "Small Biz Legal \u0026 Incorporation",
+        "category":  "Legal",
+        "customer_type":  "Founders / Solo-preneurs",
+        "urgency_level":  "Planned",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  150,
+                                    "max":  600,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per registration / flat filing fee",
+        "best_monetization":  "Affiliate software commissions",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "LLC Formation",
+                                 "EIN Registration",
+                                 "Operating Agreements"
+                             ],
+        "local_seo":  {
+                          "title_template":  "How to Start an LLC in [City], [State_Abbr] Checklist",
+                          "example_title":  "How to Start an LLC in Byron, GA Checklist",
+                          "primary_keywords":  [
+                                                   "local LLC filing steps",
+                                                   "business license cost"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "State-by-state compliance tracking sheet",
+                                      "type":  "Interactive Excel",
+                                      "price":  49
+                                  },
+        "call_to_action":  "Launch your business"
+    },
+    {
+        "id":  "niche_23",
+        "service_name":  "Apostille \u0026 Notary Admin Hub",
+        "category":  "Document \u0026 Admin Help",
+        "customer_type":  "Expats / International Biz",
+        "urgency_level":  "Emergency / Tight Deadline",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  45,
+                                    "max":  180,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per document signature / stamp",
+        "best_monetization":  "Premium checklists and local notary directory ads",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Power of Attorney legalization",
+                                 "Translation certification"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Fast Apostille Services in [City], [State_Abbr]",
+                          "example_title":  "Fast Apostille Services in Byron, GA",
+                          "primary_keywords":  [
+                                                   "emergency notary near me",
+                                                   "document legalization cost"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "International document preparation checklist",
+                                      "type":  "PDF Guide",
+                                      "price":  29
+                                  },
+        "call_to_action":  "Find an emergency notary"
+    },
+    {
+        "id":  "niche_24",
+        "service_name":  "Contract Review \u0026 Scope Audit",
+        "category":  "Legal",
+        "customer_type":  "Subcontractors / Agencies",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  300,
+                                    "max":  1200,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per-page evaluation flat tier",
+        "best_monetization":  "Paid micro-audits, commercial legal firm leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Indemnity review",
+                                 "Retainage verification",
+                                 "Scope conflict maps"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Commercial Subcontract Agreement Audits in [City], [State_Abbr]",
+                          "example_title":  "Commercial Subcontract Agreement Audits in Byron, GA",
+                          "primary_keywords":  [
+                                                   "construction contract lawyer review",
+                                                   "verify scope of work legal traps"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "5 Red-Flag Contract Clauses Checklist",
+                                      "type":  "PDF Sheet",
+                                      "price":  149
+                                  },
+        "call_to_action":  "Submit Contract for Review"
+    },
+    {
+        "id":  "niche_25",
+        "service_name":  "Junk Removal Pricing",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Homeowners / Estate Executors",
+        "urgency_level":  "Planned / Emergency",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  150,
+                                    "max":  850,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per truckload volume / flat item fee",
+        "best_monetization":  "Local lead generation",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Estate cleanout",
+                                 "Hoarder sorting",
+                                 "Garage clearing"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Affordable Junk Removal Costs in [City], [State_Abbr]",
+                          "example_title":  "Affordable Junk Removal Costs in Byron, GA",
+                          "primary_keywords":  [
+                                                   "haul away junk price",
+                                                   "trash removal near me"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Decluttering checklist \u0026 property sorting layout",
+                                      "type":  "PDF Template",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Request a haul quote"
+    },
+    {
+        "id":  "niche_26",
+        "service_name":  "Appliance Removal \u0026 Recycle",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Property Managers / Landlords",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "Low Ticket",
+        "average_price_range":  {
+                                    "min":  75,
+                                    "max":  250,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per unit extraction base price",
+        "best_monetization":  "High-urgency local logistics routing calls",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Refrigerator disposal",
+                                 "Freon recovery logs",
+                                 "Dryer hauling"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Refrigerator \u0026 Washer Bulk Pickups in [City], [State_Abbr]",
+                          "example_title":  "Refrigerator \u0026 Washer Bulk Pickups in Byron, GA",
+                          "primary_keywords":  [
+                                                   "old appliance disposal crew",
+                                                   "free appliance recycling pickup lookup"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Appliance Disconnection \u0026 Drainage Safety Sheet",
+                                      "type":  "PDF Guide",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Clear Old Unit Now"
+    },
+    {
+        "id":  "niche_27",
+        "service_name":  "Dumpster Rental Cost Index",
+        "category":  "Property \u0026 Convenience Services",
+        "customer_type":  "Remodeling Contractors / Flippers",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  320,
+                                    "max":  1100,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per roll-off size / weekly drop fee",
+        "best_monetization":  "High-ticket RCPX leads",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Construction waste disposal",
+                                 "Roofing tear-off bins"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Best Roll-Off Dumpster Rental Prices in [City], [State_Abbr]",
+                          "example_title":  "Best Roll-Off Dumpster Rental Prices in Byron, GA",
+                          "primary_keywords":  [
+                                                   "15 yard dumpster rental",
+                                                   "roll off container cost"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Dumpster sizing calculator \u0026 weight allowance sheet",
+                                      "type":  "Interactive Excel",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Check local availability"
+    },
+    {
+        "id":  "niche_28",
+        "service_name":  "Moving Labor / On-Demand Loading",
+        "category":  "Senior, Family \u0026 Household Services",
+        "customer_type":  "Shifting Tenants / Families",
+        "urgency_level":  "Tight Deadline",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  200,
+                                    "max":  1400,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per mover / hourly scheduling layout",
+        "best_monetization":  "Booking fees, localized carrier directory advertising spaces",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "U-Haul truck packing",
+                                 "Furniture pad wrapping",
+                                 "Heavy piano lifts"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Hire Local Moving Labor Crews in [City], [State_Abbr]",
+                          "example_title":  "Hire Local Moving Labor Crews in Byron, GA",
+                          "primary_keywords":  [
+                                                   "load moving truck help online",
+                                                   "local hands for furniture lifting"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Truck Packing Optimization Space Calculation Matrix",
+                                      "type":  "PDF Layout",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Reserve Loading Hands"
+    },
+    {
+        "id":  "niche_29",
+        "service_name":  "Short-Term Rental Listing Optimization",
+        "category":  "Property \u0026 Convenience Services",
+        "customer_type":  "Airbnb / VRBO Hosts / Investors",
+        "urgency_level":  "Planned",
+        "price_level":  "Mid Ticket",
+        "average_price_range":  {
+                                    "min":  250,
+                                    "max":  1200,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per optimization build / copy rewrite",
+        "best_monetization":  "Digital products \u0026 service retainers",
+        "listing_tier":  "Premium",
+        "related_services":  [
+                                 "Listing copywriting",
+                                 "SEO photo sorting",
+                                 "Pricing algorithm setup"
+                             ],
+        "local_seo":  {
+                          "title_template":  "How to Increase Airbnb Bookings in [City], [State_Abbr]",
+                          "example_title":  "How to Increase Airbnb Bookings in Byron, GA",
+                          "primary_keywords":  [
+                                                   "short term rental seo",
+                                                   "optimize airbnb listing"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "High-conversion listing description framework",
+                                      "type":  "Word Template",
+                                      "price":  99
+                                  },
+        "call_to_action":  "Audit my listing"
+    },
+    {
+        "id":  "niche_30",
+        "service_name":  "Smart Panel Upgrade \u0026 EV Infrastructure",
+        "category":  "Electrical \u0026 Energy Systems",
+        "typical_project_value_range":  "$4,500 - $12,500",
+        "required_certifications":  [
+                                        "Licensed Master Electrician",
+                                        "EVITP Certified"
+                                    ],
+        "active_local_providers":  [
+
+                                   ],
+        "customer_type":  "Homeowner / B2B Builder",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  4500,
+                                    "max":  12500,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project / per panel",
+        "best_monetization":  "Lead generation / partner commission",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "EV charger installation",
+                                 "Panel upgrade",
+                                 "Load management system"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Smart Panel \u0026 EV Charger Installers in [City], [State_Abbr]",
+                          "example_title":  "Smart Panel \u0026 EV Charger Installers in Byron, GA",
+                          "primary_keywords":  [
+                                                   "ev charger installer",
+                                                   "smart electrical panel cost"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Smart Load Management System Planning Guide",
+                                      "type":  "PDF Guide",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Request electrical assessment"
+    },
+    {
+        "id":  "niche_31",
+        "service_name":  "Crawlspace Encapsulation \u0026 Radon Mitigation",
+        "category":  "Environmental \u0026 Foundation Protection",
+        "typical_project_value_range":  "$6,000 - $18,000",
+        "required_certifications":  [
+                                        "NEHA-NRPP Certified",
+                                        "IICRC Mold Remediation"
+                                    ],
+        "active_local_providers":  [
+
+                                   ],
+        "customer_type":  "Homeowner / Property Manager",
+        "urgency_level":  "Planned / Safety Urgent",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  6000,
+                                    "max":  18000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per square foot / mitigation system",
+        "best_monetization":  "Lead generation",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Radon testing",
+                                 "Crawlspace sealing",
+                                 "Sump pump installation"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Crawlspace Encapsulation \u0026 Radon Mitigation in [City], [State_Abbr]",
+                          "example_title":  "Crawlspace Encapsulation \u0026 Radon Mitigation in Byron, GA",
+                          "primary_keywords":  [
+                                                   "crawlspace sealing cost",
+                                                   "radon mitigation systems"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Home Environmental and Moisture Control Checklist",
+                                      "type":  "PDF Checklist",
+                                      "price":  0
+                                  },
+        "call_to_action":  "Get structural environmental quotes"
+    },
+    {
+        "id":  "niche_32",
+        "service_name":  "Architectural Microcement Overlays",
+        "category":  "Premium Architectural Finishes",
+        "typical_project_value_range":  "$8,000 - $25,000",
+        "required_certifications":  [
+                                        "Certified Microcement Installer"
+                                    ],
+        "active_local_providers":  [
+
+                                   ],
+        "customer_type":  "Homeowner / Architect / Designer",
+        "urgency_level":  "Planned",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  8000,
+                                    "max":  25000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per square foot / per project",
+        "best_monetization":  "Lead generation / design consultations",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Continuous flooring",
+                                 "Microcement wall finishes",
+                                 "Seamless countertop overlays"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Architectural Microcement Installers in [City], [State_Abbr]",
+                          "example_title":  "Architectural Microcement Installers in Byron, GA",
+                          "primary_keywords":  [
+                                                   "microcement floor cost",
+                                                   "seamless concrete overlay"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Microcement Specification and Maintenance Guide",
+                                      "type":  "PDF Guide",
+                                      "price":  49
+                                  },
+        "call_to_action":  "Request artisanal finishes quote"
+    },
+    {
+        "id":  "niche_33",
+        "service_name":  "Exterior Climate Hardening \u0026 Storm Mitigation",
+        "category":  "Resilience \u0026 Exterior Envelope",
+        "typical_project_value_range":  "$12,000 - $35,000",
+        "required_certifications":  [
+                                        "FORTIFIED Homeâ„¢ Compliant Installer"
+                                    ],
+        "active_local_providers":  [
+
+                                   ],
+        "customer_type":  "GC / Property Owner",
+        "urgency_level":  "Planned / Insurance Mandated",
+        "price_level":  "High Ticket",
+        "average_price_range":  {
+                                    "min":  12000,
+                                    "max":  35000,
+                                    "currency":  "USD"
+                                },
+        "labor_pricing_method":  "Per project compliance certificate",
+        "best_monetization":  "Lead generation / assessment fees",
+        "listing_tier":  "Standard",
+        "related_services":  [
+                                 "Wildfire home hardening",
+                                 "Ember-resistant venting",
+                                 "Hurricane tie-downs"
+                             ],
+        "local_seo":  {
+                          "title_template":  "Exterior Climate Hardening in [City], [State_Abbr]",
+                          "example_title":  "Exterior Climate Hardening in Byron, GA",
+                          "primary_keywords":  [
+                                                   "home hardening compliance",
+                                                   "storm mitigation contractors"
+                                               ]
+                      },
+        "downloadable_resource":  {
+                                      "title":  "Fortified Home Mitigation Compliance Blueprint",
+                                      "type":  "PDF Guide",
+                                      "price":  99
+                                  },
+        "call_to_action":  "Assess my home compliance"
+    }
 ]

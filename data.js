@@ -578,5 +578,97 @@ const localDatabase = [
     },
     "downloadable_resource": { "title": "High-conversion listing description framework", "type": "Word Template", "price": 99 },
     "call_to_action": "Audit my listing"
+  },
+  {
+    "id": "niche_30",
+    "service_name": "Smart Panel Upgrade & EV Infrastructure",
+    "category": "Electrical & Energy Systems",
+    "typical_project_value_range": "$4,500 - $12,500",
+    "required_certifications": ["Licensed Master Electrician", "EVITP Certified"],
+    "active_local_providers": [],
+    "customer_type": "Homeowner / B2B Builder",
+    "urgency_level": "Planned",
+    "price_level": "High Ticket",
+    "average_price_range": { "min": 4500, "max": 12500, "currency": "USD" },
+    "labor_pricing_method": "Per project / per panel",
+    "best_monetization": "Lead generation / partner commission",
+    "listing_tier": "Standard",
+    "related_services": ["EV charger installation", "Panel upgrade", "Load management system"],
+    "local_seo": {
+      "title_template": "Smart Panel & EV Charger Installers in [City], [State_Abbr]",
+      "example_title": "Smart Panel & EV Charger Installers in Byron, GA",
+      "primary_keywords": ["ev charger installer", "smart electrical panel cost"]
+    },
+    "downloadable_resource": { "title": "Smart Load Management System Planning Guide", "type": "PDF Guide", "price": 0 },
+    "call_to_action": "Request electrical assessment"
+  },
+  {
+    "id": "niche_31",
+    "service_name": "Crawlspace Encapsulation & Radon Mitigation",
+    "category": "Environmental & Foundation Protection",
+    "typical_project_value_range": "$6,000 - $18,000",
+    "required_certifications": ["NEHA-NRPP Certified", "IICRC Mold Remediation"],
+    "active_local_providers": [],
+    "customer_type": "Homeowner / Property Manager",
+    "urgency_level": "Planned / Safety Urgent",
+    "price_level": "High Ticket",
+    "average_price_range": { "min": 6000, "max": 18000, "currency": "USD" },
+    "labor_pricing_method": "Per square foot / mitigation system",
+    "best_monetization": "Lead generation",
+    "listing_tier": "Standard",
+    "related_services": ["Radon testing", "Crawlspace sealing", "Sump pump installation"],
+    "local_seo": {
+      "title_template": "Crawlspace Encapsulation & Radon Mitigation in [City], [State_Abbr]",
+      "example_title": "Crawlspace Encapsulation & Radon Mitigation in Byron, GA",
+      "primary_keywords": ["crawlspace sealing cost", "radon mitigation systems"]
+    },
+    "downloadable_resource": { "title": "Home Environmental and Moisture Control Checklist", "type": "PDF Checklist", "price": 0 },
+    "call_to_action": "Get structural environmental quotes"
+  },
+  {
+    "id": "niche_32",
+    "service_name": "Architectural Microcement Overlays",
+    "category": "Premium Architectural Finishes",
+    "typical_project_value_range": "$8,000 - $25,000",
+    "required_certifications": ["Certified Microcement Installer"],
+    "active_local_providers": [],
+    "customer_type": "Homeowner / Architect / Designer",
+    "urgency_level": "Planned",
+    "price_level": "High Ticket",
+    "average_price_range": { "min": 8000, "max": 25000, "currency": "USD" },
+    "labor_pricing_method": "Per square foot / per project",
+    "best_monetization": "Lead generation / design consultations",
+    "listing_tier": "Standard",
+    "related_services": ["Continuous flooring", "Microcement wall finishes", "Seamless countertop overlays"],
+    "local_seo": {
+      "title_template": "Architectural Microcement Installers in [City], [State_Abbr]",
+      "example_title": "Architectural Microcement Installers in Byron, GA",
+      "primary_keywords": ["microcement floor cost", "seamless concrete overlay"]
+    },
+    "downloadable_resource": { "title": "Microcement Specification and Maintenance Guide", "type": "PDF Guide", "price": 49 },
+    "call_to_action": "Request artisanal finishes quote"
+  },
+  {
+    "id": "niche_33",
+    "service_name": "Exterior Climate Hardening & Storm Mitigation",
+    "category": "Resilience & Exterior Envelope",
+    "typical_project_value_range": "$12,000 - $35,000",
+    "required_certifications": ["FORTIFIED Home™ Compliant Installer"],
+    "active_local_providers": [],
+    "customer_type": "GC / Property Owner",
+    "urgency_level": "Planned / Insurance Mandated",
+    "price_level": "High Ticket",
+    "average_price_range": { "min": 12000, "max": 35000, "currency": "USD" },
+    "labor_pricing_method": "Per project compliance certificate",
+    "best_monetization": "Lead generation / assessment fees",
+    "listing_tier": "Standard",
+    "related_services": ["Wildfire home hardening", "Ember-resistant venting", "Hurricane tie-downs"],
+    "local_seo": {
+      "title_template": "Exterior Climate Hardening in [City], [State_Abbr]",
+      "example_title": "Exterior Climate Hardening in Byron, GA",
+      "primary_keywords": ["home hardening compliance", "storm mitigation contractors"]
+    },
+    "downloadable_resource": { "title": "Fortified Home Mitigation Compliance Blueprint", "type": "PDF Guide", "price": 99 },
+    "call_to_action": "Assess my home compliance"
   }
 ];
