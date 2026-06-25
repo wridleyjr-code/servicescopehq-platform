@@ -71,47 +71,92 @@ function resetFilterButtons() {
     buttons.forEach(b => b.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900");
 }
 
+// Mapping of major B2B construction & trade city hubs for all 50 States (Expanded to 10-15 cities each)
+const US_STATE_CITY_HUBS = {
+    "AL": ["Birmingham", "Huntsville", "Mobile", "Montgomery", "Tuscaloosa", "Hoover", "Auburn", "Dothan", "Decatur", "Madison", "Florence", "Gadsden", "Vestavia Hills", "Prattville"],
+    "AK": ["Anchorage", "Fairbanks", "Juneau", "Sitka", "Ketchikan", "Wasilla", "Kenai", "Kodiak", "Palmer", "Homer", "Bethel", "Valdez", "Soldotna", "Nome"],
+    "AZ": ["Phoenix", "Tucson", "Mesa", "Chandler", "Scottsdale", "Glendale", "Gilbert", "Tempe", "Peoria", "Surprise", "Yuma", "Avondale", "Flagstaff", "Goodyear", "Lake Havasu City"],
+    "AR": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro", "Rogers", "North Little Rock", "Conway", "Bentonville", "Pine Bluff", "Hot Springs", "Benton", "Texarkana"],
+    "CA": ["Los Angeles", "San Francisco", "San Diego", "San Jose", "Sacramento", "Oakland", "Fresno", "Bakersfield", "Anaheim", "Santa Ana", "Riverside", "Stockton", "Chula Vista", "Irvine", "Fremont"],
+    "CO": ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Lakewood", "Thornton", "Arvada", "Westminster", "Pueblo", "Centennial", "Boulder", "Greeley", "Longmont", "Loveland", "Grand Junction"],
+    "CT": ["Bridgeport", "New Haven", "Hartford", "Stamford", "Waterbury", "Norwalk", "Danbury", "New Britain", "Meriden", "Bristol", "West Haven", "Milford", "Middletown", "Shelton"],
+    "DE": ["Wilmington", "Dover", "Newark", "Middletown", "Smyrna", "Milford", "Seaford", "Georgetown", "Elsmere", "New Castle", "Lewes", "Delaware City", "Harrington"],
+    "FL": ["Miami", "Orlando", "Tampa", "Jacksonville", "Tallahassee", "Fort Lauderdale", "St. Petersburg", "Port St. Lucie", "Cape Coral", "Hialeah", "Pembroke Pines", "Hollywood", "Miramar", "Gainesville", "Coral Springs"],
+    "GA": ["Atlanta", "Augusta", "Savannah", "Macon", "Columbus", "Byron", "Athens", "Sandy Springs", "Roswell", "Johns Creek", "Warner Robins", "Alpharetta", "Marietta", "Valdosta", "Smyrna"],
+    "HI": ["Honolulu", "Hilo", "Kahului", "Kailua", "Kaneohe", "Waipahu", "Pearl City", "Lahaina", "Lihue", "Wailuku", "Kapolei", "Mililani Town", "Ewa Beach", "Kihei"],
+    "ID": ["Boise", "Meridian", "Nampa", "Idaho Falls", "Pocatello", "Caldwell", "Coeur d'Alene", "Twin Falls", "Lewiston", "Post Falls", "Rexburg", "Moscow", "Eagle", "Kuna"],
+    "IL": ["Chicago", "Aurora", "Rockford", "Joliet", "Naperville", "Springfield", "Peoria", "Elgin", "Waukegan", "Champaign", "Bloomington", "Decatur", "Evanston", "Arlington Heights", "Schaumburg"],
+    "IN": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel", "Fishers", "Bloomington", "Hammond", "Gary", "Lafayette", "Muncie", "Terre Haute", "Kokomo", "Noblesville", "Greenwood"],
+    "IA": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City", "Waterloo", "West Des Moines", "Ames", "Council Bluffs", "Dubuque", "Ankeny", "Urbandale", "Cedar Falls", "Marion"],
+    "KS": ["Wichita", "Overland Park", "Kansas City", "Topeka", "Olathe", "Lawrence", "Shawnee", "Manhattan", "Lenexa", "Salina", "Hutchinson", "Leavenworth", "Garden City", "Dodge City"],
+    "KY": ["Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington", "Richmond", "Georgetown", "Florence", "Hopkinsville", "Nicholasville", "Elizabethtown", "Henderson", "Frankfort", "Paducah"],
+    "LA": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette", "Lake Charles", "Kenner", "Bossier City", "Monroe", "Alexandria", "Houma", "New Iberia", "Slidell", "Ruston", "Hammond"],
+    "ME": ["Portland", "Lewiston", "Bangor", "South Portland", "Auburn", "Biddeford", "Sanford", "Saco", "Westbrook", "Augusta", "Waterville", "Ellsworth", "Presque Isle", "Bath"],
+    "MD": ["Baltimore", "Columbia", "Germantown", "Silver Spring", "Waldorf", "Frederick", "Ellicott City", "Glen Burnie", "Gaithersburg", "Rockville", "Bethesda", "Dundalk", "Annapolis", "Salisbury"],
+    "MA": ["Boston", "Worcester", "Springfield", "Cambridge", "Lowell", "Brockton", "Quincy", "Lynn", "New Bedford", "Fall River", "Newton", "Lawrence", "Somerville", "Framingham", "Haverhill"],
+    "MI": ["Detroit", "Grand Rapids", "Warren", "Sterling Heights", "Ann Arbor", "Lansing", "Flint", "Dearborn", "Livonia", "Troy", "Westland", "Farmington Hills", "Kalamazoo", "Wyoming", "Rochester Hills"],
+    "MN": ["Minneapolis", "St. Paul", "Rochester", "Duluth", "Bloomington", "Brooklyn Park", "Plymouth", "Woodbury", "Lakeville", "Blaine", "Maple Grove", "St. Cloud", "Eagan", "Eden Prairie", "Coon Rapids"],
+    "MS": ["Jackson", "Gulfport", "Southaven", "Biloxi", "Hattiesburg", "Olive Branch", "Tupelo", "Meridian", "Greenville", "Clinton", "Pearl", "Starkville", "Ridgeland", "Brandon", "Vicksburg"],
+    "MO": ["Kansas City", "St. Louis", "Springfield", "Columbia", "Independence", "Lee's Summit", "O'Fallon", "St. Joseph", "St. Charles", "Blue Springs", "St. Peters", "Florissant", "Joplin", "Chesterfield"],
+    "MT": ["Billings", "Missoula", "Great Falls", "Bozeman", "Helena", "Butte", "Kalispell", "Havre", "Anaconda", "Miles City", "Livingston", "Laurel", "Lewistown", "Whitefish"],
+    "NE": ["Omaha", "Lincoln", "Bellevue", "Grand Island", "Kearney", "Fremont", "Hastings", "North Platte", "Norfolk", "Columbus", "Papillion", "La Vista", "Scottsbluff", "Beatrice"],
+    "NV": ["Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks", "Carson City", "Elko", "Mesquite", "Boulder City", "Fernley", "Fallon", "Winnemucca", "Gardnerville", "Ely"],
+    "NH": ["Manchester", "Nashua", "Concord", "Derry", "Dover", "Rochester", "Salem", "Merrimack", "Hudson", "Londonderry", "Keene", "Portsmouth", "Bedford", "Laconia", "Exeter"],
+    "NJ": ["Newark", "Jersey City", "Paterson", "Elizabeth", "Clifton", "Trenton", "Camden", "Passaic", "Bayonne", "East Orange", "Union City", "Vineland", "Hoboken", "New Brunswick", "Plainfield"],
+    "NM": ["Albuquerque", "Las Cruces", "Rio Rancho", "Santa Fe", "Roswell", "Farmington", "South Valley", "Clovis", "Hobbs", "Alamogordo", "Carlsbad", "Gallup", "Deming", "Las Vegas"],
+    "NY": ["New York City", "Buffalo", "Rochester", "Yonkers", "Syracuse", "Albany", "New Rochelle", "Mount Vernon", "Schenectady", "Utica", "White Plains", "Troy", "Niagara Falls", "Binghamton", "Rome"],
+    "NC": ["Charlotte", "Raleigh", "Greensboro", "Durham", "Winston-Salem", "Fayetteville", "Cary", "Wilmington", "High Point", "Concord", "Asheville", "Gastonia", "Jacksonville", "Chapel Hill", "Rocky Mount"],
+    "ND": ["Fargo", "Bismarck", "Grand Forks", "Minot", "West Fargo", "Williston", "Dickinson", "Mandan", "Jamestown", "Wahpeton", "Devils Lake", "Valley City", "Grafton", "Beulah"],
+    "OH": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron", "Dayton", "Parma", "Canton", "Lorain", "Hamilton", "Youngstown", "Springfield", "Kettering", "Elyria", "Lakewood"],
+    "OK": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton", "Edmond", "Moore", "Midwest City", "Enid", "Stillwater", "Muskogee", "Bartlesville", "Shawnee", "Owasso", "Ponca City"],
+    "OR": ["Portland", "Salem", "Eugene", "Gresham", "Hillsboro", "Beaverton", "Bend", "Medford", "Springfield", "Corvallis", "Albany", "Tigard", "Lake Oswego", "Keizer", "Grants Pass"],
+    "PA": ["Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading", "Scranton", "Bethlehem", "Lancaster", "Harrisburg", "Altoona", "York", "State College", "Wilkes-Barre", "Norristown", "Chester"],
+    "RI": ["Providence", "Warwick", "Cranston", "Pawtucket", "East Providence", "Woonsocket", "Coventry", "Cumberland", "North Providence", "South Kingstown", "West Warwick", "Johnston", "Lincoln", "Bristol"],
+    "SC": ["Charleston", "Columbia", "North Charleston", "Mount Pleasant", "Rock Hill", "Greenville", "Summerville", "Sumter", "Hilton Head Island", "Florence", "Spartanburg", "Myrtle Beach", "Aiken", "Greer"],
+    "SD": ["Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown", "Mitchell", "Yankton", "Pierre", "Huron", "Vermillion", "Spearfish", "Box Elder", "Rapid Valley", "Sturgis"],
+    "TN": ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville", "Murfreesboro", "Franklin", "Jackson", "Johnson City", "Bartlett", "Hendersonville", "Kingsport", "Collierville", "Cleveland", "Smyrna"],
+    "TX": ["Houston", "San Antonio", "Dallas", "Austin", "Fort Worth", "El Paso", "Arlington", "Corpus Christi", "Plano", "Lubbock", "Laredo", "Irving", "Garland", "Frisco", "McKinney", "Amarillo"],
+    "UT": ["Salt Lake City", "West Valley City", "Provo", "West Jordan", "Orem", "Sandy", "Ogden", "St. George", "Layton", "South Jordan", "Taylorsville", "Lehi", "Logan", "Murray", "Bountiful"],
+    "VT": ["Burlington", "South Burlington", "Rutland", "Barre", "Montpelier", "Winooski", "St. Albans", "Vergennes", "Newport", "Essex Junction", "Bennington", "Brattleboro", "Colchester", "Shelburne"],
+    "VA": ["Virginia Beach", "Norfolk", "Chesapeake", "Richmond", "Arlington", "Newport News", "Alexandria", "Hampton", "Roanoke", "Portsmouth", "Suffolk", "Lynchburg", "Harrisonburg", "Charlottesville", "Blacksburg"],
+    "WA": ["Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue", "Kent", "Everett", "Renton", "Federal Way", "Yakima", "Spokane Valley", "Kirkland", "Bellingham", "Kennewick", "Pasco"],
+    "WV": ["Charleston", "Huntington", "Morgantown", "Parkersburg", "Wheeling", "Weirton", "Fairmont", "Beckley", "Clarksburg", "Martinsburg", "Bluefield", "South Charleston", "St. Albans", "Vienna"],
+    "WI": ["Milwaukee", "Madison", "Green Bay", "Kenosha", "Racine", "Appleton", "Waukesha", "Oshkosh", "Eau Claire", "Janesville", "West Allis", "La Crosse", "Sheboygan", "Wauwatosa", "Fond du Lac"],
+    "WY": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs", "Sheridan", "Green River", "Evanston", "Riverton", "Cody", "Jackson", "Rawlins", "Lander", "Torrington"]
+};
+
 function initializeGeographicListeners() {
     const stateInput = document.getElementById("stateFilter");
     const cityInput = document.getElementById("cityFilter");
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
-    // Dynamic city populating function
+    // Dynamic city populating function based on hardcoded US_STATE_CITY_HUBS map
     function populateCitiesForState(stateCode) {
         if (!cityInput) return;
         
-        // Clear previous options
+        // Reset City Hub dropdown
         cityInput.innerHTML = '<option value="">All Cities</option>';
         
-        if (!stateCode) {
-            cityInput.disabled = true;
-            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
-            cityInput.innerHTML = '<option value="">Select State First</option>';
-            geoState.city = "";
-            return;
-        }
-
-        // Extract unique cities for this state from activeDatabase
-        const cities = [...new Set(
-            activeDatabase
-                .filter(item => item.state && item.state.toUpperCase() === stateCode.toUpperCase() && item.city)
-                .map(item => item.city)
-        )].sort();
-
-        if (cities.length > 0) {
-            cities.forEach(city => {
+        if (stateCode && US_STATE_CITY_HUBS[stateCode]) {
+            // Enable selector and populate state-specific city options
+            cityInput.disabled = false;
+            cityInput.classList.remove("text-slate-500", "disabled:opacity-50");
+            cityInput.classList.add("text-slate-300");
+            
+            US_STATE_CITY_HUBS[stateCode].forEach(city => {
                 const opt = document.createElement("option");
                 opt.value = city;
                 opt.textContent = city;
                 cityInput.appendChild(opt);
             });
-            cityInput.disabled = false;
-            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300";
         } else {
+            // Disable selector if no state is chosen
             cityInput.disabled = true;
-            cityInput.className = "w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50";
-            cityInput.innerHTML = '<option value="">No Cities Found</option>';
+            cityInput.classList.add("text-slate-500", "disabled:opacity-50");
+            cityInput.classList.remove("text-slate-300");
+            cityInput.innerHTML = '<option value="">Select State First</option>';
+            geoState.city = "";
         }
     }
 
