@@ -42,14 +42,14 @@ function initializeUIFilters() {
         filterAllBtn.addEventListener("click", () => {
             activeCategoryFilter = "";
             resetFilterButtons();
-            filterAllBtn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-50 text-indigo-700";
+            filterAllBtn.className = "text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-all uppercase";
             executePlatformSearchFilter();
         });
     }
 
     categories.forEach(cat => {
         const btn = document.createElement("button");
-        btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900";
+        btn.className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:bg-slate-800 hover:text-slate-200";
         btn.textContent = cat;
         btn.onclick = () => setCategoryFilter(cat, btn);
         container.appendChild(btn);
@@ -59,16 +59,16 @@ function initializeUIFilters() {
 function setCategoryFilter(category, clickedButton) {
     activeCategoryFilter = category;
     resetFilterButtons();
-    clickedButton.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-50 text-indigo-700";
+    clickedButton.className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-950/40 text-indigo-400 border border-indigo-900/40";
     executePlatformSearchFilter();
 }
 
 function resetFilterButtons() {
     const filterAllBtn = document.getElementById("filter-all");
-    if(filterAllBtn) filterAllBtn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900";
+    if(filterAllBtn) filterAllBtn.className = "text-[10px] font-bold text-slate-400 hover:text-slate-200 transition-all uppercase";
     
     const buttons = document.querySelectorAll("#categoryContainer button");
-    buttons.forEach(b => b.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900");
+    buttons.forEach(b => b.className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:bg-slate-800 hover:text-slate-200");
 }
 
 // Mapping of major B2B construction & trade city hubs for all 50 States (Expanded to 10-15 cities each)
@@ -482,21 +482,16 @@ function openLeadModal(id, displayTitle, category, resourceTitle, price) {
     const leadModal = document.getElementById("leadModal");
     if(!leadModal) return;
 
-    // Restore RFQ-only sections and default text in case they were hidden by the listing modal
+    // Restore RFQ-only sections and default text
     const rfqEnhancements = document.getElementById("rfqEnhancementsSection");
     if (rfqEnhancements) rfqEnhancements.classList.remove("hidden");
     const certsSection = document.getElementById("certsSection");
     if (certsSection) certsSection.classList.remove("hidden");
     
-    const infoBoxDesc = document.querySelector("#leadModal .bg-indigo-50 p.opacity-90");
+    const infoBoxDesc = document.querySelector("#leadModal .opacity-90");
     if (infoBoxDesc) {
-        infoBoxDesc.textContent = "Fill out your routing parameters below to fetch your resource file and direct quotes from verification checked contractors.";
+        infoBoxDesc.textContent = "Fill out your routing parameters below to instantly sync your request as a FREE ADD lead to our Google Sheets pipeline.";
     }
-
-    let locString = "";
-    if (geoState.zip) locString = geoState.zip;
-    else if (geoState.city && geoState.state) locString = `${geoState.city}, ${geoState.state}`;
-    else if (geoState.state) locString = geoState.state;
 
     document.getElementById("formNicheId").value = id;
     document.getElementById("subscriberNicheInput").value = displayTitle;
@@ -519,47 +514,12 @@ function openLeadModal(id, displayTitle, category, resourceTitle, price) {
         formSubmitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
     }
 
-    document.getElementById("formLocationInput").value = locString;
-    document.getElementById("formLocationInput").placeholder = "";
+    // Populate split geographic values
+    const zipInput = document.getElementById("formZipInput");
+    const cityInput = document.getElementById("formCityInput");
+    if (zipInput) zipInput.value = geoState.zip || "";
+    if (cityInput) cityInput.value = geoState.city || "";
     
-    leadModal.classList.remove("hidden");
-    document.body.classList.add("overflow-hidden");
-}
-
-function openBusinessListingModal() {
-    const leadModal = document.getElementById("leadModal");
-    if(!leadModal) return;
-
-    // Set modal headers specifically for claiming/listing a business
-    document.getElementById("formNicheId").value = "niche_business_listing";
-    document.getElementById("subscriberNicheInput").value = "Business Listing";
-    document.getElementById("modalNicheName").textContent = "Claim / Add Your Business";
-    document.getElementById("modalCategory").textContent = "Service Provider Network";
-    document.getElementById("modalResourceName").textContent = "Directory Partner Placement";
-    
-    // Set customized onboarding message
-    const infoBoxDesc = document.querySelector("#leadModal .bg-indigo-50 p.opacity-90");
-    if (infoBoxDesc) {
-        infoBoxDesc.textContent = "Submit your business details below to secure a local directory listing, claim your profile, and receive regional RFQ routing requests.";
-    }
-
-    // Set specialized submit button
-    const formSubmitBtn = document.getElementById("formSubmitBtn");
-    if (formSubmitBtn) {
-        formSubmitBtn.textContent = "Request Partner Directory Listing";
-        formSubmitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs";
-    }
-
-    // Hide project-specific inputs (Budget, Timeline, Certifications)
-    const rfqEnhancements = document.getElementById("rfqEnhancementsSection");
-    if (rfqEnhancements) rfqEnhancements.classList.add("hidden");
-    const certsSection = document.getElementById("certsSection");
-    if (certsSection) certsSection.classList.add("hidden");
-
-    // Reset location value with a placeholder
-    document.getElementById("formLocationInput").value = "";
-    document.getElementById("formLocationInput").placeholder = "e.g. Atlanta, GA or 30301";
-
     leadModal.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
 }
@@ -568,6 +528,23 @@ function closeModal() {
     const leadModal = document.getElementById("leadModal");
     if(leadModal) {
         leadModal.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+    }
+}
+
+// Control UI visibility toggles for the Add Business Modal
+function openBusinessModal() {
+    const bizModal = document.getElementById("businessModal");
+    if(bizModal) {
+        bizModal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+    }
+}
+
+function closeBusinessModal() {
+    const bizModal = document.getElementById("businessModal");
+    if(bizModal) {
+        bizModal.classList.add("hidden");
         document.body.classList.remove("overflow-hidden");
     }
 }
@@ -718,49 +695,38 @@ function setupNewsletterFormListener() {
     });
 }
 
-async function captureSubscriberEmail(event) {
+async function submitLeadForm(event) {
     event.preventDefault(); // Stop page refresh
     
     const form = event.target;
     const formData = new FormData(form);
     
-    // Capture all fields from the RFQ form and parse location details
-    const locationVal = formData.get('client_location') || document.getElementById('formLocationInput').value || "";
+    const cityVal = formData.get('client_city') || "";
+    const zipVal = formData.get('client_zip') || "";
+    const locationVal = `${cityVal}, ${zipVal}`;
     
-    let parsedCity = "";
-    let parsedZip = "";
-    if (/^\d{5}$/.test(locationVal.trim())) {
-        parsedZip = locationVal.trim();
-    } else if (locationVal.includes(',')) {
-        const parts = locationVal.split(',');
-        parsedCity = parts[0].trim();
-        parsedZip = parts[1] ? parts[1].trim() : "";
-    } else {
-        parsedCity = locationVal.trim();
-    }
-
     const payload = {
-        email: formData.get('client_email') || document.getElementById('subscriberEmailInput').value,
-        niche: formData.get('target_niche_name') || document.getElementById('subscriberNicheInput').value,
+        email: formData.get('client_email') || "",
+        niche: formData.get('target_niche_name') || "",
         name: formData.get('client_name') || "",
         phone: formData.get('client_phone') || "",
         
         // Multi-mapped location fields for maximum webhook compatibility:
         location: locationVal,
         client_location: locationVal,
-        zip: parsedZip || locationVal,
-        city: parsedCity || locationVal,
-        ZIP: parsedZip || locationVal,
-        City: parsedCity || locationVal,
-        zipcode: parsedZip || locationVal,
-        ZipCode: parsedZip || locationVal,
+        zip: zipVal,
+        city: cityVal,
+        ZIP: zipVal,
+        City: cityVal,
+        zipcode: zipVal,
+        ZipCode: zipVal,
         
         budget: formData.get('client_budget') || "",
         timeline: formData.get('client_timeline') || "",
         certs: formData.get('client_certs') || ""
     };
 
-    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitBtn = document.getElementById("formSubmitBtn");
     const originalBtnText = submitBtn ? submitBtn.textContent : "Submit Request";
     let originalBtnClass = submitBtn ? submitBtn.className : "";
 
@@ -786,6 +752,7 @@ async function captureSubscriberEmail(event) {
             alert("Success! Your resource has been unlocked and your RFQ routed to our network.");
             setTimeout(() => {
                 closeModal();
+                form.reset();
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalBtnText;
@@ -806,6 +773,51 @@ async function captureSubscriberEmail(event) {
                 submitBtn.className = originalBtnClass;
             }, 3000);
         }
+    }
+}
+
+async function submitBusinessListing(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("bizEmail").value;
+    const name = document.getElementById("bizName").value;
+    const niche = document.getElementById("bizNiche").value;
+    const city = document.getElementById("bizCity").value;
+    const zip = document.getElementById("bizZip").value;
+
+    const payload = {
+        email: email,
+        niche: `${name.toUpperCase()} - (CLAIM REQUESTED: ${niche})`,
+        city: city,
+        zip: zip,
+        status: "CLAIM REQUESTED",
+        ZIP: zip,
+        City: city,
+        zipcode: zip,
+        ZipCode: zip,
+        location: `${city}, ${zip}`,
+        client_location: `${city}, ${zip}`
+    };
+
+    try {
+        console.log("📤 Submitting claimed listing to Google Sheets pipeline...");
+        const response = await fetch('/.netlify/functions/saveEmail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert("Success! Your business listing request has been logged. Our verification team will review your profile shortly.");
+            closeBusinessModal();
+            event.target.reset();
+        } else {
+            alert("Error: " + (result.error || "Failed to process listing. Please check connection."));
+        }
+    } catch (err) {
+        console.error("❌ Submission Sync Failure:", err.message);
+        alert("Failed to reach routing gateway. Confirm your internet connection.");
     }
 }
 
@@ -913,6 +925,9 @@ function runAdaVerifier(nicheId) {
 
 // Map automatic execution trigger routine on standard frame page loads
 document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById('adaWidth')) {
+        runAdaVerifier();
+    }
     ['niche_01', 'niche_02'].forEach(id => {
         if (document.getElementById(`adaWidth-${id}`)) {
             runAdaVerifier(id);

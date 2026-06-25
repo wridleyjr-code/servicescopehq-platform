@@ -3,274 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServiceScopeHQ | B2B Niche Estimates & Scopes Directory</title>
+    <title>ServiceScopeHQ | B2B Directory, Scopes & Trade Calculators</title>
     <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6366f1; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col transition-colors duration-200">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between font-sans selection:bg-indigo-500 selection:text-white">
 
     <!-- Top Branded Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="bg-indigo-600 text-white font-black text-xl px-3 py-1.5 rounded-lg tracking-tight">SS</div>
+                <div class="bg-indigo-600 text-white font-black text-xl px-3 py-1.5 rounded-lg tracking-tight shadow-lg shadow-indigo-950/50">SS</div>
                 <div>
-                    <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">ServiceScope<span class="text-indigo-600">HQ</span></h1>
-                    <p class="text-xs text-slate-500 font-medium hidden sm:block">The B2B Database for Local Services, Estimates & Scopes</p>
+                    <h1 class="text-xl font-extrabold text-slate-100 tracking-tight">ServiceScope<span class="text-indigo-500">HQ</span></h1>
+                    <p class="text-xs text-slate-400 font-medium hidden sm:block">The B2B Database for Local Services, Estimates & Scopes</p>
                 </div>
             </div>
             
             <div class="flex items-center space-x-3">
-                <!-- Location Lock Badge -->
-                <div class="hidden sm:flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span id="currentLocationBadge">Live Estimates & Scopes</span>
-                </div>
                 <!-- How to Use Guide Button -->
-                <button onclick="openGuideModal()" id="howToUseBtn" class="flex items-center space-x-1.5 bg-slate-100 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-slate-600 hover:text-indigo-700 text-xs font-bold px-3 py-2 rounded transition-all whitespace-nowrap">
+                <button onclick="openGuideModal()" id="howToUseBtn" class="flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-705 border border-slate-700 hover:border-slate-650 text-slate-300 text-xs font-bold px-3 py-2 rounded transition-all whitespace-nowrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"/></svg>
                     <span class="hidden sm:inline">How to Use</span>
                 </button>
-                <!-- Tier 1 Monetization CTA -->
-                <button onclick="openBusinessListingModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded shadow-sm transition-all whitespace-nowrap">List Your Business</button>
+                <!-- Add / Claim Business CTA -->
+                <button onclick="openBusinessModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold py-2 px-4 rounded-lg shadow-md transition-all tracking-wide uppercase">
+                    ➕ Add/Claim Your Business
+                </button>
+                <!-- Location Lock Badge -->
+                <div class="flex items-center space-x-1.5 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="currentLocationBadge">US Cost Index</span>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Workspace Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-8">
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-grow">
         
-        <!-- Sidebar Navigation Filters -->
-        <aside class="w-full md:w-64 flex-shrink-0 space-y-6">
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-5">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Search Filters</h3>
-                
-                <!-- Strategic Vertical Tag Links -->
-                <div class="space-y-1">
-                    <h4 class="text-xs font-bold text-slate-500 mb-2">Market Verticals</h4>
-                    <button class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-50 text-indigo-700" id="filter-all">
-                        All Sectors
-                    </button>
-                    <div id="categoryContainer" class="space-y-1 mt-1">
-                        <!-- Dynamic Sidebar Target Outputs -->
-                    </div>
-                </div>
+        <!-- Section 1: Geographic & Keyword Search Console -->
+        <section class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-indigo-400">Target Sourcing Search Engine</h2>
+                <span class="text-xs text-slate-400 font-medium">Record Count: <span id="displayedCount" class="text-indigo-400 font-bold">0</span> / <span id="totalCount" class="text-slate-400">0</span> Scopes</span>
             </div>
-
-            <!-- MRR Modeling Engine -->
-            <div class="bg-indigo-900 text-white p-5 rounded-xl shadow-md space-y-4">
-                <div class="flex items-center space-x-2 border-b border-indigo-800 pb-3">
-                    <h3 class="text-sm font-extrabold uppercase tracking-widest text-indigo-200">MRR Modeling Engine</h3>
-                </div>
-                
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-[10px] font-bold text-indigo-300 uppercase tracking-wider mb-1">Monthly Leads</label>
-                        <input type="number" id="mrrLeads" value="10" min="1" class="w-full px-3 py-1.5 bg-indigo-800 border border-indigo-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-indigo-300 uppercase tracking-wider mb-1">Close Rate (%)</label>
-                        <input type="number" id="mrrCloseRate" value="20" min="1" max="100" class="w-full px-3 py-1.5 bg-indigo-800 border border-indigo-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-indigo-300 uppercase tracking-wider mb-1">Avg Retainer ($)</label>
-                        <input type="number" id="mrrRetainer" value="1500" min="1" class="w-full px-3 py-1.5 bg-indigo-800 border border-indigo-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
-                    </div>
-                </div>
-
-                <div class="bg-indigo-950 p-4 rounded-lg mt-4 border border-indigo-800">
-                    <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider mb-1">Projected MRR</div>
-                    <div id="mrrOutput" class="text-2xl font-black text-emerald-400 tracking-tight">$3,000<span class="text-xs text-indigo-500 font-bold ml-1">/mo</span></div>
-                    
-                    <div class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider mt-3 mb-0.5">Annual Run Rate</div>
-                    <div id="arrOutput" class="text-sm font-bold text-indigo-200">$36,000</div>
-                </div>
-            </div>
-
-            <!-- B2B Billable Hourly Rate Calculator -->
-            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-4 text-white">
-                <div>
-                    <h3 class="text-xs font-extrabold uppercase tracking-widest text-indigo-400">Hourly Rate Calculator</h3>
-                    <p class="text-[10px] text-slate-400 mt-0.5">Determine your exact target billing rate to protect your profit margins.</p>
-                </div>
-                
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Base Tech Wage ($/hr)</label>
-                        <input type="number" id="calcWage" value="32" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Labor Burden % (Overhead/Tax)</label>
-                        <input type="number" id="calcBurden" value="35" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Desired Net Margin %</label>
-                        <input type="number" id="calcMargin" value="20" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    
-                    <button onclick="calculateRequiredHourlyRate()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition-all text-xs uppercase tracking-wider">Compute Minimum Rate</button>
-                    
-                    <div class="bg-indigo-950 p-3 rounded-lg border border-indigo-800 flex justify-between items-center mt-2">
-                        <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Required Quote Rate:</span>
-                        <span id="hourlyRateResult" class="font-black text-emerald-400 text-sm">$0.00 / hr</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- B2B Construction Contingency & Escalation Estimator Core Matrix -->
-            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4 max-w-lg text-slate-200">
-                <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-400">Construction Contingency & Escalation Estimator</h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Protect your margins against shifting material prices and supply chain volatility delays.</p>
-                </div>
-                
-                <div class="space-y-3 text-xs">
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-slate-300 mb-1 font-semibold">Estimated Base Cost ($)</label>
-                            <input type="number" id="baseCostInput" value="15000" oninput="runEscalationCalculator()" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 mb-1 font-semibold">Project Duration (Months)</label>
-                            <input type="number" id="durationInput" value="6" min="1" max="24" oninput="runEscalationCalculator()" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-slate-300 mb-1 font-semibold">Material Supply Volatility Tier</label>
-                        <select id="volatilitySelect" onchange="runEscalationCalculator()" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
-                            <option value="0.02">Low Risk (Standard lumber, drywall, basic fasteners)</option>
-                            <option value="0.05" selected>Medium Risk (Custom tile, copper piping, HVAC units)</option>
-                            <option value="0.10">High Risk (Structural steel, specialty electrical components)</option>
-                            <option value="0.18">Extreme Risk (Imported luxury finishes, microchip panels)</option>
-                        </select>
-                    </div>
-
-                    <div class="bg-slate-900 p-4 rounded border border-slate-800 space-y-2 mt-4">
-                        <h4 class="font-bold text-slate-400 uppercase text-[10px] tracking-wider mb-2">Calculated Risk Padding Summary</h4>
-                        <div class="flex justify-between text-xs border-b border-slate-800 pb-1">
-                            <span class="text-slate-400">Time-Based Escalation (0.5%/mo):</span>
-                            <span id="outEscalation" class="font-mono text-slate-200">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-xs border-b border-slate-800 pb-1">
-                            <span class="text-slate-400">Material Volatility Padding:</span>
-                            <span id="outVolatility" class="font-mono text-slate-200">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-sm font-bold border-b border-slate-800 pb-1 pt-1 text-indigo-400">
-                            <span>Total Suggested Cushion:</span>
-                            <span><span id="outTotalCushion">$0.00</span> (<span id="outPercentage">0%</span>)</span>
-                        </div>
-                        <div class="flex justify-between text-base font-black pt-2 text-emerald-400">
-                            <span>Adjusted Safe Bid Target:</span>
-                            <span id="outFinalBid" class="font-mono">$0.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Data Grid Explorer Area -->
-        <section class="flex-grow flex flex-col space-y-4">
             
-            <!-- Enhanced Geographic and Keyword Sorting Console -->
-            <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-4">
-                <div class="text-xs font-bold uppercase tracking-wider text-indigo-400">Target Area Sourcing</div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                    <!-- Keyword Field -->
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Scope Keyword</label>
-                        <input type="text" id="dirSearch" placeholder="e.g., Tile, Shower..." 
-                               class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
-                    </div>
-
-                    <!-- State Selector -->
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">State Region</label>
-                        <select id="stateFilter" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300">
-                            <option value="">All States</option>
-                            <option value="AL">Alabama (AL)</option>
-                            <option value="AK">Alaska (AK)</option>
-                            <option value="AZ">Arizona (AZ)</option>
-                            <option value="AR">Arkansas (AR)</option>
-                            <option value="CA">California (CA)</option>
-                            <option value="CO">Colorado (CO)</option>
-                            <option value="CT">Connecticut (CT)</option>
-                            <option value="DE">Delaware (DE)</option>
-                            <option value="FL">Florida (FL)</option>
-                            <option value="GA">Georgia (GA)</option>
-                            <option value="HI">Hawaii (HI)</option>
-                            <option value="ID">Idaho (ID)</option>
-                            <option value="IL">Illinois (IL)</option>
-                            <option value="IN">Indiana (IN)</option>
-                            <option value="IA">Iowa (IA)</option>
-                            <option value="KS">Kansas (KS)</option>
-                            <option value="KY">Kentucky (KY)</option>
-                            <option value="LA">Louisiana (LA)</option>
-                            <option value="ME">Maine (ME)</option>
-                            <option value="MD">Maryland (MD)</option>
-                            <option value="MA">Massachusetts (MA)</option>
-                            <option value="MI">Michigan (MI)</option>
-                            <option value="MN">Minnesota (MN)</option>
-                            <option value="MS">Mississippi (MS)</option>
-                            <option value="MO">Missouri (MO)</option>
-                            <option value="MT">Montana (MT)</option>
-                            <option value="NE">Nebraska (NE)</option>
-                            <option value="NV">Nevada (NV)</option>
-                            <option value="NH">New Hampshire (NH)</option>
-                            <option value="NJ">New Jersey (NJ)</option>
-                            <option value="NM">New Mexico (NM)</option>
-                            <option value="NY">New York (NY)</option>
-                            <option value="NC">North Carolina (NC)</option>
-                            <option value="ND">North Dakota (ND)</option>
-                            <option value="OH">Ohio (OH)</option>
-                            <option value="OK">Oklahoma (OK)</option>
-                            <option value="OR">Oregon (OR)</option>
-                            <option value="PA">Pennsylvania (PA)</option>
-                            <option value="RI">Rhode Island (RI)</option>
-                            <option value="SC">South Carolina (SC)</option>
-                            <option value="SD">South Dakota (SD)</option>
-                            <option value="TN">Tennessee (TN)</option>
-                            <option value="TX">Texas (TX)</option>
-                            <option value="UT">Utah (UT)</option>
-                            <option value="VT">Vermont (VT)</option>
-                            <option value="VA">Virginia (VA)</option>
-                            <option value="WA">Washington (WA)</option>
-                            <option value="WV">West Virginia (WV)</option>
-                            <option value="WI">Wisconsin (WI)</option>
-                            <option value="WY">Wyoming (WY)</option>
-                        </select>
-                    </div>
-
-                    <!-- City Selector (Populates dynamically based on state choice) -->
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">City Hub</label>
-                        <select id="cityFilter" disabled class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50">
-                            <option value="">Select State First</option>
-                        </select>
-                    </div>
-
-                    <!-- ZIP Code Direct Input -->
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">ZIP Code Override</label>
-                        <input type="text" id="zipFilter" placeholder="e.g., 31008" maxlength="5"
-                               class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-4">
+                <!-- Keyword Input Block -->
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Scope Keyword</label>
+                    <input type="text" id="dirSearch" placeholder="e.g., Tile, Shower..." 
+                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
                 </div>
-            </div>
 
-            <div class="flex items-center justify-between bg-white px-6 py-4 rounded-xl border border-slate-200 shadow-sm">
-                <div class="text-sm font-medium text-slate-500">
-                    Showing <span id="displayedCount" class="font-bold text-slate-800">0</span> of <span id="totalCount" class="font-bold text-slate-800">0</span> Service Scopes
+                <!-- State Selector -->
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">State Region</label>
+                    <select id="stateFilter" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300 bg-slate-950">
+                        <option value="">All States</option>
+                        <option value="AL">Alabama (AL)</option><option value="AK">Alaska (AK)</option><option value="AZ">Arizona (AZ)</option><option value="AR">Arkansas (AR)</option>
+                        <option value="CA">California (CA)</option><option value="CO">Colorado (CO)</option><option value="CT">Connecticut (CT)</option><option value="DE">Delaware (DE)</option>
+                        <option value="FL">Florida (FL)</option><option value="GA">Georgia (GA)</option><option value="HI">Hawaii (HI)</option><option value="ID">Idaho (ID)</option>
+                        <option value="IL">Illinois (IL)</option><option value="IN">Indiana (IN)</option><option value="IA">Iowa (IA)</option><option value="KS">Kansas (KS)</option>
+                        <option value="KY">Kentucky (KY)</option><option value="LA">Louisiana (LA)</option><option value="ME">Maine (ME)</option><option value="MD">Maryland (MD)</option>
+                        <option value="MA">Massachusetts (MA)</option><option value="MI">Michigan (MI)</option><option value="MN">Minnesota (MN)</option><option value="MS">Mississippi (MS)</option>
+                        <option value="MO">Missouri (MO)</option><option value="MT">Montana (MT)</option><option value="NE">Nebraska (NE)</option><option value="NV">Nevada (NV)</option>
+                        <option value="NH">New Hampshire (NH)</option><option value="NJ">New Jersey (NJ)</option><option value="NM">New Mexico (NM)</option><option value="NY">New York (NY)</option>
+                        <option value="NC">North Carolina (NC)</option><option value="ND">North Dakota (ND)</option><option value="OH">Ohio (OH)</option><option value="OK">Oklahoma (OK)</option>
+                        <option value="OR">Oregon (OR)</option><option value="PA">Pennsylvania (PA)</option><option value="RI">Rhode Island (RI)</option><option value="SC">South Carolina (SC)</option>
+                        <option value="SD">South Dakota (SD)</option><option value="TN">Tennessee (TN)</option><option value="TX">Texas (TX)</option><option value="UT">Utah (UT)</option>
+                        <option value="VT">Vermont (VT)</option><option value="VA">Virginia (VA)</option><option value="WA">Washington (WA)</option><option value="WV">West Virginia (WV)</option>
+                        <option value="WI">Wisconsin (WI)</option><option value="WY">Wyoming (WY)</option>
+                    </select>
                 </div>
-                <div class="flex space-x-2">
-                    <select id="priceFilter" class="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+                <!-- City Selector -->
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">City Hub</label>
+                    <select id="cityFilter" disabled class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-500 disabled:opacity-50 bg-slate-950">
+                        <option value="">Select State First</option>
+                    </select>
+                </div>
+
+                <!-- ZIP Code Direct Input -->
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">ZIP Code Override</label>
+                    <input type="text" id="zipFilter" placeholder="e.g., 31008" maxlength="5"
+                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-200">
+                </div>
+
+                <!-- Price Filter Selector -->
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Price Level</label>
+                    <select id="priceFilter" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 text-xs focus:outline-none focus:border-indigo-500 text-slate-300 bg-slate-950">
                         <option value="">All Price Levels</option>
                         <option value="High Ticket">High Ticket</option>
                         <option value="Mid Ticket">Mid Ticket</option>
@@ -278,78 +111,312 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Directory Listing Container -->
-            <div id="directoryGrid" class="grid grid-cols-1 gap-4">
-                <!-- Javascript Renders Entries Instantly In This Zone -->
-            </div>
-
-            <!-- Tier 3 Monetization: Newsletter Capture Block -->
-            <div class="mt-8 bg-slate-900 rounded-xl p-8 border border-slate-800 text-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-indigo-900/20"></div>
-                <div class="relative z-10 max-w-2xl mx-auto">
-                    <h3 class="text-2xl font-black text-white tracking-tight mb-2">The Scope-of-Work Newsletter</h3>
-                    <p class="text-slate-400 text-sm mb-6">Get weekly market pricing, labor metrics, and contract compliance updates designed strictly for high-volume B2B builders and general contractors.</p>
-                    <form name="newsletter" method="POST" class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <input type="hidden" name="form-name" value="newsletter" />
-                        <input type="email" name="email" placeholder="Enter your work email address..." required class="w-full sm:w-96 px-4 py-3 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm">
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg transition-all whitespace-nowrap shadow-md text-sm">Subscribe for Insights</button>
-                    </form>
-                </div>
-            </div>
         </section>
+
+        <!-- Section 2: Directory Display & High-Ticket Interactive Calculators -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Side: Directory Grid & Newsletter Block -->
+            <section class="lg:col-span-7 flex flex-col space-y-6">
+                <!-- Directory Listing Container -->
+                <div id="directoryGrid" class="space-y-4 max-h-[850px] overflow-y-auto pr-2 custom-scrollbar">
+                    <!-- Javascript Renders Entries Instantly In This Zone -->
+                </div>
+
+                <!-- Scope-of-Work Newsletter Capture Block -->
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-800 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-indigo-900/10"></div>
+                    <div class="relative z-10 max-w-xl mx-auto">
+                        <h3 class="text-lg font-black text-white tracking-tight mb-1">The Scope-of-Work Newsletter</h3>
+                        <p class="text-slate-400 text-xs mb-4">Weekly market pricing, labor metrics, and contract compliance updates designed strictly for high-volume B2B builders and general contractors.</p>
+                        <form name="newsletter" method="POST" class="flex flex-col sm:flex-row gap-2 justify-center">
+                            <input type="hidden" name="form-name" value="newsletter" />
+                            <input type="email" name="email" placeholder="Enter your work email..." required class="w-full sm:w-72 px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-indigo-500 text-xs">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg transition-all whitespace-nowrap shadow-md text-xs uppercase tracking-wider">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Contractor Toolkit & Interactive Calculators -->
+            <aside class="lg:col-span-5 space-y-6">
+                
+                <!-- Category Verticals Filters -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400">Market Verticals</h3>
+                        <button class="text-[10px] font-bold text-slate-400 hover:text-slate-200 transition-all uppercase" id="filter-all">All Sectors</button>
+                    </div>
+                    <div id="categoryContainer" class="flex flex-col gap-1.5 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Dynamic Sidebar Target Outputs -->
+                    </div>
+                </div>
+
+                <!-- Tool 1: B2B Billable Hourly Rate Calculator -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-400">Hourly Rate Calculator</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Determine your exact target billing rate to protect your profit margins.</p>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Base Tech Wage ($/hr)</label>
+                            <input type="number" id="calcWage" value="32" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Labor Burden % (Overhead/Tax)</label>
+                            <input type="number" id="calcBurden" value="35" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Desired Net Margin %</label>
+                            <input type="number" id="calcMargin" value="20" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        
+                        <div class="bg-slate-950 p-4 rounded border border-slate-800 flex justify-between items-center mt-4 text-[11px]">
+                            <span class="font-bold text-slate-400 uppercase text-[9px]">Required Quote Rate:</span>
+                            <span id="hourlyRateResult" class="font-black text-emerald-400 text-xs">$0.00 / hr</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 2: MRR Modeling Engine -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-400">MRR Modeling Engine</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Model dynamic recurring service fees and contract portfolios.</p>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Monthly Leads</label>
+                            <input type="number" id="mrrLeads" value="10" min="1" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Close Rate (%)</label>
+                            <input type="number" id="mrrCloseRate" value="20" min="1" max="100" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase mb-1">Avg Retainer ($)</label>
+                            <input type="number" id="mrrRetainer" value="1500" min="1" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded border border-slate-800 space-y-2 mt-4 text-[11px]">
+                        <div class="flex justify-between border-b border-slate-800 pb-1">
+                            <span class="text-slate-400">Projected MRR:</span>
+                            <span id="mrrOutput" class="font-bold text-emerald-400">$3,000/mo</span>
+                        </div>
+                        <div class="flex justify-between pt-1">
+                            <span class="text-slate-400">Annual Run Rate (ARR):</span>
+                            <span id="arrOutput" class="font-mono text-slate-200">$36,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 3: Construction Contingency & Escalation Estimator -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-400">Construction Contingency Estimator</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Protect bids against shifting material prices and supply chain inflation.</p>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Base Est. Cost ($)</label>
+                                <input type="number" id="baseCostInput" value="15000" oninput="runEscalationCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Duration (Months)</label>
+                                <input type="number" id="durationInput" value="6" min="1" max="24" oninput="runEscalationCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold">Material Volatility Tier</label>
+                            <select id="volatilitySelect" onchange="runEscalationCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 bg-slate-950">
+                                <option value="0.02">Low Risk (Standard lumber, drywall, fasteners)</option>
+                                <option value="0.05" selected>Medium Risk (Custom tile, copper piping, HVAC)</option>
+                                <option value="0.10">High Risk (Structural steel, specialty electrical)</option>
+                                <option value="0.18">Extreme Risk (Imported luxury finishes, rare commodities)</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded border border-slate-800 space-y-2 mt-4 text-[11px]">
+                            <div class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-slate-400">Time-Based Escalation (0.5%/mo):</span>
+                                <span id="outEscalation" class="font-mono text-slate-200">$0.00</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-slate-400">Material Volatility Padding:</span>
+                                <span id="outVolatility" class="font-mono text-slate-200">$0.00</span>
+                            </div>
+                            <div class="flex justify-between font-bold border-b border-slate-800 pb-1 pt-1 text-indigo-400">
+                                <span>Total Suggested Cushion:</span>
+                                <span id="outTotalCushion">$0.00 (<span id="outPercentage">0%</span>)</span>
+                            </div>
+                            <div class="flex justify-between text-sm font-black pt-2 text-emerald-400">
+                                <span>Adjusted Safe Bid Target:</span>
+                                <span id="outFinalBid" class="font-mono">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 4: Tile Shower Material Takeoff & Slope Tool (Niche 03) -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Tile Shower Takeoff & Slope Engine</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">TCNA-compliant material scaling and pre-slope calculator for custom tile bays.</p>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Pan Width (ft)</label>
+                                <input type="number" id="panWidth" value="3" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Pan Length (ft)</label>
+                                <input type="number" id="panLength" value="5" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Wall Height (ft)</label>
+                                <input type="number" id="wallHeight" value="8" oninput="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold">Waste Allowance Layer</label>
+                            <select id="wasteFactor" onchange="runTileCalculator()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-500 bg-slate-950">
+                                <option value="1.10" selected>10% Standard (Straight Grid Layout)</option>
+                                <option value="1.15">15% Modified (Large Format / Diagonal Cuts)</option>
+                                <option value="1.20">20% High Waste (Herringbone / Chevron)</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded border border-slate-800 space-y-2 mt-4 text-[11px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-slate-900 border border-slate-800 p-2 rounded">
+                                    <p class="text-slate-400 text-[9px] uppercase">Backer Board (3'x5')</p>
+                                    <p id="takeoffBoards" class="text-xs font-black text-slate-200 mt-0.5">0 Sheets</p>
+                                </div>
+                                <div class="bg-slate-900 border border-slate-800 p-2 rounded">
+                                    <p class="text-slate-400 text-[9px] uppercase">Waterproofing Membrane</p>
+                                    <p id="takeoffMembrane" class="text-xs font-black text-slate-200 mt-0.5">0 Sq Ft</p>
+                                </div>
+                                <div class="bg-slate-900 border border-slate-800 p-2 rounded">
+                                    <p class="text-slate-400 text-[9px] uppercase">Thinset (50lb Bags)</p>
+                                    <p id="takeoffThinset" class="text-xs font-black text-slate-200 mt-0.5">0 Bags</p>
+                                </div>
+                                <div class="bg-slate-900 border border-slate-800 p-2 rounded">
+                                    <p class="text-slate-400 text-[9px] uppercase">Drain Center Drop</p>
+                                    <p id="takeoffSlope" class="text-xs font-black text-amber-400 mt-0.5">0.00 inches</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 5: ADA Grab Bar & Roll-In Clearance Verifier -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-teal-400">ADA Roll-In Clearance Verifier</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Instant ADA Section 304 code clearance tracking checker for residential aging remodels.</p>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Clear Width (Inches)</label>
+                                <input type="number" id="adaWidth" value="72" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 mb-1 font-semibold">Clear Length (Inches)</label>
+                                <input type="number" id="adaLength" value="84" oninput="runAdaVerifier()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-teal-500">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 pt-1 bg-slate-950 p-3 rounded border border-slate-800">
+                            <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
+                                <input type="checkbox" id="adaObstructions" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0">
+                                <span class="text-[10px]">Fixed Floor Obstructions (Vanity, Cabinets)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-slate-300 select-none cursor-pointer">
+                                <input type="checkbox" id="adaDoorSwing" onchange="runAdaVerifier()" class="rounded border-slate-800 bg-slate-950 text-teal-600 focus:ring-0">
+                                <span class="text-[10px]">Bathroom Door Swings Inward into Room Space</span>
+                            </label>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded border border-slate-800 mt-4 space-y-2 text-[11px]">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                                <span class="font-bold text-slate-400 uppercase text-[9px]">ADA Clearance Status:</span>
+                                <span id="adaBadge" class="text-[9px] font-black uppercase px-2 py-0.5 rounded border">Checking...</span>
+                            </div>
+                            <p id="adaMessage" class="text-[10px] text-slate-300 leading-relaxed bg-slate-900 border border-slate-800/60 p-2 rounded"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
     </main>
 
     <!-- Unified Lead Generation Modal Framework -->
-    <div id="leadModal" class="fixed inset-0 z-50 overflow-y-auto hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-xl border border-slate-200 w-full max-w-lg overflow-hidden transform transition-all">
-            <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+    <div id="leadModal" class="fixed inset-0 z-50 overflow-y-auto hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-xl shadow-2xl border border-slate-800 w-full max-w-lg overflow-hidden">
+            <div class="bg-slate-950 px-6 py-4 flex items-center justify-between border-b border-slate-800">
                 <div>
-                    <h3 id="modalNicheName" class="text-lg font-bold tracking-tight">Service Lead Dispatch</h3>
-                    <p id="modalCategory" class="text-xs text-indigo-400 font-semibold uppercase tracking-wider"></p>
+                    <h3 id="modalNicheName" class="text-base font-bold tracking-tight text-white font-sans">Service Lead Dispatch</h3>
+                    <p id="modalCategory" class="text-[10px] text-indigo-400 font-semibold uppercase tracking-wider font-sans"></p>
                 </div>
                 <button onclick="closeModal()" class="text-slate-400 hover:text-white transition-all text-xl font-bold">&times;</button>
             </div>
             
-            <!-- Native Netlify Lead Intake Engine Wrapper -->
-            <form name="servicescopehq-leads" method="POST" onsubmit="captureSubscriberEmail(event)" class="p-6 space-y-4">
-                <input type="hidden" name="form-name" value="servicescopehq-leads" />
+            <form id="leadCaptureForm" onsubmit="submitLeadForm(event)" class="p-6 space-y-4">
                 <input type="hidden" id="formNicheId" name="target_niche_id" value="" />
                 <input type="hidden" id="subscriberNicheInput" name="target_niche_name" value="" />
                 
-                <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-3.5 text-xs text-indigo-800 space-y-1">
+                <div class="bg-indigo-950/20 border border-indigo-900/30 rounded-lg p-3.5 text-xs text-indigo-300 space-y-1">
                     <p class="font-bold flex items-center">
                         🎁 Resource Unlocked: <span id="modalResourceName" class="underline ml-1"></span>
                     </p>
-                    <p class="opacity-90">Fill out your routing parameters below to fetch your resource file and direct quotes from verification checked contractors.</p>
+                    <p class="opacity-90">Fill out your routing parameters below to instantly sync your request as a FREE ADD lead to our Google Sheets pipeline.</p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Your Name</label>
-                        <input type="text" name="client_name" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Company / Name</label>
+                        <input type="text" id="formNameInput" name="client_name" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number</label>
-                        <input type="tel" name="client_phone" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Phone Number</label>
+                        <input type="tel" id="formPhoneInput" name="client_phone" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
-                    <input type="email" id="subscriberEmailInput" name="client_email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Primary Email</label>
+                    <input type="email" id="formEmailInput" name="client_email" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Target ZIP Code / City Location</label>
-                    <input type="text" id="formLocationInput" name="client_location" value="" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-
-                <!-- Tier 2 Monetization: RFQ Enhancements -->
-                <div id="rfqEnhancementsSection" class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-200 pt-4">
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Est. Project Budget</label>
-                        <select name="client_budget" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Target ZIP Code</label>
+                        <input type="text" id="formZipInput" name="client_zip" required value="" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">City Location</label>
+                        <input type="text" id="formCityInput" name="client_city" required value="" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                    </div>
+                </div>
+
+                <!-- RFQ-only qualification additions -->
+                <div id="rfqEnhancementsSection" class="grid grid-cols-2 gap-4 border-t border-slate-800 pt-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Est. Project Budget</label>
+                        <select id="formBudgetSelect" name="client_budget" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-300 bg-slate-950">
                             <option value="TBD">To Be Determined</option>
                             <option value="<5k">Under $5,000</option>
                             <option value="5k-25k">$5,000 - $25,000</option>
@@ -358,8 +425,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Timeline</label>
-                        <select name="client_timeline" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Timeline</label>
+                        <select id="formTimelineSelect" name="client_timeline" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-300 bg-slate-950">
                             <option value="ASAP">ASAP (Emergency)</option>
                             <option value="1-4 weeks">1 to 4 Weeks</option>
                             <option value="1-3 months">1 to 3 Months</option>
@@ -369,12 +436,71 @@
                 </div>
 
                 <div id="certsSection">
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">Required Certifications (Optional)</label>
-                    <input type="text" name="client_certs" placeholder="e.g., OSHA 30, Bonded, MBE" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Required Certifications (Optional)</label>
+                    <input type="text" id="formCertsInput" name="client_certs" placeholder="e.g., OSHA 30, Bonded, MBE" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
                 </div>
 
                 <button type="submit" id="formSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs">
-                    Authorize Request & Download Template
+                    Download Resource & Log to Sheet
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add / Claim Business Modal Form (Submits as CLAIM REQUESTED) -->
+    <div id="businessModal" class="fixed inset-0 z-50 overflow-y-auto hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-xl shadow-2xl border border-slate-800 w-full max-w-lg overflow-hidden">
+            <div class="bg-slate-950 px-6 py-4 flex items-center justify-between border-b border-slate-800">
+                <div>
+                    <h3 class="text-base font-bold tracking-tight text-white font-sans">Add or Claim Your Business</h3>
+                    <p class="text-[10px] text-indigo-400 font-semibold uppercase tracking-wider font-sans">Join our directory to connect with active local GCs</p>
+                </div>
+                <button onclick="closeBusinessModal()" class="text-slate-400 hover:text-white transition-all text-xl font-bold">&times;</button>
+            </div>
+            
+            <form onsubmit="submitBusinessListing(event)" class="p-6 space-y-4">
+                <div class="bg-indigo-950/20 border border-indigo-900/30 rounded-lg p-3.5 text-xs text-indigo-300">
+                    💡 **Marketplace Rules:** Submitting this form appends your listing request as a **CLAIM REQUESTED** status directly into our active Google Sheets verification ledger.
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Company / Trade Name</label>
+                    <input type="text" id="bizName" required placeholder="e.g., Byron Custom Tile Specialists" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Business Email</label>
+                        <input type="email" id="bizEmail" required placeholder="contact@company.com" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Primary Niche Target</label>
+                        <select id="bizNiche" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-300 bg-slate-950">
+                            <option value="Tile Shower Installation">Tile Shower Installation</option>
+                            <option value="Handicap Bathroom Costs">Handicap Bathroom Costs</option>
+                            <option value="Mold Remediation Pricing">Mold Remediation Pricing</option>
+                            <option value="Aging-in-Place Home Modification">Aging-in-Place Home Modification</option>
+                            <option value="Smart Panel Upgrade">Smart Panel Upgrade</option>
+                            <option value="Radon Mitigation & Encapsulation">Radon Mitigation & Encapsulation</option>
+                            <option value="Architectural Microcement Overlays">Architectural Microcement Overlays</option>
+                            <option value="Exterior Climate Hardening">Exterior Climate Hardening</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">City Location</label>
+                        <input type="text" id="bizCity" required placeholder="Byron" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Target ZIP Code</label>
+                        <input type="text" id="bizZip" required placeholder="31008" maxlength="5" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all uppercase tracking-wider text-xs">
+                    Submit Business Claim Request
                 </button>
             </form>
         </div>
@@ -383,20 +509,20 @@
     <!-- ============================================================ -->
     <!-- Consumer Guide Modal                                        -->
     <!-- ============================================================ -->
-    <div id="guideModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleGuideBackdropClick(event)">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
+    <div id="guideModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleGuideBackdropClick(event)">
+        <div class="bg-slate-900 rounded-xl shadow-2xl border border-slate-800 w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
 
             <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 px-6 py-5 flex items-center justify-between flex-shrink-0">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 px-6 py-5 flex items-center justify-between flex-shrink-0 border-b border-slate-800">
                 <div>
-                    <h2 class="text-lg font-extrabold text-white tracking-tight">How to Use ServiceScopeHQ</h2>
+                    <h2 class="text-lg font-extrabold text-white tracking-tight font-sans">How to Use ServiceScopeHQ</h2>
                     <p class="text-xs text-indigo-300 mt-0.5">Your complete guide to finding services, templates &amp; contractors</p>
                 </div>
                 <button onclick="closeGuideModal()" class="text-slate-400 hover:text-white transition-all text-2xl font-bold leading-none">&times;</button>
             </div>
 
             <!-- Tab Navigation -->
-            <div class="flex border-b border-slate-200 bg-slate-50 flex-shrink-0 overflow-x-auto">
+            <div class="flex border-b border-slate-800 bg-slate-950 flex-shrink-0 overflow-x-auto">
                 <button onclick="switchGuideTab('overview')"    id="gtab-overview"    class="guide-tab guide-tab-active">🗺️ Overview</button>
                 <button onclick="switchGuideTab('search')"      id="gtab-search"      class="guide-tab">🔍 Search &amp; Filter</button>
                 <button onclick="switchGuideTab('cards')"       id="gtab-cards"       class="guide-tab">📋 Service Cards</button>
@@ -405,34 +531,34 @@
             </div>
 
             <!-- Tab Content -->
-            <div class="overflow-y-auto flex-grow p-6 space-y-5 text-sm text-slate-700 custom-scrollbar">
+            <div class="overflow-y-auto flex-grow p-6 space-y-5 text-sm text-slate-300 custom-scrollbar">
 
                 <!-- OVERVIEW TAB -->
                 <div id="gpanel-overview" class="guide-panel space-y-5">
-                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-indigo-800">
+                    <div class="bg-indigo-950/40 border border-indigo-900/40 rounded-xl p-4 text-indigo-300">
                         <p class="font-bold text-base mb-1">Welcome to ServiceScopeHQ 👋</p>
                         <p class="text-xs leading-relaxed">The B2B database for local service estimates, scope-of-work templates, and contractor connections across the US.</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
                             <div class="text-xl">🔍</div>
-                            <p class="font-bold text-slate-800">Find Local Providers</p>
-                            <p class="text-xs text-slate-500 leading-relaxed">Search contractors, legal pros, tech specialists and more by keyword, city, state, or ZIP code.</p>
+                            <p class="font-bold text-slate-200">Find Local Providers</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Search contractors, legal pros, tech specialists and more by keyword, city, state, or ZIP code.</p>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
                             <div class="text-xl">📄</div>
-                            <p class="font-bold text-slate-800">Download Templates</p>
-                            <p class="text-xs text-slate-500 leading-relaxed">Get free &amp; paid scope-of-work docs, checklists, and contract shells — ready to use instantly.</p>
+                            <p class="font-bold text-slate-200">Download Templates</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Get free &amp; paid scope-of-work docs, checklists, and contract shells — ready to use instantly.</p>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
                             <div class="text-xl">📬</div>
-                            <p class="font-bold text-slate-800">Submit an RFQ</p>
-                            <p class="text-xs text-slate-500 leading-relaxed">Request quotes from vetted professionals. Describe your project — they come to you.</p>
+                            <p class="font-bold text-slate-200">Submit an RFQ</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Request quotes from vetted professionals. Describe your project — they come to you.</p>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
                             <div class="text-xl">💰</div>
-                            <p class="font-bold text-slate-800">Model Your Revenue</p>
-                            <p class="text-xs text-slate-500 leading-relaxed">Use the MRR calculator in the sidebar to forecast monthly &amp; annual revenue for your service business.</p>
+                            <p class="font-bold text-slate-200">Model Your Revenue</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">Use the MRR calculator in the sidebar to forecast monthly &amp; annual revenue for your service business.</p>
                         </div>
                     </div>
                     <div class="text-center pt-2">
@@ -442,52 +568,44 @@
 
                 <!-- SEARCH & FILTER TAB -->
                 <div id="gpanel-search" class="guide-panel hidden space-y-4">
-                    <h3 class="font-extrabold text-slate-900 text-base">Finding the Right Service</h3>
+                    <h3 class="font-extrabold text-slate-100 text-base">Finding the Right Service</h3>
 
                     <div class="space-y-3">
-                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex gap-3 items-start p-3 bg-slate-950 rounded-xl border border-slate-800">
                             <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
                             <div>
-                                <p class="font-bold text-slate-800">Scope Keyword</p>
-                                <p class="text-xs text-slate-500 mt-0.5">Type any trade or topic — <code class="bg-slate-200 px-1 rounded">tile</code>, <code class="bg-slate-200 px-1 rounded">mold</code>, <code class="bg-slate-200 px-1 rounded">LLC</code>, <code class="bg-slate-200 px-1 rounded">airbnb</code>. Results filter instantly.</p>
+                                <p class="font-bold text-slate-200">Scope Keyword</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Type any trade or topic — <code class="bg-slate-900 px-1 rounded border border-slate-800">tile</code>, <code class="bg-slate-900 px-1 rounded border border-slate-800">mold</code>, <code class="bg-slate-900 px-1 rounded border border-slate-800">LLC</code>, <code class="bg-slate-900 px-1 rounded border border-slate-800">airbnb</code>. Results filter instantly.</p>
                             </div>
                         </div>
-                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex gap-3 items-start p-3 bg-slate-950 rounded-xl border border-slate-800">
                             <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
                             <div>
-                                <p class="font-bold text-slate-800">State Region</p>
-                                <p class="text-xs text-slate-500 mt-0.5">Type a 2-letter state code — <code class="bg-slate-200 px-1 rounded">GA</code>, <code class="bg-slate-200 px-1 rounded">FL</code>, <code class="bg-slate-200 px-1 rounded">TX</code>, <code class="bg-slate-200 px-1 rounded">NC</code> — to narrow to your state.</p>
+                                <p class="font-bold text-slate-200">State Region</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Select your state dropdown region. This immediately populates relevant construction hubs.</p>
                             </div>
                         </div>
-                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex gap-3 items-start p-3 bg-slate-950 rounded-xl border border-slate-800">
                             <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
                             <div>
-                                <p class="font-bold text-slate-800">City Hub</p>
-                                <p class="text-xs text-slate-500 mt-0.5">Type your city — <code class="bg-slate-200 px-1 rounded">Atlanta</code>, <code class="bg-slate-200 px-1 rounded">Miami</code>, <code class="bg-slate-200 px-1 rounded">Houston</code> — to show only local live listings.</p>
+                                <p class="font-bold text-slate-200">City Hub</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Select a trade hub city within your selected state. Filters down your subcontractor search space.</p>
                             </div>
                         </div>
-                        <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex gap-3 items-start p-3 bg-slate-950 rounded-xl border border-slate-800">
                             <div class="bg-indigo-600 text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
                             <div>
-                                <p class="font-bold text-slate-800">ZIP Code Override</p>
-                                <p class="text-xs text-slate-500 mt-0.5">Enter a 5-digit ZIP — <code class="bg-slate-200 px-1 rounded">31008</code>, <code class="bg-slate-200 px-1 rounded">30309</code> — for hyper-local results. Updates the header badge.</p>
+                                <p class="font-bold text-slate-200">ZIP Code Override</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Enter a 5-digit ZIP — <code class="bg-slate-900 px-1 rounded border border-slate-800">31008</code>, <code class="bg-slate-900 px-1 rounded border border-slate-800">30309</code> — for hyper-local results. Updates the cost index badge.</p>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="border-t border-slate-200 pt-4">
-                        <p class="font-bold text-slate-800 mb-2">Sidebar Filters</p>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2"><span class="font-semibold">Market Verticals</span><br><span class="text-slate-500">Filter by industry sector</span></div>
-                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2"><span class="font-semibold">Price Level</span><br><span class="text-slate-500">High / Mid / Low Ticket</span></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- SERVICE CARDS TAB -->
                 <div id="gpanel-cards" class="guide-panel hidden space-y-4">
-                    <h3 class="font-extrabold text-slate-900 text-base">Reading a Service Card</h3>
-                    <div class="bg-slate-900 border-2 border-indigo-500/60 rounded-xl p-4 text-white relative overflow-hidden shadow-lg">
+                    <h3 class="font-extrabold text-slate-100 text-base">Reading a Service Card</h3>
+                    <div class="bg-slate-950 border-2 border-indigo-500/60 rounded-xl p-4 text-white relative overflow-hidden shadow-lg">
                         <div class="absolute -right-8 top-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[9px] font-black uppercase tracking-widest text-slate-900 py-1 px-8 rotate-45">Premium</div>
                         <div class="space-y-1 z-10">
                             <div class="flex items-center space-x-2">
@@ -497,56 +615,56 @@
                             <p class="text-sm font-bold">Tile Shower Installation in Atlanta, GA</p>
                             <p class="text-xs text-slate-400">📍 Coverage: Atlanta, GA (30309) &nbsp;•&nbsp; High Ticket</p>
                         </div>
-                        <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+                        <div class="flex gap-2 mt-3 pt-3 border-t border-slate-800">
                             <span class="text-[10px] font-bold bg-amber-500 text-slate-900 px-3 py-1.5 rounded">Buy Asset ($49)</span>
                             <span class="text-[10px] font-bold bg-indigo-600 text-white px-3 py-1.5 rounded">Dispatch RFQ</span>
                         </div>
                     </div>
                     <div class="space-y-2 text-xs">
-                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-600 w-28 flex-shrink-0">Gold border</span><span class="text-slate-500">Premium listing — top-ranked, verified provider</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-600 w-28 flex-shrink-0">Verified Pro badge</span><span class="text-slate-500">Premium tier — manually elevated listing</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-700 w-28 flex-shrink-0">Category tag</span><span class="text-slate-500">Industry sector — matches sidebar filter</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-700 w-28 flex-shrink-0">📍 Coverage</span><span class="text-slate-500">City / State / ZIP the listing serves</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-28 flex-shrink-0">Amber button</span><span class="text-slate-500">Paid asset available — click to purchase via Stripe</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-600 w-28 flex-shrink-0">Grey button</span><span class="text-slate-500">Free template — fill form to download</span></div>
-                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-700 w-28 flex-shrink-0">Blue button</span><span class="text-slate-500">Dispatch RFQ — submit your project for quotes</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-400 w-28 flex-shrink-0">Gold border</span><span class="text-slate-400">Premium listing — top-ranked, verified provider</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-550 w-28 flex-shrink-0">Verified Pro badge</span><span class="text-slate-400">Premium tier — manually elevated listing</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-300 w-28 flex-shrink-0">Category tag</span><span class="text-slate-400">Industry sector — matches sidebar filter</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-300 w-28 flex-shrink-0">📍 Coverage</span><span class="text-slate-400">City / State / ZIP the listing serves</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-amber-500 w-28 flex-shrink-0">Amber button</span><span class="text-slate-400">Paid asset available — click to purchase via Stripe</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-slate-400 w-28 flex-shrink-0">Grey button</span><span class="text-slate-400">Free template — fill form to download</span></div>
+                        <div class="flex gap-2 items-start"><span class="font-bold text-indigo-400 w-28 flex-shrink-0">Blue button</span><span class="text-slate-400">Dispatch RFQ — submit your project for quotes</span></div>
                     </div>
                 </div>
 
                 <!-- TEMPLATES & RFQS TAB -->
                 <div id="gpanel-resources" class="guide-panel hidden space-y-5">
-                    <h3 class="font-extrabold text-slate-900 text-base">Templates &amp; RFQs</h3>
+                    <h3 class="font-extrabold text-slate-100 text-base">Templates &amp; RFQs</h3>
 
                     <div class="space-y-3">
-                        <div class="border border-slate-200 rounded-xl overflow-hidden">
-                            <div class="bg-slate-100 px-4 py-2.5 font-bold text-slate-700 text-xs uppercase tracking-wider">📥 Downloading a Free Template</div>
-                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                        <div class="border border-slate-800 rounded-xl overflow-hidden">
+                            <div class="bg-slate-950 px-4 py-2.5 font-bold text-slate-300 text-xs uppercase tracking-wider border-b border-slate-800">📥 Downloading a Free Template</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-400">
                                 <p>1. Click the grey <strong>"Download Template (FREE)"</strong> button on any card.</p>
                                 <p>2. Fill in your name, phone, email, and location.</p>
                                 <p>3. Optionally add your budget range, timeline, and any certifications needed.</p>
                                 <p>4. Click <strong>"Authorize Request &amp; Download Template"</strong>.</p>
-                                <p class="text-indigo-600 font-semibold pt-1">✓ You'll receive the template and be connected to local pros in that category.</p>
+                                <p class="text-indigo-400 font-semibold pt-1">✓ You'll receive the template and be connected to local pros in that category.</p>
                             </div>
                         </div>
 
-                        <div class="border border-amber-200 rounded-xl overflow-hidden">
-                            <div class="bg-amber-50 px-4 py-2.5 font-bold text-amber-700 text-xs uppercase tracking-wider">💳 Buying a Paid Asset</div>
-                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                        <div class="border border-amber-900/60 rounded-xl overflow-hidden">
+                            <div class="bg-amber-950/20 px-4 py-2.5 font-bold text-amber-400 text-xs uppercase tracking-wider border-b border-amber-900/40">💳 Buying a Paid Asset</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-400">
                                 <p>1. Click the amber <strong>"Buy Asset ($XX)"</strong> button.</p>
                                 <p>2. Review the asset name and price in the popup.</p>
                                 <p>3. Click <strong>"Checkout via Stripe"</strong> to complete payment securely.</p>
-                                <p class="text-slate-500 pt-1">Paid assets include detailed Excel templates, contract shells, compliance guides, and audit packets.</p>
+                                <p class="text-slate-400 pt-1">Paid assets include detailed Excel templates, contract shells, compliance guides, and audit packets.</p>
                             </div>
                         </div>
 
-                        <div class="border border-indigo-200 rounded-xl overflow-hidden">
-                            <div class="bg-indigo-50 px-4 py-2.5 font-bold text-indigo-700 text-xs uppercase tracking-wider">📬 Submitting an RFQ</div>
-                            <div class="p-4 space-y-1.5 text-xs text-slate-600">
+                        <div class="border border-indigo-900/60 rounded-xl overflow-hidden">
+                            <div class="bg-indigo-950/20 px-4 py-2.5 font-bold text-indigo-400 text-xs uppercase tracking-wider border-b border-indigo-900/40">📬 Submitting an RFQ</div>
+                            <div class="p-4 space-y-1.5 text-xs text-slate-400">
                                 <p>1. Click the blue <strong>"Dispatch RFQ"</strong> button on any service card.</p>
                                 <p>2. Fill in your contact info, location, budget range, and timeline.</p>
                                 <p>3. Add any certification requirements (e.g. OSHA 30, Bonded, MBE).</p>
                                 <p>4. Click <strong>"Securely Dispatch RFQ to Pro Network"</strong>.</p>
-                                <p class="text-indigo-600 font-semibold pt-1">✓ Verified professionals in your area follow up via phone or email.</p>
+                                <p class="text-indigo-400 font-semibold pt-1">✓ Verified professionals in your area follow up via phone or email.</p>
                             </div>
                         </div>
                     </div>
@@ -554,49 +672,42 @@
 
                 <!-- FAQ TAB -->
                 <div id="gpanel-faq" class="guide-panel hidden space-y-3">
-                    <h3 class="font-extrabold text-slate-900 text-base">Frequently Asked Questions</h3>
+                    <h3 class="font-extrabold text-slate-100 text-base">Frequently Asked Questions</h3>
                     <div class="space-y-2">
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                        <details class="border border-slate-800 rounded-xl group bg-slate-950/40">
+                            <summary class="px-4 py-3 font-semibold text-slate-200 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-900 rounded-xl transition-all">
                                 Are the business listings real companies?
                                 <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Live listings (tagged with a city/state) are real businesses sourced from OpenStreetMap. Static niche entries are curated service categories with templated scope info.</p>
+                            <p class="px-4 pb-3 text-xs text-slate-400 leading-relaxed">Live listings (tagged with a city/state) are real businesses sourced from OpenStreetMap. Static niche entries are curated service categories with templated scope info.</p>
                         </details>
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                        <details class="border border-slate-800 rounded-xl group bg-slate-950/40">
+                            <summary class="px-4 py-3 font-semibold text-slate-200 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-900 rounded-xl transition-all">
                                 How do I find contractors in my specific city?
                                 <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Type your city in the "City Hub" field and your 2-letter state code in "State Region". Only listings matching your area will appear in the directory.</p>
+                            <p class="px-4 pb-3 text-xs text-slate-400 leading-relaxed">Select your state and city from the geographic console dropdowns. Only listings matching your area will appear in the directory.</p>
                         </details>
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                        <details class="border border-slate-800 rounded-xl group bg-slate-950/40">
+                            <summary class="px-4 py-3 font-semibold text-slate-200 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-900 rounded-xl transition-all">
                                 What's the difference between free and paid resources?
                                 <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Free resources are general-use templates and checklists. Paid assets ($19–$199) are professionally formatted scope templates, contract shells, and compliance matrices designed to save hours of work.</p>
+                            <p class="px-4 pb-3 text-xs text-slate-400 leading-relaxed">Free resources are general-use templates and checklists. Paid assets ($19–$199) are professionally formatted scope templates, contract shells, and compliance matrices designed to save hours of work.</p>
                         </details>
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                        <details class="border border-slate-800 rounded-xl group bg-slate-950/40">
+                            <summary class="px-4 py-3 font-semibold text-slate-200 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-900 rounded-xl transition-all">
                                 What happens after I submit an RFQ?
                                 <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">Your project details are routed to the ServiceScopeHQ pro network. Verified contractors in your area and service category will follow up via phone or email.</p>
+                            <p class="px-4 pb-3 text-xs text-slate-400 leading-relaxed">Your project details are routed to the ServiceScopeHQ pro network. Verified contractors in your area and service category will follow up via phone or email.</p>
                         </details>
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
+                        <details class="border border-slate-800 rounded-xl group bg-slate-950/40">
+                            <summary class="px-4 py-3 font-semibold text-slate-200 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-900 rounded-xl transition-all">
                                 Is my information secure?
                                 <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">All form submissions are processed through Netlify's secure infrastructure. Payment checkout is handled by Stripe (PCI-DSS compliant). Your data is never sold to third parties.</p>
-                        </details>
-                        <details class="border border-slate-200 rounded-xl group">
-                            <summary class="px-4 py-3 font-semibold text-slate-800 cursor-pointer text-xs list-none flex justify-between items-center hover:bg-slate-50 rounded-xl transition-all">
-                                Why does the header say "Live Estimates &amp; Scopes"?
-                                <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                            </summary>
-                            <p class="px-4 pb-3 text-xs text-slate-500 leading-relaxed">That's the default — no location filter is active, so you're seeing all listings nationally. Enter a city or state and the badge updates to show your active area.</p>
+                            <p class="px-4 pb-3 text-xs text-slate-400 leading-relaxed">All form submissions are processed through Netlify's secure infrastructure. Payment checkout is handled by Stripe (PCI-DSS compliant). Your data is never sold to third parties.</p>
                         </details>
                     </div>
                 </div>
@@ -604,12 +715,17 @@
             </div><!-- end scroll area -->
 
             <!-- Modal Footer -->
-            <div class="border-t border-slate-200 px-6 py-3 flex justify-between items-center bg-slate-50 flex-shrink-0">
-                <p class="text-[10px] text-slate-400">ServiceScopeHQ &copy; 2026 — The B2B Services Database</p>
-                <button onclick="closeGuideModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">Close Guide</button>
+            <div class="border-t border-slate-800 px-6 py-4 flex justify-between items-center bg-slate-950 flex-shrink-0">
+                <p class="text-[10px] text-slate-500">ServiceScopeHQ &copy; 2026 — The B2B Services Database</p>
+                <button onclick="closeGuideModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">Close Guide</button>
             </div>
         </div>
     </div>
+
+    <!-- Page Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500 font-medium">
+        &copy; 2026 ServiceScopeHQ. Real-time lead logs securely written to our Google Sheet database via serverless webhooks.
+    </footer>
 
     <style>
         .guide-tab {
@@ -618,14 +734,14 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #64748b;
+            color: #94a3b8;
             border-bottom: 2px solid transparent;
             white-space: nowrap;
             transition: all 0.15s;
             flex-shrink: 0;
         }
-        .guide-tab:hover { color: #4f46e5; background: #eef2ff; }
-        .guide-tab-active { color: #4f46e5 !important; border-bottom-color: #4f46e5 !important; background: white !important; }
+        .guide-tab:hover { color: #6366f1; background: #1e1b4b; }
+        .guide-tab-active { color: #6366f1 !important; border-bottom-color: #6366f1 !important; background: #0f172a !important; }
     </style>
 
     <script>
@@ -650,11 +766,6 @@
             document.getElementById('gtab-' + tab).classList.add('guide-tab-active');
         }
     </script>
-
-    <!-- Page Footer -->
-    <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400 font-medium">
-        &copy; 2026 ServiceScopeHQ. All rights reserved. Powered by Serverless Cloud Operations.
-    </footer>
 
     <!-- Run Logic Orchestration Hook -->
     <script src="data.js"></script>
