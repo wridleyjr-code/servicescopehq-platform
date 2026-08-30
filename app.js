@@ -701,15 +701,19 @@ async function submitLeadForm(event) {
     const form = event.target;
     const formData = new FormData(form);
     
-    const cityVal = formData.get('client_city') || "";
-    const zipVal = formData.get('client_zip') || "";
+    const cityVal = formData.get('client_city') || document.getElementById('formCityInput')?.value || "";
+    const zipVal = formData.get('client_zip') || document.getElementById('formZipInput')?.value || "";
     const locationVal = `${cityVal}, ${zipVal}`;
+    const clientName = formData.get('client_name') || document.getElementById('formNameInput')?.value || "";
+    const nicheName = formData.get('target_niche_name') || document.getElementById('subscriberNicheInput')?.value || "";
     
     const payload = {
-        email: formData.get('client_email') || "",
-        niche: formData.get('target_niche_name') || "",
-        name: formData.get('client_name') || "",
-        phone: formData.get('client_phone') || "",
+        email: formData.get('client_email') || document.getElementById('formEmailInput')?.value || "",
+        niche: nicheName,
+        target_niche_name: nicheName,
+        name: clientName,
+        companyName: clientName,
+        phone: formData.get('client_phone') || document.getElementById('formPhoneInput')?.value || "",
         
         // Multi-mapped location fields for maximum webhook compatibility:
         location: locationVal,
@@ -787,7 +791,10 @@ async function submitBusinessListing(event) {
 
     const payload = {
         email: email,
+        companyName: name,
+        name: name,
         niche: `${name.toUpperCase()} - (CLAIM REQUESTED: ${niche})`,
+        target_niche_name: `${name.toUpperCase()} - (CLAIM REQUESTED: ${niche})`,
         city: city,
         zip: zip,
         status: "CLAIM REQUESTED",
