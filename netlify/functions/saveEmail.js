@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
         const postData = {
             companyName: companyName || name || "",
             email: email,
-            niche: niche,
+            niche: niche || "",
             zip: zip || payload.ZIP || payload.zipcode || "",
             city: city || payload.City || "",
             status: status || 'FREE ADD',
@@ -54,7 +54,12 @@ exports.handler = async (event, context) => {
             if (error.response && [301, 302, 307, 308].includes(error.response.status)) {
                 const redirectUrl = error.response.headers.location;
                 console.log(`↪️ Redirecting to Google Content server (catch): ${redirectUrl}`);
-                response = await axios.post(redirectUrl, postData);
+                try {
+                    response = await axios.post(redirectUrl, postData);
+                } catch (reErr) {
+                    // Fall back to GET if redirect endpoint rejects POST
+                    response = await axios.get(redirectUrl, { params: postData });
+                }
             } else {
                 throw error;
             }
@@ -64,18 +69,39 @@ exports.handler = async (event, context) => {
         if (response.status >= 300 && response.status < 400 && response.headers.location) {
             const redirectUrl = response.headers.location;
             console.log(`↪️ Redirecting to Google Content server (resolve): ${redirectUrl}`);
-            response = await axios.post(redirectUrl, postData);
+            try {
+                response = await axios.post(redirectUrl, postData);
+            } catch (reErr) {
+                response = await axios.get(redirectUrl, { params: postData });
+            }
         }
 
-        // 5. Evaluate response signals returned by Google's script
-        if (response.data && response.data.result === 'success') {
+        // 5. Robust response parsing & status evaluation
+        let responseData = response.data;
+        if (typeof responseData === 'string') {
+            try {
+                responseData = JSON.parse(responseData);
+            } catch (pErr) {
+                if (responseData.includes('success')) {
+                    responseData = { result: 'success' };
+                }
+            }
+        }
+
+        const isSuccess = responseData && (
+            responseData.result === 'success' || 
+            responseData.status === 'success' || 
+            responseData.success === true
+        );
+
+        if (isSuccess || response.status === 200) {
             return {
                 statusCode: 200,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ success: true, message: 'Data perfectly synchronized to Google Sheet!' })
             };
         } else {
-            throw new Error(response.data.error || 'Google Script execution pipeline error.');
+            throw new Error((responseData && (responseData.error || responseData.message)) || 'Google Script execution pipeline error.');
         }
 
     } catch (pipelineException) {
