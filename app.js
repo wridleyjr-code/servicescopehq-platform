@@ -774,7 +774,11 @@ async function submitLeadForm(event) {
                 submitBtn.textContent = "Request Sent!";
                 submitBtn.className = "w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg shadow-md text-xs uppercase tracking-wider transition-all";
             }
-            alert("Success! Your resource has been unlocked and your RFQ routed to our network.");
+            
+            // Trigger automated template download
+            triggerAutomatedTemplateDownload(nicheName, clientName);
+
+            alert("Success! Your resource template has been generated and unlocked.");
             setTimeout(() => {
                 closeModal();
                 form.reset();
@@ -799,6 +803,42 @@ async function submitLeadForm(event) {
             }, 3000);
         }
     }
+}
+
+function triggerAutomatedTemplateDownload(nicheName, clientName) {
+    const resourceName = document.getElementById("modalResourceName")?.textContent || "Scope-Template";
+    const cleanTitle = (resourceName || nicheName || "ServiceScopeHQ_Template").replace(/[^a-zA-Z0-9_-]/g, "_");
+    const content = `========================================================
+ServiceScopeHQ B2B Scope-of-Work & Resource Template
+========================================================
+Resource: ${resourceName}
+Target Service: ${nicheName}
+Authorized To: ${clientName || 'Valued Partner'}
+Generated Date: ${new Date().toLocaleDateString()}
+
+1. SCOPE OF WORK SUMMARY
+--------------------------------------------------------
+This document outlines the standard operational scope, material specifications, and quality verification parameters required for high-compliance B2B contractor bidding.
+
+2. STANDARD REQUISITIONS & COMPLIANCE
+- Verify local city municipal permit filing requirements prior to project commencement.
+- Maintain active General Liability Insurance and Workers' Compensation coverage.
+- All structural, electrical, plumbing, and moisture mitigation procedures must conform to local building code standards.
+
+3. BID DISPATCH & CONTRACTOR ROUTING
+Your project specification has been securely routed to verified regional trade contractors for competitive quote generation.
+
+========================================================
+ServiceScopeHQ - The B2B Database for Services & Scopes
+========================================================`;
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${cleanTitle}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 async function submitBusinessListing(event) {
