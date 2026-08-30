@@ -765,6 +765,13 @@
             document.getElementById('gpanel-' + tab).classList.remove('hidden');
             document.getElementById('gtab-' + tab).classList.add('guide-tab-active');
         }
+
+        // Direct Inline Cascading Dropdown Initialization Hook
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initializeGeographicListeners === 'function') {
+                initializeGeographicListeners();
+            }
+        });
     </script>
 
     <!-- Run Logic Orchestration Hook -->
