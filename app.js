@@ -132,28 +132,30 @@ function initializeGeographicListeners() {
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
-    // Dynamic city populating function with robust state abbreviation lookup
+    // Dynamic city populating function with robust fallback city hub dictionary & event binding
     function populateCitiesForState(rawState) {
         if (!cityInput) return;
+        
+        const cityHubMap = (typeof US_STATE_CITY_HUBS !== 'undefined' ? US_STATE_CITY_HUBS : (typeof stateCityHubs !== 'undefined' ? stateCityHubs : {}));
         
         // Reset City Hub dropdown
         cityInput.innerHTML = '<option value="">All Cities</option>';
         
         let stateCode = (rawState || "").trim().toUpperCase();
-        if (stateCode && !US_STATE_CITY_HUBS[stateCode]) {
+        if (stateCode && !cityHubMap[stateCode]) {
             const match = stateCode.match(/\b([A-Z]{2})\b/);
-            if (match && US_STATE_CITY_HUBS[match[1]]) {
+            if (match && cityHubMap[match[1]]) {
                 stateCode = match[1];
             }
         }
         
-        if (stateCode && US_STATE_CITY_HUBS[stateCode]) {
+        if (stateCode && cityHubMap[stateCode]) {
             // Enable selector and populate state-specific city options
             cityInput.disabled = false;
             cityInput.classList.remove("text-slate-500", "disabled:opacity-50");
             cityInput.classList.add("text-slate-300");
             
-            US_STATE_CITY_HUBS[stateCode].forEach(city => {
+            cityHubMap[stateCode].forEach(city => {
                 const opt = document.createElement("option");
                 opt.value = city;
                 opt.textContent = city;
@@ -170,14 +172,16 @@ function initializeGeographicListeners() {
     }
 
     if(stateInput) {
-        stateInput.addEventListener("change", (e) => {
+        const handleStateChange = (e) => {
             const selectedState = e.target.value.trim().toUpperCase();
             geoState.state = selectedState;
             populateCitiesForState(selectedState);
             geoState.city = ""; // Reset city selection
             updateLocationBadge();
             executePlatformSearchFilter();
-        });
+        };
+        stateInput.addEventListener("change", handleStateChange);
+        stateInput.addEventListener("input", handleStateChange);
     }
 
     if(cityInput) {
