@@ -26,11 +26,13 @@ exports.handler = async (event, context) => {
 
         console.log(`📤 Syncing captured subscriber [${email}] from company [${companyName || name || "N/A"}] directly to Google Sheet...`);
 
-        // Format standard payload keys to match Google Script columns
+        // Format standard payload keys for explicit companyName and niche column routing
         const postData = {
             companyName: companyName || name || "",
+            name: name || companyName || "",
             email: email,
-            niche: niche || "",
+            niche: niche || payload.target_niche_name || "",
+            target_niche_name: niche || payload.target_niche_name || "",
             zip: zip || payload.ZIP || payload.zipcode || "",
             city: city || payload.City || "",
             status: status || 'FREE ADD',
