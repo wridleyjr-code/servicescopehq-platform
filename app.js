@@ -125,16 +125,24 @@ const US_STATE_CITY_HUBS = {
     "WY": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs", "Sheridan", "Green River", "Evanston", "Riverton", "Cody", "Jackson", "Rawlins", "Lander", "Torrington"]
 };
 
-// Restored cascading city hub dropdown event listener for state-specific hub filtering
+// Restored cascading city hub dropdown event listener with resilient DOM polling
+let geoPollAttempts = 0;
 function initializeGeographicListeners() {
     const stateInput = document.getElementById("stateFilter");
     const cityInput = document.getElementById("cityFilter");
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
+    if ((!stateInput || !cityInput) && geoPollAttempts < 10) {
+        geoPollAttempts++;
+        setTimeout(initializeGeographicListeners, 200);
+        return;
+    }
+
     // Dynamic city populating function with robust fallback city hub dictionary & event binding
     function populateCitiesForState(rawState) {
-        if (!cityInput) return;
+        const activeCityInput = document.getElementById("cityFilter");
+        if (!activeCityInput) return;
         
         const cityHubMap = (typeof US_STATE_CITY_HUBS !== 'undefined' ? US_STATE_CITY_HUBS : (typeof stateCityHubs !== 'undefined' ? stateCityHubs : {}));
         
