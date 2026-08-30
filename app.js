@@ -132,12 +132,20 @@ function initializeGeographicListeners() {
     const zipInput = document.getElementById("zipFilter");
     const searchInput = document.getElementById("dirSearch");
 
-    // Dynamic city populating function based on hardcoded US_STATE_CITY_HUBS map
-    function populateCitiesForState(stateCode) {
+    // Dynamic city populating function with robust state abbreviation lookup
+    function populateCitiesForState(rawState) {
         if (!cityInput) return;
         
         // Reset City Hub dropdown
         cityInput.innerHTML = '<option value="">All Cities</option>';
+        
+        let stateCode = (rawState || "").trim().toUpperCase();
+        if (stateCode && !US_STATE_CITY_HUBS[stateCode]) {
+            const match = stateCode.match(/\b([A-Z]{2})\b/);
+            if (match && US_STATE_CITY_HUBS[match[1]]) {
+                stateCode = match[1];
+            }
+        }
         
         if (stateCode && US_STATE_CITY_HUBS[stateCode]) {
             // Enable selector and populate state-specific city options
