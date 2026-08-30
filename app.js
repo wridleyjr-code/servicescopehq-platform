@@ -125,6 +125,7 @@ const US_STATE_CITY_HUBS = {
     "WY": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs", "Sheridan", "Green River", "Evanston", "Riverton", "Cody", "Jackson", "Rawlins", "Lander", "Torrington"]
 };
 
+// Restored cascading city hub dropdown event listener for state-specific hub filtering
 function initializeGeographicListeners() {
     const stateInput = document.getElementById("stateFilter");
     const cityInput = document.getElementById("cityFilter");
