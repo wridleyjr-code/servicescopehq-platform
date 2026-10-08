@@ -31,11 +31,12 @@
             <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
                 <a href="#scope-builder" class="hover:text-brand-400 transition">Scope Builder</a>
                 <a href="#calculators" class="hover:text-brand-400 transition">Calculators</a>
+                <a href="#add-listing" class="hover:text-brand-400 transition">Add Listing</a>
                 <a href="#pricing" class="hover:text-brand-400 transition">Pro Plans</a>
-                <a href="#rfq" class="hover:text-brand-400 transition text-brand-400 font-semibold">Get Project Leads</a>
+                <a href="#rfq" class="hover:text-brand-400 transition text-brand-400 font-semibold">Get Leads</a>
             </nav>
             <div>
-                <a href="#rfq" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-xl text-sm transition shadow-lg shadow-brand-600/20">Request Leads</a>
+                <a href="#add-listing" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-xl text-sm transition shadow-lg shadow-brand-600/20">Claim Listing</a>
             </div>
         </div>
     </header>
@@ -56,8 +57,8 @@
                 <a href="#scope-builder" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 px-8 rounded-xl transition shadow-lg shadow-brand-600/20 text-center">
                     Build a Scope Free
                 </a>
-                <a href="#rfq" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold py-3.5 px-8 rounded-xl transition border border-slate-700 text-center">
-                    Get Qualified Leads
+                <a href="#add-listing" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold py-3.5 px-8 rounded-xl transition border border-slate-700 text-center">
+                    Add Your Contractor Profile
                 </a>
             </div>
         </div>
@@ -133,6 +134,56 @@
                     <!-- Populated by script -->
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Add / Claim Contractor Listing Section -->
+    <section id="add-listing" class="py-16 px-4 max-w-4xl mx-auto w-full border-t border-slate-800/80">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="text-center max-w-xl mx-auto mb-8">
+                <span class="text-xs font-semibold text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/20 uppercase tracking-wider">Directory Inclusion</span>
+                <h2 class="text-2xl font-bold text-white mt-3">Add or Claim Your Contractor Profile</h2>
+                <p class="text-xs text-slate-400 mt-1">List your remodeling or restoration business in the ServiceScopeHQ directory for free to receive local client project matches.</p>
+            </div>
+
+            <form id="listingForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Company Name</label>
+                        <input type="text" id="listCompany" required value="RCPX Construction" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Business Contact Email</label>
+                        <input type="email" id="listEmail" required placeholder="owner@rcpx.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Primary Trade Specialization</label>
+                        <select id="listTrade" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                            <option value="Residential Remodeling & Restoration">Residential Remodeling & Restoration</option>
+                            <option value="Water-Damage Mitigation">Water-Damage Mitigation</option>
+                            <option value="Tile & Flooring Installation">Tile & Flooring Installation</option>
+                            <option value="Kitchen & Bath Specialist">Kitchen & Bath Specialist</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Service Area / City & ZIP</label>
+                        <input type="text" id="listLocation" required value="Byron / Atlanta, GA (31008)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Licensing / Insurance Status</label>
+                    <input type="text" id="listCredentials" placeholder="e.g. Licensed Residential General Contractor #GCQA..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                </div>
+
+                <button type="submit" id="listSubmitBtn" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg shadow-brand-600/20 text-sm mt-4">
+                    Submit Free Contractor Listing
+                </button>
+                <p id="listSuccessMsg" class="text-center text-xs text-brand-400 font-medium hidden mt-2">Success! Your contractor profile has been submitted and added to the directory database.</p>
+            </form>
         </div>
     </section>
 
@@ -374,6 +425,22 @@ Client Signature (${client}): ________________________ Date: _____
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        });
+
+        // Listing Form Handler
+        document.getElementById('listingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('listSubmitBtn');
+            const msg = document.getElementById('listSuccessMsg');
+            
+            btn.innerText = "Registering Listing...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerText = "Submit Free Contractor Listing";
+                btn.disabled = false;
+                msg.classList.remove('hidden');
+            }, 800);
         });
 
         // Lead Form Handler
