@@ -30,12 +30,12 @@
             </div>
             <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
                 <a href="#scope-builder" class="hover:text-brand-400 transition">Scope Builder</a>
-                <a href="#calculators" class="hover:text-brand-400 transition">Calculators & Pricing</a>
+                <a href="#calculators" class="hover:text-brand-400 transition">Calculators</a>
                 <a href="#pricing" class="hover:text-brand-400 transition">Pro Plans</a>
-                <a href="#rfq" class="hover:text-brand-400 transition">Get Project Leads</a>
+                <a href="#rfq" class="hover:text-brand-400 transition text-brand-400 font-semibold">Get Project Leads</a>
             </nav>
             <div>
-                <a href="#pricing" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-xl text-sm transition shadow-lg shadow-brand-600/20">Start Free Trial</a>
+                <a href="#rfq" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-xl text-sm transition shadow-lg shadow-brand-600/20">Request Leads</a>
             </div>
         </div>
     </header>
@@ -56,23 +56,9 @@
                 <a href="#scope-builder" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 px-8 rounded-xl transition shadow-lg shadow-brand-600/20 text-center">
                     Build a Scope Free
                 </a>
-                <a href="#calculators" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold py-3.5 px-8 rounded-xl transition border border-slate-700 text-center">
-                    Explore Calculators & Pricing
+                <a href="#rfq" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold py-3.5 px-8 rounded-xl transition border border-slate-700 text-center">
+                    Get Qualified Leads
                 </a>
-            </div>
-            <div class="pt-8 grid grid-cols-3 gap-4 max-w-xl mx-auto text-center border-t border-slate-800/60 mt-10">
-                <div>
-                    <div class="text-2xl font-bold text-white">Scope</div>
-                    <div class="text-xs text-slate-400 mt-1">Detailed room breakdowns</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white">Estimate</div>
-                    <div class="text-xs text-slate-400 mt-1">Labor & material pricing</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white">Send</div>
-                    <div class="text-xs text-slate-400 mt-1">Proposal-ready PDFs</div>
-                </div>
             </div>
         </div>
     </section>
@@ -147,6 +133,51 @@
                     <!-- Populated by script -->
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Get Project Leads / RFQ Section -->
+    <section id="rfq" class="py-16 px-4 max-w-4xl mx-auto w-full border-t border-slate-800/80">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="text-center max-w-xl mx-auto mb-8">
+                <span class="text-xs font-semibold text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/20 uppercase tracking-wider">Verified Opportunities</span>
+                <h2 class="text-2xl font-bold text-white mt-3">Request Qualified Remodeling & Restoration Leads</h2>
+                <p class="text-xs text-slate-400 mt-1">Submit your company and service criteria to receive high-intent project leads in your local market.</p>
+            </div>
+
+            <form id="leadForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Company Name</label>
+                        <input type="text" id="leadCompany" required placeholder="e.g. RCPX Construction" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Email Address</label>
+                        <input type="email" id="leadEmail" required placeholder="pro@rcpx.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Target Trade Niche</label>
+                        <select id="leadNiche" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                            <option value="Residential Bathroom Remodel">Residential Bathroom Remodel</option>
+                            <option value="Water-Damage Restoration">Water-Damage Restoration</option>
+                            <option value="Tile Shower Installation">Tile Shower Installation</option>
+                            <option value="Aging-in-Place ADA Modification">Aging-in-Place ADA Modification</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Service ZIP / City Location</label>
+                        <input type="text" id="leadLocation" required placeholder="31008 / Byron, GA" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
+                    </div>
+                </div>
+
+                <button type="submit" id="leadSubmitBtn" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg shadow-brand-600/20 text-sm mt-4">
+                    Claim Verified Lead Access
+                </button>
+                <p id="leadSuccessMsg" class="text-center text-xs text-brand-400 font-medium hidden mt-2">Success! Your request has been logged. We will connect you with active projects shortly.</p>
+            </form>
         </div>
     </section>
 
@@ -343,6 +374,23 @@ Client Signature (${client}): ________________________ Date: _____
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        });
+
+        // Lead Form Handler
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('leadSubmitBtn');
+            const msg = document.getElementById('leadSuccessMsg');
+            
+            btn.innerText = "Processing Request...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerText = "Claim Verified Lead Access";
+                btn.disabled = false;
+                msg.classList.remove('hidden');
+                document.getElementById('leadForm').reset();
+            }, 800);
         });
 
         updatePreview();
